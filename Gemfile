@@ -5,12 +5,12 @@ gem 'rails', '4.0.0'
 gem 'bootstrap-sass'
 
 group :development, :test do
-  gem 'rspec-rails'
+  gem 'rspec-rails', '2.13.1'
 end
 
 group :test do
-  gem 'selenium-webdriver'
-  gem 'capybara'
+  gem 'selenium-webdriver', '2.35.1'
+  gem 'capybara', '2.1.0'
 end
 
 # Use sqlite3 as the database for Active Record
@@ -43,7 +43,7 @@ group :doc do
 end
 
 # Use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
+gem 'bcrypt-ruby', '3.0.1'
 
 # Use unicorn as the app server
 # gem 'unicorn'

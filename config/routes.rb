@@ -1,4 +1,5 @@
 Qochbuch::Application.routes.draw do
+  get "users/new"
   root 'landing_pages#home'
   get "landing_pages/help"
   get "landing_pages/about"
