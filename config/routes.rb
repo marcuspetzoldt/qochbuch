@@ -1,4 +1,7 @@
 Qochbuch::Application.routes.draw do
+  root 'landing_pages#home'
+  get "landing_pages/help"
+  get "landing_pages/about"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
