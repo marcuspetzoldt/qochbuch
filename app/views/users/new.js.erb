@@ -1,0 +1,5 @@
+<% unless @cancel %>
+  $('#signon').html('<%=j render partial: 'users/signup' %>')
+<% else %>
+  $('#signon').html('')
+<% end %>

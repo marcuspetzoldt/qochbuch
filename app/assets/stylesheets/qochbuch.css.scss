@@ -144,3 +144,20 @@ span > a:hover {
   border-bottom-color:white;
   color:white;
 }
+
+#error_explanation {
+  color: #f00;
+  ul {
+    list-style: none;
+    margin: 0 0 18px 0;
+  }
+}
+
+.field_with_errors {
+  display: inline;
+  color: red;
+  input {
+    background-color: #ffeeee;
+  }
+}
+
