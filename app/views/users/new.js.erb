@@ -1,5 +1,13 @@
-<% unless @cancel %>
-  $('#signon').html('<%=j render partial: 'users/signup' %>')
+<% unless @close %>
+  var form = $('<%=j render partial: "users/signup" %>')
+  var signon = $('#signon')
+  if (signon.length) {
+    signon.html(form)
+  } else {
+    $('body').last().append(form)
+  }
+  $('#formSignon').hide()
+  $('#formSignon').fadeIn(850)
 <% else %>
-  $('#signon').html('')
+  $('#formSignon').fadeOut(850, function() {$('#signon').remove()})
 <% end %>

@@ -8,18 +8,19 @@ class UsersController < ApplicationController
 
   def create
 
-    if (params[:commit].nil?)
+    @close = false
+    if (params[:cancel])
       # Cancel Button
-      @cancel = true
+      @close = true
       render 'new'
     else
       # Submit Button
       @user = User.new(user_params)
       if @user.save
         # Handle a successful save.
-      else
-        render 'new'
+        @close = true
       end
+      render 'new'
     end
   end
 
