@@ -20,33 +20,38 @@ describe "LandingPages" do
 
   describe 'Signup', js: true do
 
-    it 'should open the signup form' do
+    user = FactoryGirl.create(:user)
+    new_user = User.new(name: 'test', email: 'new_user@test.de', password: 'secret', password_confirmation: 'secret')
+    before do
       click_link('linkSignon')
-#     expect(find_by_id('formSignon')).not_to be_nil
+    end
+
+    it 'should open the signup form' do
       expect(page).to have_selector('div#formSignon')
     end
 
     it 'should close the signup form on cancel' do
-      click_link('linkSignon')
-      click_button('Abbrechen')
+      click_button('cancelSignon')
       sleep 2
       expect(page).not_to have_selector('div#formSignon')
     end
 
     it 'should close the signup form on successful submit' do
-      click_link('linkSignon')
-      fill_in('Name', with: 'Test')
-      fill_in('Email', with: 'test@test.de')
-      fill_in('Password', with: 'kennwort')
-      fill_in('user_password_confirmation', with: 'kennwort')
-      click_button('Account anlegen')
+      fill_in('Name', with: new_user.name)
+      fill_in('Email', with: new_user.email)
+      fill_in('Password', with: new_user.password)
+      fill_in('user_password_confirmation', with: new_user.password_confirmation)
+      click_button('commitSignon')
       sleep 2
       expect(page).not_to have_selector('div#formSignon')
     end
 
     it 'should NOT close the signup form on UNsuccessful submit' do
-      click_link('linkSignon')
-      click_button('Account anlegen')
+      fill_in('Name', with: user.name)
+      fill_in('Email', with: user.email)
+      fill_in('Password', with: user.password)
+      fill_in('user_password_confirmation', with: user.password_confirmation)
+      click_button('commitSignon')
       sleep 2
       expect(page).to have_selector('div#formSignon')
     end
