@@ -1,0 +1,26 @@
+<% if signed_in? %>
+
+  <div class="btn-group">
+    <button class="btn btn-inverse dropdown-toggle" data-toggle="dropdown" href="#">
+      <i class="icon icon-user icon-white"></i>&nbsp;<%= current_user.name %>
+      <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+      <li><a href="#"><i class="menu icon-plus"></i>Neues Rezept</a></li>
+      <li><a href="#"><i class="menu icon-search"></i>Meine Rezepte</a></li>
+      <li class="divider"></li>
+      <li><a href="changePassword.html"><i class="menu icon-wrench"></i>Kennwort ändern</a></li>
+      <li class="divider"></li>
+      <li>
+        <%= link_to(signout_path, method: 'delete', id: 'linkSignout') do %>
+          <i class="menu icon-off"></i>Abmelden
+        <% end %>
+      </li>
+    </ul>
+  </div>
+
+<% else %>
+
+  <%= link_to(signin_path, remote: true, id: 'linkSignon') do %><i class="icon-lock icon-white"></i>&nbsp;Anmelden<% end %>
+
+<% end %>

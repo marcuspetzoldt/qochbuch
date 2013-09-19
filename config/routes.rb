@@ -1,9 +1,11 @@
 Qochbuch::Application.routes.draw do
   resources :users
-  resources :sessions, only: [ :new, :create, :destroy ]
   root 'landing_pages#home'
   get "landing_pages/help"
   get "landing_pages/about"
+  match '/signin', to: 'users#new', via: 'get', defaults: { what: 'signin' }
+  match '/signup', to: 'users#new', via: 'get', defaults: { what: 'signup' }
+  match '/signout', to: 'users#signout', via: 'delete'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

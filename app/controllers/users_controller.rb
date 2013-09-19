@@ -8,20 +8,39 @@ class UsersController < ApplicationController
 
   def create
 
-    @close = false
-    if (params[:cancel])
-      # Cancel Button
-      @close = true
-      render 'new'
-    else
+    if params[:commit]
       # Submit Button
-      @user = User.new(user_params)
-      if @user.save
-        # Handle a successful save.
-        @close = true
+      if params[:what] == 'signup'
+        @user = User.new(user_params)
+        if @user.save
+          # Handle a successful save.
+          sign_in(@user)
+        else
+          render('new')
+          sleep(1)
+          return
+        end
+      else
+        user = User.find_by(email: params[:user][:email])
+        if user && user.authenticate(params[:user][:password])
+          sign_in(user)
+        else
+          @user = User.new(user_params)
+          flash.now[:error] = 'Invalid user / password combination.'
+          render('new')
+          sleep(1)
+          return
+        end
       end
-      render 'new'
     end
+    # Wait for the fade-out of the form to happen (850ms)
+    sleep(1)
+    render :js => "window.location.href='"+root_path+"'"
+  end
+
+  def signout
+    sign_out
+    redirect_to root_path
   end
 
   private

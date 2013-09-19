@@ -1,40 +1,74 @@
-<div style="position:absolute; top: 0; left:0; width:100%; height:100%; background-color:gray; opacity: .8;"></div>
-<div class="container">
-  <div class="row">
-    <div class="span6 offset3 img-rounded" style="position:fixed; top: 25%; border: 2px solid black; background-color: white">
+<div id="signon">
+  <div style="position:absolute; top: 0; left:0; width:100%; height:100%; background-color:gray; opacity: .8;"></div>
+  <div class="container">
+    <div class="row">
+      <div id="formSignon" class="span6 offset3 img-rounded" style="position:fixed; top: 25%; border: 2px solid black; background-color: white;">
+        <%= form_for(@user, html: { class: 'form-horizontal' }, remote: true) do |f| %>
 
-      <%= form_for(:user, html: { class: 'form-horizontal' }) do |f| %>
+          <ul class="nav nav-tabs">
+            <li <% if params[:what] == 'signin' %>class="active"<% end %>><%= link_to('Anmelden', signin_path, remote: true, id: 'linkSignin') %></li>
+            <li <% if params[:what] == 'signup' %>class="active"<% end %>><%= link_to('Account anlegen', signup_path, remote: true, id: 'linkSignup') %></li>
+          </ul>
 
-        <ul class="nav nav-tabs">
-          <li class="active"><a href="#">Anmelden</a></li>
-          <li><%= link_to('Account anlegen', new_user_path, remote: true) %></li>
-        </ul>
+          <%= render 'shared/error_messages' %>
+          <% flash.each do |key, value| %>
+            <div class="alert alert-<%= key %>" style="margin: 8px"><%= value %></div>
+          <% end %>
 
-        <div class="control-group">
-          <%= f.label(:email, class: 'control-label') %>
-          <div class="controls">
-            <div class="input-prepend">
-              <span class="add-on">@</span>
-              <%= f.email_field(:email) %>
+
+          <%= hidden_field_tag('what', params[:what]) %>
+
+          <% unless params[:what] == 'signin' %>
+          <div class="control-group">
+            <%= f.label(:name, class: 'control-label') %>
+            <div class="controls">
+              <div class="input-prepend">
+                <span class="add-on"><i class="icon icon-user"></i></span>
+                <%= f.text_field(:name) %>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="control-group">
-          <%= f.label(:password, class: 'control-label') %>
-          <div class="controls">
-            <div class="input-prepend">
-              <span class="add-on"><i class="icon icon-lock"></i></span>
-              <%= f.password_field :password %>
+          <% end %>
+          <div class="control-group">
+            <%= f.label(:email, class: 'control-label') %>
+            <div class="controls">
+              <div class="input-prepend">
+                <span class="add-on">@</span>
+                <%= f.email_field(:email) %>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="control-group">
-          <div class="controls">
-            <%= f.submit('Anmelden', class: 'btn btn-primary') %>&nbsp;<%= f.button('Abbrechen', class: 'btn') %>
+          <div class="control-group">
+            <%= f.label(:password, class: 'control-label') %>
+            <div class="controls">
+              <div class="input-prepend">
+                <span class="add-on"><i class="icon icon-lock"></i></span>
+                <%= f.password_field :password %>
+              </div>
+            </div>
+            <% unless params[:what] == 'signin' %>
+            <div class="control-label" />
+            <div class="controls">
+              <div class="input-prepend">
+                <span class="add-on"><i class="icon icon-lock"></i></span>
+                <%= f.password_field :password_confirmation %>
+              </div>
+            </div>
+            <% end %>
           </div>
-        </div>
-      <% end %>
+          <div class="control-group">
+            <div class="controls">
+              <% if params[:what] == 'signin' %>
+                <%= f.button('Anmelden', class: 'btn btn-primary', id: 'commitSignon', name: 'commit') %>
+              <% else %>
+                <%= f.button('Account anlegen', class: 'btn btn-primary', id: 'commitSignon', name: 'commit') %>
+              <% end %>
+              &nbsp;<%= f.button('Abbrechen', class: 'btn', id: 'cancelSignon', name: 'cancel') %>
+            </div>
+          </div>
+        <% end %>
 
+      </div>
     </div>
   </div>
 </div>
