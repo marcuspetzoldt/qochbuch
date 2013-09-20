@@ -9,7 +9,11 @@
       <li><a href="#"><i class="menu icon-plus"></i>Neues Rezept</a></li>
       <li><a href="#"><i class="menu icon-search"></i>Meine Rezepte</a></li>
       <li class="divider"></li>
-      <li><a href="changePassword.html"><i class="menu icon-wrench"></i>Kennwort ändern</a></li>
+      <li>
+        <%= link_to(change_password_path, method: 'patch', remote: true, id: 'linkChangePassword') do %>
+          <i class="menu icon-wrench"></i>Kennwort ändern
+        <% end %>
+      </li>
       <li class="divider"></li>
       <li>
         <%= link_to(signout_path, method: 'delete', id: 'linkSignout') do %>

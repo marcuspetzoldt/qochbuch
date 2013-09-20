@@ -2,9 +2,8 @@ require 'spec_helper'
 
 describe 'Signing on a user', js: true do
 
+  new_user = User.new(name: 'test', email: 'new_user@test.de', password: 'secret', password_confirmation: 'secret')
   user = FactoryGirl.create(:user)
-  new_user1 = User.new(name: 'test', email: 'new_user1@test.de', password: 'secret', password_confirmation: 'secret')
-  new_user2 = User.new(name: 'test', email: 'new_user2@test.de', password: 'secret', password_confirmation: 'secret')
   before do
     visit(root_path)
     click_link('linkSignon')
@@ -22,16 +21,13 @@ describe 'Signing on a user', js: true do
 
     it 'should close the sign in form on cancel' do
       click_button('cancelSignon')
-      sleep 2
+      sleep(2)
       expect(page).not_to have_selector('div#formSignon')
     end
 
     describe 'Successful log in' do
       before do
-        fill_in('Email', with: user.email)
-        fill_in('Password', with: user.password)
-        click_button('commitSignon')
-        sleep 2
+        sign_in(user)
       end
 
       it 'should close the sign in form on successful submit' do
@@ -40,9 +36,62 @@ describe 'Signing on a user', js: true do
       end
 
       describe 'User menu' do
-        before {click_button(user.name)}
-        it 'should have the sign out link' do
-          expect(page).to have_link('Abmelden', href: signout_path)
+        before do
+          click_button(user.name)
+        end
+        describe "Sign out" do
+          it 'should have a working sign out link' do
+            expect(page).to have_link('linkSignout', href: signout_path)
+            click_link('linkSignout')
+            expect(page).to have_link('linkSignon', href: signin_path)
+          end
+        end
+
+        describe 'Change Password' do
+          before do
+            click_link('linkChangePassword')
+          end
+=begin
+          it 'Successful password change' do
+            expect(page).to have_selector('div#formChangePassword')
+            fill_in('password', with: user.password)
+            fill_in('user_password', with: 'newpassword')
+            fill_in('user_password_confirmation', with: 'newpassword')
+            click_button('commit')
+            sleep(2)
+            expect(page).not_to have_selector('div#formChangePassword')
+            expect(user.reload.authenticate('newpassword')).to eq user
+          end
+=end
+
+          it 'Unsuccessful password change (new passwords don\'t match)' do
+            expect(page).to have_selector('div#formChangePassword')
+            fill_in('password', with: user.password)
+            fill_in('user_password', with: 'newpassword')
+            fill_in('user_password_confirmation', with: 'wrongpassword')
+            click_button('commit')
+            sleep(2)
+            expect(page).to have_selector('div#formChangePassword')
+            expect(page).to have_selector('div.alert.alert-error')
+          end
+
+          it 'Unsuccessful password change (wrong password given)' do
+            expect(page).to have_selector('div#formChangePassword')
+            fill_in('password', with: user.password)
+            fill_in('user_password', with: 'newpassword')
+            fill_in('user_password_confirmation', with: 'wrongpassword')
+            click_button('commit')
+            sleep(2)
+            expect(page).to have_selector('div#formChangePassword')
+            expect(page).to have_selector('div.alert.alert-error')
+          end
+
+          it 'should close form on cancel' do
+            expect(page).to have_selector('div#formChangePassword')
+            click_button('cancel')
+            sleep(2)
+            expect(page).not_to have_selector('div#formChangePassword')
+          end
         end
       end
     end
@@ -53,7 +102,7 @@ describe 'Signing on a user', js: true do
         fill_in('Email', with: user.email)
         fill_in('Password', with: 'wrong password')
         click_button('commitSignon')
-        sleep 2
+        sleep(2)
         expect(page).to have_selector('div#formSignon')
         expect(page).to have_selector('div.alert.alert-error', text: 'Invalid user / password combination.')
       end
@@ -75,33 +124,23 @@ describe 'Signing on a user', js: true do
 
     it 'should close the sign up form on cancel' do
       click_button('cancelSignon')
-      sleep 2
+      sleep(2)
       expect(page).not_to have_selector('div#formSignon')
     end
 
     describe 'Successful sign up' do
-      it 'should close the sign up form on successful submit' do
-        fill_in('Name', with: new_user1.name)
-        fill_in('Email', with: new_user1.email)
-        fill_in('Password', with: new_user1.password)
-        fill_in('user_password_confirmation', with: new_user1.password)
+      before {
+        fill_in('Name', with: new_user.name)
+        fill_in('Email', with: new_user.email)
+        fill_in('Password', with: new_user.password)
+        fill_in('user_password_confirmation', with: new_user.password)
         click_button('commitSignon')
-        sleep 2
-        expect(page).not_to have_selector('div#formSignon')
-        expect(page).to have_button(new_user1.name)
-      end
+        sleep(2)
+      }
 
-      describe 'User menu' do
-        it 'should have the sign out link' do
-          fill_in('Name', with: new_user2.name)
-          fill_in('Email', with: new_user2.email)
-          fill_in('Password', with: new_user2.password)
-          fill_in('user_password_confirmation', with: new_user2.password)
-          click_button('commitSignon')
-          sleep 2
-          click_button(new_user2.name)
-          expect(page).to have_link('Abmelden', href: signout_path)
-        end
+      it 'should close the sign up form on successful submit' do
+        expect(page).not_to have_selector('div#formSignon')
+        expect(page).to have_button(new_user.name)
       end
 
     end
@@ -110,11 +149,12 @@ describe 'Signing on a user', js: true do
 
       it 'should NOT close the sign up form on unsuccessful submit' do
         click_button('commitSignon')
-        sleep 2
+        sleep(2)
         expect(page).to have_selector('div#formSignon')
         expect(page).to have_selector('div.alert.alert-error')
       end
     end
+
   end
 
 end

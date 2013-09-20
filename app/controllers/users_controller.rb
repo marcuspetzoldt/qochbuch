@@ -35,12 +35,41 @@ class UsersController < ApplicationController
     end
     # Wait for the fade-out of the form to happen (850ms)
     sleep(1)
-    render :js => "window.location.href='"+root_path+"'"
+    render js: "window.location.href=\"#{root_path}\""
   end
 
   def signout
     sign_out
     redirect_to root_path
+  end
+
+  def change_password
+    @user = current_user
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def update
+    if params[:commit]
+      @user = current_user
+      if @user.authenticate(params[:password])
+        @user.password = params[:user][:password]
+        @user.password_confirmation = params[:user][:password_confirmation]
+        if !@user.save
+          render('change_password')
+          return
+        end
+      else
+        flash.now[:error] = 'Wrong password.'
+        render('change_password')
+        return
+      end
+    end
+    # Wait for the fade-out of the form to happen (850ms)
+    sleep(1)
+    render js: "window.location.href=\"#{root_path}\""
+
   end
 
   private

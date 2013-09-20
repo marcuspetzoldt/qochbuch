@@ -6,6 +6,7 @@ Qochbuch::Application.routes.draw do
   match '/signin', to: 'users#new', via: 'get', defaults: { what: 'signin' }
   match '/signup', to: 'users#new', via: 'get', defaults: { what: 'signup' }
   match '/signout', to: 'users#signout', via: 'delete'
+  match '/change_password', to: 'users#change_password', via: 'patch'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
