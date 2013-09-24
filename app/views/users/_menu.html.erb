@@ -6,7 +6,11 @@
       <span class="caret"></span>
     </button>
     <ul class="dropdown-menu">
-      <li><a href="#"><i class="menu icon-plus"></i>Neues Rezept</a></li>
+      <li>
+        <%= link_to(new_recipe_path, id:'linkNewRecipe') do %>
+          <i class="menu icon-plus"></i>Neues Rezept
+        <% end %>
+      </li>
       <li><a href="#"><i class="menu icon-search"></i>Meine Rezepte</a></li>
       <li class="divider"></li>
       <li>

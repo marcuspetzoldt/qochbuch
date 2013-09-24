@@ -10,7 +10,7 @@
             <li <% if params[:what] == 'signup' %>class="active"<% end %>><%= link_to('Account anlegen', signup_path, remote: true, id: 'linkSignup') %></li>
           </ul>
 
-          <%= render 'shared/error_messages' %>
+          <%= render('shared/error_messages', individuum: @user) %>
           <% flash.each do |key, value| %>
             <div class="alert alert-<%= key %>" style="margin: 8px"><%= value %></div>
           <% end %>

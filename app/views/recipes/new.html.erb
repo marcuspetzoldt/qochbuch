@@ -1,0 +1,133 @@
+  <div class="row">
+    <% 3.times do |i| %>
+    <div class="span4">
+      <%= render(partial: 'form_for_pic', locals: { nr: i+1, image_path: Recipe.image_name(@recipe, i+1) }) %>
+    </div>
+    <% end %>
+  </div>
+  <div class="row">
+    <div class="span12">
+
+      <%= render('shared/error_messages', individuum: @recipe) %>
+      <% flash.each do |key, value| %>
+        <div class="alert alert-<%= key %>" style="margin: 8px"><%= value %></div>
+      <% end %>
+
+      <div class="accordion" id="accordion2">
+        <div class="accordion-group">
+          <div class="accordion-heading">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+              Region<i class="icon icon-chevron-down pull-right"></i>
+            </a>
+          </div>
+          <div id="collapseOne" class="accordion-body collapse">
+            <div class="accordion-inner">
+              <div style="float:left; width: calc(50% - 8px)">
+                <div class="muted" style="text-align: justify">
+                  <div class="tag tag-success">&#10004;</div>
+                  <span style="font-size:12pt">Nullam</span> <span style="font-size:16pt">quis</span> <span style="font-size:24pt">risus</span> <span style="font-size:14pt">eget</span> <span style="font-size:14pt">urna</span> <span style="font-size:11pt">mollis</span> <span style="font-size:12pt">ornare</span> <span style="font-size:16pt">vel</span> <span style="font-size:18pt">eu</span> <span style="font-size:14pt">leo</span> <span style="font-size:22pt">Cum</span> <span style="font-size:10pt">sociis</span> <span style="font-size:10pt">natoque</span> <span style="font-size:14pt">penatibus</span> <span style="font-size:18pt">et</span> <span style="font-size:14pt">magnis</span> <span style="font-size:12pt">dis</span> <span style="font-size:14pt">parturient</span> <span style="font-size:24pt">montes</span> <span style="font-size:20pt">nascetur</span> <span style="font-size:14pt">ridiculus</span> <span style="font-size:14pt">mus</span> <span style="font-size:12pt">Nullam</span> <span style="font-size:10pt">id</span> <span style="font-size:10pt">dolor</span> <span style="font-size:16pt">id</span> <span style="font-size:19pt">nibh</span> <span style="font-size:18pt">ultricies</span> <span style="font-size:16pt">vehicula</span>
+                  <span style="font-size:12pt">Nullam</span> <span style="font-size:16pt">quis</span> <span style="font-size:24pt">risus</span> <span style="font-size:14pt">eget</span> <span style="font-size:14pt">urna</span> <span style="font-size:11pt">mollis</span> <span style="font-size:12pt">ornare</span> <span style="font-size:16pt">vel</span> <span style="font-size:18pt">eu</span> <span style="font-size:14pt">leo</span> <span style="font-size:22pt">Cum</span> <span style="font-size:10pt">sociis</span> <span style="font-size:10pt">natoque</span> <span style="font-size:14pt">penatibus</span> <span style="font-size:18pt">et</span> <span style="font-size:14pt">magnis</span> <span style="font-size:12pt">dis</span> <span style="font-size:14pt">parturient</span> <span style="font-size:24pt">montes</span> <span style="font-size:20pt">nascetur</span> <span style="font-size:14pt">ridiculus</span> <span style="font-size:14pt">mus</span> <span style="font-size:12pt">Nullam</span> <span style="font-size:10pt">id</span> <span style="font-size:10pt">dolor</span> <span style="font-size:16pt">id</span> <span style="font-size:19pt">nibh</span> <span style="font-size:18pt">ultricies</span> <span style="font-size:16pt">vehicula</span>
+                </div>
+              </div>
+              <div style="float:right; width: calc(50% - 8px)">
+                <div class="muted" style="text-align: justify">
+                  <div class="tag tag-error">&#10008;</div>
+                  <span style="font-size:18pt">et</span> <span style="font-size:14pt">magnis</span> <span style="font-size:12pt">dis</span> <span style="font-size:14pt">parturient</span> <span style="font-size:24pt">montes</span> <span style="font-size:20pt">nascetur</span> <span style="font-size:14pt">ridiculus</span> <span style="font-size:14pt">mus</span> <span style="font-size:12pt">Nullam</span> <span style="font-size:10pt">id</span> <span style="font-size:10pt">dolor</span> <span style="font-size:16pt">id</span> <span style="font-size:19pt">nibh</span> <span style="font-size:18pt">ultricies</span> <span style="font-size:16pt">vehicula</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-group">
+          <div class="accordion-heading">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+              Kategorie<i class="icon icon-chevron-down pull-right"></i>
+            </a>
+          </div>
+          <div id="collapseTwo" class="accordion-body collapse">
+            <div class="accordion-inner">
+              <div style="float:left; width: calc(50% - 8px)">
+                <div class="muted" style="text-align: justify">
+                  <div class="tag tag-success">&#10004;</div>
+                  <span style="font-size:12pt">Nullam</span> <span style="font-size:16pt">quis</span> <span style="font-size:24pt">risus</span> <span style="font-size:14pt">eget</span> <span style="font-size:14pt">urna</span> <span style="font-size:11pt">mollis</span> <span style="font-size:12pt">ornare</span> <span style="font-size:16pt">vel</span> <span style="font-size:18pt">eu</span> <span style="font-size:14pt">leo</span> <span style="font-size:22pt">Cum</span> <span style="font-size:10pt">sociis</span> <span style="font-size:10pt">natoque</span> <span style="font-size:14pt">penatibus</span> <span style="font-size:18pt">et</span> <span style="font-size:14pt">magnis</span> <span style="font-size:12pt">dis</span> <span style="font-size:14pt">parturient</span> <span style="font-size:24pt">montes</span> <span style="font-size:20pt">nascetur</span> <span style="font-size:14pt">ridiculus</span> <span style="font-size:14pt">mus</span> <span style="font-size:12pt">Nullam</span> <span style="font-size:10pt">id</span> <span style="font-size:10pt">dolor</span> <span style="font-size:16pt">id</span> <span style="font-size:19pt">nibh</span> <span style="font-size:18pt">ultricies</span> <span style="font-size:16pt">vehicula</span>
+                  <span style="font-size:12pt">Nullam</span> <span style="font-size:16pt">quis</span> <span style="font-size:24pt">risus</span> <span style="font-size:14pt">eget</span> <span style="font-size:14pt">urna</span> <span style="font-size:11pt">mollis</span> <span style="font-size:12pt">ornare</span> <span style="font-size:16pt">vel</span> <span style="font-size:18pt">eu</span> <span style="font-size:14pt">leo</span> <span style="font-size:22pt">Cum</span> <span style="font-size:10pt">sociis</span> <span style="font-size:10pt">natoque</span> <span style="font-size:14pt">penatibus</span> <span style="font-size:18pt">et</span> <span style="font-size:14pt">magnis</span> <span style="font-size:12pt">dis</span> <span style="font-size:14pt">parturient</span> <span style="font-size:24pt">montes</span> <span style="font-size:20pt">nascetur</span> <span style="font-size:14pt">ridiculus</span> <span style="font-size:14pt">mus</span> <span style="font-size:12pt">Nullam</span> <span style="font-size:10pt">id</span> <span style="font-size:10pt">dolor</span> <span style="font-size:16pt">id</span> <span style="font-size:19pt">nibh</span> <span style="font-size:18pt">ultricies</span> <span style="font-size:16pt">vehicula</span>
+                </div>
+              </div>
+              <div style="float:right; width: calc(50% - 8px)">
+                <div class="muted" style="text-align: justify">
+                  <div class="tag tag-error">&#10008;</div>
+                  <span style="font-size:18pt">et</span> <span style="font-size:14pt">magnis</span> <span style="font-size:12pt">dis</span> <span style="font-size:14pt">parturient</span> <span style="font-size:24pt">montes</span> <span style="font-size:20pt">nascetur</span> <span style="font-size:14pt">ridiculus</span> <span style="font-size:14pt">mus</span> <span style="font-size:12pt">Nullam</span> <span style="font-size:10pt">id</span> <span style="font-size:10pt">dolor</span> <span style="font-size:16pt">id</span> <span style="font-size:19pt">nibh</span> <span style="font-size:18pt">ultricies</span> <span style="font-size:16pt">vehicula</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%= form_for(@recipe, html: { style: 'margin-bottom: 80px' }) do |f| %>
+  <div class="row">
+    <div class="span5">
+      <h4>Zutaten für <select class="inline">
+          <option>1</option>
+          <option selected>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+          <option>6</option>
+        </select> Portionen
+      </h4>
+      <div class="control-group">
+        <div class="control-label">
+          <span style="width:44px; padding-left: 4px; display: inline-block">Menge</span><span style="width: 80px; padding-left: 4px; display: inline-block">Maß</span>Zutat
+        </div>
+        <div class="controls"><div style="display: none"><input type="text" pattern="([0-9]+,?[0-9]*|etwas)" style="width:40px; padding-left: 0" /><select style="width:80px; padding-left: 0"><option>Blatt</option><option>Dose</option><option>EL</option><option>Msp.</option><option>Spritzer</option><option>Stück</option><option>TL</option><option>Zweig(e)</option><option>g</option><option>große</option><option>kleine</option><option>l</option><option>mittlere</option></select><input style="width:214px; padding-left: 0" type="text"/><button onclick="return addIngredientInputRow(this)" id="btn" class="btn" style="margin-left: 4px; padding-left: 4px; padding-right: 4px; vertical-align: top"><i class="icon icon-plus"></i></button></div>
+        <div><input type="text" pattern="([0-9]+,?[0-9]*|etwas)" style="width:40px; padding-left: 0" /><select style="width:80px; padding-left: 0"><option>Blatt</option><option>Dose</option><option>EL</option><option>Msp.</option><option>Spritzer</option><option>Stück</option><option>TL</option><option>Zweig(e)</option><option>g</option><option>große</option><option>kleine</option><option>l</option><option>mittlere</option></select><input style="width:214px; padding-left: 0" type="text"/><button onclick="return addIngredientInputRow(this)" class="btn" style="margin-left: 4px; padding-left:4px; padding-right:4px; vertical-align: top"><i class="icon icon-plus"></i></button></div>
+        </div>
+      </div>
+
+    </div>
+    <div class="span7">
+      <h4>Zubereitung</h4>
+      <div class="control-group">
+        <%= f.label(:time, class: 'control-label') %>
+        <div class="controls">
+          <div class="input-append">
+            <%= f.number_field(:time, min: '1', pattern: '[1-9][0-9]*', placeholder: :time) %>
+            <span class="add-on">min</span>
+          </div>
+        </div>
+      </div>
+      <div class="control-group">
+        <%= f.label(:level, class: 'control-label') %>
+        <div class="controls">
+          <%= f.select(:level, Recipe.levels.map.each_with_index do |lvl, idx| [lvl, idx] end) %>
+        </div>
+      </div>
+      <div class="control-group">
+        <%= f.label(:title, class: 'control-label') %>
+        <div class="controls">
+          <%= f.text_field(:title, class: 'input-block-level', maxlength: '60', placeholder: :title) %>
+        </div>
+      </div>
+      <div class="control-group">
+        <%= f.label(:description, class: 'control-label') %>
+        <div class="controls">
+          <%= f.text_field(:description, class: 'input-block-level', maxlength: '200', placeholder: :description) %>
+        </div>
+      </div>
+      <div class="control-group">
+        <%= f.label(:directions, class: 'control-label') %>
+        <div class="controls">
+          <%= f.cktext_area(:directions, class: 'span7', rows: '16', :ckeditor => {:language => "de"}) %>
+        </div>
+      </div>
+      <div class="control-group">
+        <div class="controls">
+          <%= f.button('Speichern', class: 'btn btn-primary', name: 'commit', id: 'commit') %>&nbsp;
+          <%= f.button('Abbrechen', class: 'btn', name: 'cancel', id: 'cancel') %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

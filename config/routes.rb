@@ -1,12 +1,15 @@
 Qochbuch::Application.routes.draw do
-  resources :users
   root 'landing_pages#home'
+  resources :users
+  resources :recipes
   get "landing_pages/help"
   get "landing_pages/about"
   match '/signin', to: 'users#new', via: 'get', defaults: { what: 'signin' }
   match '/signup', to: 'users#new', via: 'get', defaults: { what: 'signup' }
   match '/signout', to: 'users#signout', via: 'delete'
   match '/change_password', to: 'users#change_password', via: 'patch'
+
+  match '/upload', to: 'recipes#upload', via: 'post'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -3,6 +3,8 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0'
 gem 'bootstrap-sass'
+gem 'ckeditor'
+gem 'remotipart'
 
 group :development, :test do
   gem 'rspec-rails', '2.13.1'

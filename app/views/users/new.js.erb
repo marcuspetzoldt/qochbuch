@@ -1,11 +1,10 @@
-var form = $('<%=j render partial: "users/signon" %>')
-var signon = $('#signon')
+var form = $('<%=j render partial: 'users/signon' %>');
+var signon = $('#signon');
 if (signon.length) {
   signon.html(form)
 } else {
   $('body').last().append(form)
 }
-$('#formSignon').hide()
-$('#cancelSignon').click(function() {$('#formSignon').fadeOut(850)})
-$('#commitSignon').click(function() {$('#formSignon').fadeOut(850)})
-$('#formSignon').fadeIn(850)
+$('#formSignon').hide().fadeIn(850);
+$('#cancelSignon').click(function() {$('#formSignon').fadeOut(850)});
+$('#commitSignon').click(function() {$('#formSignon').fadeOut(850)});

@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  has_many :recipes
+
   before_save { self.email.downcase! }
 
   validates(:name, presence: true, length: { maximum: 50 })
@@ -6,4 +8,5 @@ class User < ActiveRecord::Base
 
   has_secure_password
   validates(:password, length: { minimum: 6 })
+
 end

@@ -39,6 +39,9 @@ GEM
       xpath (~> 2.0)
     childprocess (0.3.9)
       ffi (~> 1.0, >= 1.0.11)
+    ckeditor (4.0.6)
+      mime-types
+      orm_adapter
     coffee-rails (4.0.0)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0.beta, < 5.0)
@@ -73,6 +76,7 @@ GEM
     multi_json (1.8.0)
     nokogiri (1.6.0-x86-mingw32)
       mini_portile (~> 0.5.0)
+    orm_adapter (0.4.0)
     polyglot (0.3.3)
     rack (1.5.2)
     rack-test (0.6.2)
@@ -93,6 +97,7 @@ GEM
     rake (10.1.0)
     rdoc (3.12.2)
       json (~> 1.4)
+    remotipart (1.2.1)
     rspec-core (2.13.1)
     rspec-expectations (2.13.0)
       diff-lcs (>= 1.1.3, < 2.0)
@@ -152,11 +157,13 @@ DEPENDENCIES
   bcrypt-ruby (= 3.0.1)
   bootstrap-sass
   capybara (= 2.1.0)
+  ckeditor
   coffee-rails (~> 4.0.0)
   factory_girl_rails (= 4.2.1)
   jbuilder (~> 1.2)
   jquery-rails
   rails (= 4.0.0)
+  remotipart
   rspec-rails (= 2.13.1)
   sass-rails (~> 4.0.0)
   sdoc

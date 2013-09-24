@@ -1,0 +1,6 @@
+$(document).on('click', 'img#pic1', function() { $('input#recipe_pic1').click() })
+$(document).on('click', 'img#pic2', function() { $('input#recipe_pic2').click() })
+$(document).on('click', 'img#pic3', function() { $('input#recipe_pic3').click() })
+$(document).on('change', 'input#recipe_pic1', function() { $('form#new_recipe_pic1').submit() })
+$(document).on('change', 'input#recipe_pic2', function() { $('form#new_recipe_pic2').submit() })
+$(document).on('change', 'input#recipe_pic3', function() { $('form#new_recipe_pic3').submit() })

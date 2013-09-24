@@ -1,7 +1,7 @@
-<% if @user.errors.any? %>
+<% if individuum.errors.any? %>
   <div class="alert alert-error" style="margin: 8px">
     <ul>
-    <% @user.errors.full_messages.each do |msg| %>
+    <% individuum.errors.full_messages.each do |msg| %>
       <li>* <%= msg %></li>
     <% end %>
     </ul>

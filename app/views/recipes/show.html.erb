@@ -1,0 +1,99 @@
+<div class="row">
+  <div class="span4">
+    <div class="well well-small" style="margin-bottom: 12px"><strong>Zubereitungszeit</strong></div>
+    <p style="padding-left: 8px"><%= @recipe.time %></p>
+    <div class="well well-small" style="margin-bottom: 12px"><strong>Schwierigkeit</strong></div>
+    <p style="padding-left:8px"><%= Recipe.levels[@recipe.level] %></p>
+    <div class="well well-small" style="margin-bottom: 12px"><strong>Autor</strong></div>
+    <p style="padding-left:8px"><%= @recipe.user.name %></p>
+    <div class="well well-small" style="margin-bottom: 12px"><strong>Bewertung</strong></div>
+    <div style="padding-left: 8px">
+      <p><%= render inline: @recipe.rating_as_string %></p>
+      <p style="position: relative; left: 0; top: -34px; font-size: 200%; color: #bbb">&#x2606;&#x2606;&#x2606;&#x2606;&#x2606;</p>
+    </div>
+  </div>
+  <div class="span6">
+    <div id="myCarousel" class="carousel slide">
+      <div class="carousel-inner">
+        <% 3.times do |i| %>
+        <div class="item<%= " active" if i==0 %>">
+          <img src="<%= Recipe.image_name(@recipe, i+1) %>" alt="<%= "#{@recipe.title} Bild #{i+1}" %>" />
+          <div class="container">
+            <div class="carousel-caption">
+              <%= i+1 %>/3
+            </div>
+          </div>
+        </div>
+        <% end %>
+      </div>
+      <a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+      <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
+    </div><!-- /.carousel -->
+  </div>
+  <div class="span2">
+    <% 3.times do |i| %>
+      <div class="preview">
+        <img src="<%= Recipe.image_name(@recipe, i+1) %>" alt="<%= "#{@recipe.title} Bild #{i+1} Vorschau" %>" />
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="row">
+  <h2 class="span8 offset4">
+    <%= @recipe.title %>
+  </h2>
+</div>
+
+<div class="row">
+  <div class="span4">
+    <h4>Zutaten für <select class="inline">
+        <option>1</option>
+        <option selected>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+        <option>6</option>
+      </select> Portionen
+    </h4>
+    <dl class="dl-horizontal">
+      <dt>4 große</dt>
+      <dd>Kartoffeln</dd>
+      <dt>2 Zweige</dt>
+      <dd>Rosmarin</dd>
+      <dt>1 Zweig</dt>
+      <dd>Thymian</dd>
+      <dt>250 g</dt>
+      <dd>Quark</dd>
+      <dt>etwas</dt>
+      <dd>Milch</dd>
+      <dt></dt>
+      <dd>Salz und Pfeffer</dd>
+      <dt>2 EL</dt>
+      <dd>Schnittlauch</dd>
+    </dl>
+  </div>
+  <div class="span8">
+    <h4>Zubereitung</h4>
+    <%= render inline: @recipe.directions %>
+  </div>
+</div>
+</div>
+
+<div class="navbar navbar-fixed-bottom">
+<div class="navbar-inner">
+  <div class="container">
+    <div class="row">
+        <div class="span6 muted credit" style="padding-top: 8px">
+          Programmierung &amp; Design: <a href="mailto:marcus.petzoldt@gmail.com">Marcus Petzoldt</a>
+        </div>
+        <div class="span6 nav-collapse collapse">
+          <ul class="nav pull-right">
+            <li><a href="#">Hilfe</a></li>
+            <li><a href="#">Kontakt</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,5 @@
+<%= form_for(@recipe, url: upload_path, html: { id: "new_recipe_pic#{nr}" }, remote: true) do |f|%>
+  <img src="<%= image_path %>" style="cursor: pointer" id="pic<%= nr %>" />
+  <%= f.file_field("pic#{nr}".to_sym, id: "recipe_pic#{nr}", accept: 'image/*', style: 'position: fixed; left: 0; top: 0') %>
+  <%= hidden_field_tag(request_forgery_protection_token.to_s, form_authenticity_token) %>
+<% end %>
