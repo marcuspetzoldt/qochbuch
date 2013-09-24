@@ -8,8 +8,7 @@
     <p style="padding-left:8px"><%= @recipe.user.name %></p>
     <div class="well well-small" style="margin-bottom: 12px"><strong>Bewertung</strong></div>
     <div style="padding-left: 8px">
-      <p><%= render inline: @recipe.rating_as_string %></p>
-      <p style="position: relative; left: 0; top: -34px; font-size: 200%; color: #bbb">&#x2606;&#x2606;&#x2606;&#x2606;&#x2606;</p>
+      <%= render 'rating' %>
     </div>
   </div>
   <div class="span6">

@@ -1,0 +1,11 @@
+<p>
+<% rating = @recipe.rating %>
+<% 5.times do |i| %><% if i < rating.to_i %><span class="starsyellow big">&#x2605;</span><% else %><span class="starsgray big">&#x2605;</span><% end %><% end %>
+</p>
+<p style="position: relative; left: 0; top: -35px; font-size: 200%; color: #bbb">
+<% if signed_in? %>
+<% 5.times do |i| %><% if @recipe.user.id == current_user.id %>&#x2606;<% else %><%= link_to(users_recipes_votes_edit_path(current_user.id, @recipe.id, i)) do %>&#x2606;<% end %><% end %><% end %>
+<% else %>&#x2606;&#x2606;&#x2606;&#x2606;&#x2606;
+<% end %>
+ <%= rating.to_i %>.<span style="font-size: 75%"><%= ((rating.frac.round(2))*100).to_i %></span>
+</p>

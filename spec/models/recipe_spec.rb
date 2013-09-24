@@ -13,11 +13,11 @@ describe Recipe do
   end
 
   it "should have these fields" do
-    expect(@user).to respond_to(:time)
-    expect(@user).to respond_to(:level)
-    expect(@user).to respond_to(:title)
-    expect(@user).to respond_to(:description)
-    expect(@user).to respond_to(:directions)
+    expect(@recipe).to respond_to(:time)
+    expect(@recipe).to respond_to(:level)
+    expect(@recipe).to respond_to(:title)
+    expect(@recipe).to respond_to(:description)
+    expect(@recipe).to respond_to(:directions)
   end
 
   describe 'time' do

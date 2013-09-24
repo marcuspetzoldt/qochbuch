@@ -1,6 +1,7 @@
 class Recipe < ActiveRecord::Base
   after_save { save_images }
   belongs_to :user
+  has_one :vote
 
   validates(:time, presence: true, format: { with: /\A[1-9][0-9]*\z/ })
   validates(:level, presence: true, inclusion: { in: 0..4 })
@@ -25,17 +26,19 @@ class Recipe < ActiveRecord::Base
     return image_name
   end
 
-  def rating_as_string
-    # TODO: Rating Model
-    n = 1
-    "<span class=\"starsyellow big\">#{"&#x2605;"*(n-1)}</span><span class=\"starsgray big\">#{"&#x2605;"*(6-n)}</span>"
+  def rating
+    if id
+      return Vote.where(recipe_id: id).average(:vote)
+    else
+      return 0
+    end
   end
 
   private
 
     def save_images
       image_path = Rails.root.join('public', 'uploads', id.to_s)
-      FileUtils.mkdir(image_path)
+      FileUtils.mkdir(image_path) unless File.exists?(image_path)
       Dir.glob(Rails.root.join('public', 'uploads', "#{user.id}_*")).each do |file|
         FileUtils.mv(file, image_path)
       end

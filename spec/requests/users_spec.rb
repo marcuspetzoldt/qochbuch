@@ -2,9 +2,9 @@ require 'spec_helper'
 
 describe 'Signing on a user', js: true do
 
-  new_user = User.new(name: 'test', email: 'new_user@test.de', password: 'secret', password_confirmation: 'secret')
-  user = FactoryGirl.create(:user)
   before do
+    new_user = User.new(name: 'test', email: 'new_user@test.de', password: 'secret', password_confirmation: 'secret')
+    user = FactoryGirl.create(:user)
     visit(root_path)
     click_link('linkSignon')
   end

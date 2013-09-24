@@ -2,7 +2,9 @@ require 'spec_helper'
 
 describe 'Recipes' do
 
-  recipe = FactoryGirl.create(:recipe)
+  before do
+    recipe = FactoryGirl.create(:recipe)
+  end
 
   describe "with signed in user", js: true do
     before do

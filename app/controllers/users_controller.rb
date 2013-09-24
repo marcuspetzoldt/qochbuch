@@ -13,7 +13,6 @@ class UsersController < ApplicationController
       if params[:what] == 'signup'
         @user = User.new(user_params)
         if @user.save
-          # Handle a successful save.
           sign_in(@user)
         else
           render('new')
@@ -35,7 +34,7 @@ class UsersController < ApplicationController
     end
     # Wait for the fade-out of the form to happen (850ms)
     sleep(1)
-    render js: "window.location.href=\"#{root_path}\""
+    render js: "$('div#signon').remove()"
   end
 
   def signout
@@ -68,7 +67,7 @@ class UsersController < ApplicationController
     end
     # Wait for the fade-out of the form to happen (850ms)
     sleep(1)
-    render js: "window.location.href=\"#{root_path}\""
+    render js: "$('div#signon').remove()"
 
   end
 

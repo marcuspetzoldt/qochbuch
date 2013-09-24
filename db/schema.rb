@@ -11,29 +11,41 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130921103816) do
+ActiveRecord::Schema.define(version: 20130924091402) do
 
-  create_table 'recipes', force: true do |t|
-    t.integer  'time'
-    t.integer  'level'
-    t.string   'title'
-    t.string   'description'
-    t.text     'directions'
-    t.datetime 'created_at'
-    t.datetime 'updated_at'
-    t.integer  'user_id'
+  create_table "recipes", force: true do |t|
+    t.integer  "time"
+    t.integer  "level"
+    t.string   "title"
+    t.string   "description"
+    t.text     "directions"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
-  add_index 'recipes', ['user_id'], name: 'index_recipes_on_user_id'
+  add_index "recipes", ["user_id"], name: "index_recipes_on_user_id"
 
-  create_table 'users', force: true do |t|
-    t.string   'name'
-    t.string   'email'
-    t.datetime 'created_at'
-    t.datetime 'updated_at'
-    t.string   'password_digest'
+  create_table "users", force: true do |t|
+    t.string   "name"
+    t.string   "email"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "password_digest"
   end
 
-  add_index 'users', ['email'], name: 'index_users_on_email', unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true
+
+  create_table "votes", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+    t.integer  "recipe_id"
+    t.integer  "vote"
+  end
+
+  add_index "votes", ["recipe_id"], name: "index_votes_on_recipe_id"
+  add_index "votes", ["user_id", "recipe_id"], name: "index_votes_on_user_id_and_recipe_id", unique: true
+  add_index "votes", ["user_id"], name: "index_votes_on_user_id"
 
 end
