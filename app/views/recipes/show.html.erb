@@ -39,7 +39,14 @@
 </div>
 
 <div class="row">
-  <h2 class="span8 offset4">
+  <div class="span4">
+    <% if signed_in? %>
+      <% if @recipe.user.id == current_user.id %>
+        <%= link_to('Bearbeiten', edit_recipe_path(@recipe), class: "btn btn-success btn-block btn-large") %>
+      <% end %>
+    <% end %>
+  </div>
+  <h2 class="span8">
     <%= @recipe.title %>
   </h2>
 </div>

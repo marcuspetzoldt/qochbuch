@@ -25,6 +25,24 @@ class RecipesController < ApplicationController
     end
   end
 
+  def edit
+    @recipe = Recipe.find(params[:id])
+    render('new')
+  end
+
+  def update
+    if params[:commit]
+      @recipe = Recipe.find(params[:id])
+      if @recipe.update(recipe_params)
+        redirect_to @recipe
+      else
+        render('new')
+      end
+    else
+      redirect_to(recipe_path(params[:id]))
+    end
+  end
+
   def show
     @recipe = Recipe.find_by(id: params[:id])
     respond_to do |format|

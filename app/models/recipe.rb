@@ -40,7 +40,7 @@ class Recipe < ActiveRecord::Base
       image_path = Rails.root.join('public', 'uploads', id.to_s)
       FileUtils.mkdir(image_path) unless File.exists?(image_path)
       Dir.glob(Rails.root.join('public', 'uploads', "#{user.id}_*")).each do |file|
-        FileUtils.mv(file, image_path)
+        FileUtils.mv(file, image_path, force: true)
       end
     end
 

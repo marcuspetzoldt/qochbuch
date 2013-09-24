@@ -34,7 +34,7 @@ class UsersController < ApplicationController
     end
     # Wait for the fade-out of the form to happen (850ms)
     sleep(1)
-    render js: "$('div#signon').remove()"
+    render js: 'location.reload()'
   end
 
   def signout
@@ -67,7 +67,7 @@ class UsersController < ApplicationController
     end
     # Wait for the fade-out of the form to happen (850ms)
     sleep(1)
-    render js: "$('div#signon').remove()"
+    render js: 'location.reload()'
 
   end
 
