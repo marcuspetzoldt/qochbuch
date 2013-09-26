@@ -1,56 +1,8 @@
 <div class="row">
-  <div style="margin-bottom: -60px"><span class="spin spin-left"><a href="#" title="3 aus n Rezepten">&lsaquo;</a></span><span class="spin spin-right"><a href="#" title="3 aus n Rezepten">&rsaquo;</a></span></div>
+  <div style="margin-bottom: -60px"><span class="spin spin-left"><%= link_to(previous_path) do %>&lsaquo;<% end %></span><span class="spin spin-right"><%= link_to(next_path) do %>&rsaquo;<% end %></span></div>
   <div class="span12">
-    <!-- TODO: Rezeptvorschläge -->
     <ul class="thumbnails">
-      <li class="span4">
-        <div class="thumbnail">
-          <p class="thumbnail">
-            <img src="<%= asset_path 'placeholder.png' %>" alt="Platzhalter" />
-          </p>
-          <h4 class="titel">Afrikanischer Kartoffelsalat</h4>
-          <p>
-            <span class="label"><span class="starsyellow">&#x2605;&#x2605;&#x2605;</span><span class="starsgray">&#x2605;&#x2605;</span></span>
-            <span class="label">40 min</span>
-            <span class="label">simpel</span>
-          </p>
-          <p style="height:80px">Nullam quis risus eget urna mollis vel eu leo. Nibh ultricies vehicula ...</p>
-          <a class="btn btn-info" href="rezept.html">Mehr</a>
-          <% if signed_in? %>
-            <a class="btn btn-success" href="rezept.html">Bearbeiten</a>
-          <% end %>
-        </div>
-      </li>
-      <li class="span4">
-        <div class="thumbnail">
-          <p class="thumbnail">
-            <img src="<%= asset_path 'placeholder.png' %>" alt="Platzhalter" />
-          </p>
-          <h4 class="titel">Rezept 2</h4>
-          <p>
-            <span class="label"><span class="starsyellow">&#x2605;&#x2605;&#x2605;&#x2605;</span><span class="starsgray">&#x2605;</span></span>
-            <span class="label">20 min</span>
-            <span class="label">simpel</span>
-          </p>
-          <p style="height:80px">Nullam quis risus eget urna mollis vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula ...</p>
-          <a class="btn btn-info" href="rezept.html">Mehr</a>
-        </div>
-      </li>
-      <li class="span4">
-        <div class="thumbnail">
-          <p class="thumbnail">
-            <img src="<%= asset_path 'placeholder.png' %>" alt="Platzhalter" />
-          </p>
-          <h4 class="titel">Rezept 3</h4>
-          <p>
-            <span class="label"><span class="starsyellow">&#x2605;&#x2605;&#x2605;</span><span class="starsgray">&#x2605;&#x2605;</span></span>
-            <span class="label">90 min</span>
-            <span class="label">leicht</span>
-          </p>
-          <p style="height:80px">Nullam quis risus eget urna mollis vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula ...</p>
-          <a class="btn btn-info" href="rezept.html">Mehr</a>
-        </div>
-      </li>
+      <%= render(@recipes) %>
     </ul>
   </div>
 </div>

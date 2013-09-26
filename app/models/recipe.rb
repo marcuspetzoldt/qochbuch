@@ -9,8 +9,30 @@ class Recipe < ActiveRecord::Base
   validates(:description, presence: false, length: { maximum: 200 })
   validates(:directions, presence: true)
 
+
   def self.levels
-    ['Simpel', 'Leicht', 'Normal', 'Schwer', 'Sehr schwer']
+    ['Sehr leicht', 'Leicht', 'Normal', 'Schwer', 'Sehr schwer']
+  end
+
+  def self.suggestions(direction=1)
+    if direction > 0
+      # next three recipes from shuffled all_ids
+      low = @position_in_resultset
+      @position_in_resultset += 3
+      if @position_in_resultset >= all_ids.size
+        @position_in_resultset = 0
+      end
+    else
+      # previous three recipes from shuffled all_ids
+      @position_in_resultset -= 3
+      low = @position_in_resultset
+      if @position_in_resultset < 0
+        @position_in_resultset = 3 * all_ids.size.div(3)
+      end
+    end
+    3.times.map do |i|
+      Recipe.find_by(id: all_ids[@position_in_resultset+i]) || Recipe.new
+    end
   end
 
   def self.image_name(for_recipe, image_nr)
@@ -26,15 +48,24 @@ class Recipe < ActiveRecord::Base
     return image_name
   end
 
+  # Average rating of given recipe, with two decimal places
   def rating
-    if id
-      return Vote.where(recipe_id: id).average(:vote)
-    else
-      return 0
-    end
+    (Vote.where(recipe_id: id).average(:vote) || 0.0).round(2)
   end
 
   private
+
+    @position_in_resultset = 0
+
+    def self.all_ids=(ids)
+      @all_ids = ids
+    end
+
+    # all ids matching the last search
+    # TODO: replace all.map
+    def self.all_ids
+      @all_ids ||= (all.map do |recipe| recipe.id end).shuffle
+    end
 
     def save_images
       image_path = Rails.root.join('public', 'uploads', id.to_s)

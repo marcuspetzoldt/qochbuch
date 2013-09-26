@@ -4,13 +4,14 @@ Qochbuch::Application.routes.draw do
   resources :recipes
   get "landing_pages/help"
   get "landing_pages/about"
+  match '/next', to: 'landing_pages#next', via: 'get'
+  match '/previous', to: 'landing_pages#previous', via: 'get'
   match '/signin', to: 'users#new', via: 'get', defaults: { what: 'signin' }
   match '/signup', to: 'users#new', via: 'get', defaults: { what: 'signup' }
   match '/signout', to: 'users#signout', via: 'delete'
   match '/change_password', to: 'users#change_password', via: 'patch'
   match '/upload', to: 'recipes#upload', via: ['post', 'patch']
-# match '/vote/:user_id/:recipe_id/:id', to: 'votes#edit', via: 'get'
-  match '/users/:user_id/recipes/:recipe_id/votes/:id/edit', to: 'votes#edit', via: 'get', as: 'users_recipes_votes_edit'
+  match '/recipes/:recipe_id/votes/:id/edit', to: 'votes#edit', via: 'get', as: 'recipes_votes_edit'
 # resources :users do
 #   resources :recipes do
 #     resources :votes

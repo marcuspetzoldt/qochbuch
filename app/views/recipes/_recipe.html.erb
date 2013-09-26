@@ -1,0 +1,28 @@
+<% @recipe = recipe %>
+<li class="span4">
+  <div class="thumbnail">
+    <% if recipe.new_record? %>
+      <p class="thumbnail">
+        <%= image_tag('placeholder.png', alt: 'Platzhalter') %>
+      </p>
+      <p style="height: 194px">&nbsp;</p>
+    <% else %>
+      <p class="thumbnail">
+        <img src="<%= Recipe.image_name(@recipe, 1) %>" alt="<%= "#{@recipe.title} Bild 1" %>" />
+      </p>
+      <h4 class="titel"><%= @recipe.title %></h4>
+      <p>
+        <span class="label"><%= render(partial: 'recipes/rating', locals: { display_only: true }) %></span></span>
+        <span class="label"><%= @recipe.time %> min</span>
+        <span class="label"><%= Recipe.levels[@recipe.level] %></span>
+      </p>
+      <p style="height:80px"><%= @recipe.description %></p>
+      <%= link_to('Mehr', recipe_path(@recipe), class: 'btn btn-info') %>
+      <% if signed_in? %>
+        <% if current_user.id == @recipe.user.id %>
+          <%= link_to('Bearbeiten', edit_recipe_path(@recipe), class: 'btn btn-success') %>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+</li>

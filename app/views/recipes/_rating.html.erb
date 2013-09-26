@@ -1,11 +1,10 @@
-<p>
-<% rating = @recipe.rating %>
-<% 5.times do |i| %><% if i < rating.to_i %><span class="starsyellow big">&#x2605;</span><% else %><span class="starsgray big">&#x2605;</span><% end %><% end %>
-</p>
-<p style="position: relative; left: 0; top: -35px; font-size: 200%; color: #bbb">
+<% rating = @recipe.rating || 0.0 %>
+<% if display_only %>
+<% 5.times do |i| %><% if i < rating.to_i %><span class="starsyellow">&#x2605;</span><% else %><span class="starsgray">&#x2605;</span><% end %><% end %>
+<% else %>
 <% if signed_in? %>
-<% 5.times do |i| %><% if @recipe.user.id == current_user.id %>&#x2606;<% else %><%= link_to(users_recipes_votes_edit_path(current_user.id, @recipe.id, i)) do %>&#x2606;<% end %><% end %><% end %>
+<% 5.times do |i| %><% if @recipe.user.id == current_user.id %>&#x2606;<% else %><%= link_to(recipes_votes_edit_path(@recipe.id, i+1)) do %>&#x2606;<% end %><% end %><% end %>
 <% else %>&#x2606;&#x2606;&#x2606;&#x2606;&#x2606;
 <% end %>
- <%= rating.to_i %>.<span style="font-size: 75%"><%= ((rating.frac.round(2))*100).to_i %></span>
-</p>
+ <%= rating.to_i %>.<span style="font-size: 75%"><%= ((rating-rating.to_i)*100).to_i %></span>
+<% end %>
