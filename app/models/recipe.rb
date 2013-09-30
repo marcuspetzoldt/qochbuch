@@ -2,6 +2,8 @@ class Recipe < ActiveRecord::Base
   after_save { save_images }
   belongs_to :user
   has_one :vote
+  has_many :taggings
+  has_many :tags, through: :taggings
 
   validates(:time, presence: true, format: { with: /\A[1-9][0-9]*\z/ })
   validates(:level, presence: true, inclusion: { in: 0..4 })

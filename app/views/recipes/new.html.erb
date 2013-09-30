@@ -23,16 +23,15 @@
           <div id="collapseOne" class="accordion-body collapse">
             <div class="accordion-inner">
               <div style="float:left; width: calc(50% - 8px)">
-                <div class="muted" style="text-align: justify">
+                <div id="region_usable" class="muted" style="text-align: justify">
                   <div class="tag tag-success">&#10004;</div>
-                  <span style="font-size:12pt">Nullam</span> <span style="font-size:16pt">quis</span> <span style="font-size:24pt">risus</span> <span style="font-size:14pt">eget</span> <span style="font-size:14pt">urna</span> <span style="font-size:11pt">mollis</span> <span style="font-size:12pt">ornare</span> <span style="font-size:16pt">vel</span> <span style="font-size:18pt">eu</span> <span style="font-size:14pt">leo</span> <span style="font-size:22pt">Cum</span> <span style="font-size:10pt">sociis</span> <span style="font-size:10pt">natoque</span> <span style="font-size:14pt">penatibus</span> <span style="font-size:18pt">et</span> <span style="font-size:14pt">magnis</span> <span style="font-size:12pt">dis</span> <span style="font-size:14pt">parturient</span> <span style="font-size:24pt">montes</span> <span style="font-size:20pt">nascetur</span> <span style="font-size:14pt">ridiculus</span> <span style="font-size:14pt">mus</span> <span style="font-size:12pt">Nullam</span> <span style="font-size:10pt">id</span> <span style="font-size:10pt">dolor</span> <span style="font-size:16pt">id</span> <span style="font-size:19pt">nibh</span> <span style="font-size:18pt">ultricies</span> <span style="font-size:16pt">vehicula</span>
-                  <span style="font-size:12pt">Nullam</span> <span style="font-size:16pt">quis</span> <span style="font-size:24pt">risus</span> <span style="font-size:14pt">eget</span> <span style="font-size:14pt">urna</span> <span style="font-size:11pt">mollis</span> <span style="font-size:12pt">ornare</span> <span style="font-size:16pt">vel</span> <span style="font-size:18pt">eu</span> <span style="font-size:14pt">leo</span> <span style="font-size:22pt">Cum</span> <span style="font-size:10pt">sociis</span> <span style="font-size:10pt">natoque</span> <span style="font-size:14pt">penatibus</span> <span style="font-size:18pt">et</span> <span style="font-size:14pt">magnis</span> <span style="font-size:12pt">dis</span> <span style="font-size:14pt">parturient</span> <span style="font-size:24pt">montes</span> <span style="font-size:20pt">nascetur</span> <span style="font-size:14pt">ridiculus</span> <span style="font-size:14pt">mus</span> <span style="font-size:12pt">Nullam</span> <span style="font-size:10pt">id</span> <span style="font-size:10pt">dolor</span> <span style="font-size:16pt">id</span> <span style="font-size:19pt">nibh</span> <span style="font-size:18pt">ultricies</span> <span style="font-size:16pt">vehicula</span>
+                  <%= render(partial: 'layouts/tag_cloud', locals: { cloud: @regions[:usable], name: 'region_usable' }) %>
                 </div>
               </div>
               <div style="float:right; width: calc(50% - 8px)">
-                <div class="muted" style="text-align: justify">
+                <div id="region_used" class="muted" style="text-align: justify">
                   <div class="tag tag-error">&#10008;</div>
-                  <span style="font-size:18pt">et</span> <span style="font-size:14pt">magnis</span> <span style="font-size:12pt">dis</span> <span style="font-size:14pt">parturient</span> <span style="font-size:24pt">montes</span> <span style="font-size:20pt">nascetur</span> <span style="font-size:14pt">ridiculus</span> <span style="font-size:14pt">mus</span> <span style="font-size:12pt">Nullam</span> <span style="font-size:10pt">id</span> <span style="font-size:10pt">dolor</span> <span style="font-size:16pt">id</span> <span style="font-size:19pt">nibh</span> <span style="font-size:18pt">ultricies</span> <span style="font-size:16pt">vehicula</span>
+                  <%= render(partial: 'layouts/tag_cloud', locals: { cloud: @regions[:used], name: 'region_used' }) %>
                 </div>
               </div>
             </div>
@@ -47,16 +46,15 @@
           <div id="collapseTwo" class="accordion-body collapse">
             <div class="accordion-inner">
               <div style="float:left; width: calc(50% - 8px)">
-                <div class="muted" style="text-align: justify">
+                <div id="tag_usable" class="muted" style="text-align: justify">
                   <div class="tag tag-success">&#10004;</div>
-                  <span style="font-size:12pt">Nullam</span> <span style="font-size:16pt">quis</span> <span style="font-size:24pt">risus</span> <span style="font-size:14pt">eget</span> <span style="font-size:14pt">urna</span> <span style="font-size:11pt">mollis</span> <span style="font-size:12pt">ornare</span> <span style="font-size:16pt">vel</span> <span style="font-size:18pt">eu</span> <span style="font-size:14pt">leo</span> <span style="font-size:22pt">Cum</span> <span style="font-size:10pt">sociis</span> <span style="font-size:10pt">natoque</span> <span style="font-size:14pt">penatibus</span> <span style="font-size:18pt">et</span> <span style="font-size:14pt">magnis</span> <span style="font-size:12pt">dis</span> <span style="font-size:14pt">parturient</span> <span style="font-size:24pt">montes</span> <span style="font-size:20pt">nascetur</span> <span style="font-size:14pt">ridiculus</span> <span style="font-size:14pt">mus</span> <span style="font-size:12pt">Nullam</span> <span style="font-size:10pt">id</span> <span style="font-size:10pt">dolor</span> <span style="font-size:16pt">id</span> <span style="font-size:19pt">nibh</span> <span style="font-size:18pt">ultricies</span> <span style="font-size:16pt">vehicula</span>
-                  <span style="font-size:12pt">Nullam</span> <span style="font-size:16pt">quis</span> <span style="font-size:24pt">risus</span> <span style="font-size:14pt">eget</span> <span style="font-size:14pt">urna</span> <span style="font-size:11pt">mollis</span> <span style="font-size:12pt">ornare</span> <span style="font-size:16pt">vel</span> <span style="font-size:18pt">eu</span> <span style="font-size:14pt">leo</span> <span style="font-size:22pt">Cum</span> <span style="font-size:10pt">sociis</span> <span style="font-size:10pt">natoque</span> <span style="font-size:14pt">penatibus</span> <span style="font-size:18pt">et</span> <span style="font-size:14pt">magnis</span> <span style="font-size:12pt">dis</span> <span style="font-size:14pt">parturient</span> <span style="font-size:24pt">montes</span> <span style="font-size:20pt">nascetur</span> <span style="font-size:14pt">ridiculus</span> <span style="font-size:14pt">mus</span> <span style="font-size:12pt">Nullam</span> <span style="font-size:10pt">id</span> <span style="font-size:10pt">dolor</span> <span style="font-size:16pt">id</span> <span style="font-size:19pt">nibh</span> <span style="font-size:18pt">ultricies</span> <span style="font-size:16pt">vehicula</span>
+                  <%= render(partial: 'layouts/tag_cloud', locals: { cloud: @tags[:usable], name: 'tag_usable' }) %>
                 </div>
               </div>
               <div style="float:right; width: calc(50% - 8px)">
-                <div class="muted" style="text-align: justify">
+                <div id="tag_used" class="muted" style="text-align: justify">
                   <div class="tag tag-error">&#10008;</div>
-                  <span style="font-size:18pt">et</span> <span style="font-size:14pt">magnis</span> <span style="font-size:12pt">dis</span> <span style="font-size:14pt">parturient</span> <span style="font-size:24pt">montes</span> <span style="font-size:20pt">nascetur</span> <span style="font-size:14pt">ridiculus</span> <span style="font-size:14pt">mus</span> <span style="font-size:12pt">Nullam</span> <span style="font-size:10pt">id</span> <span style="font-size:10pt">dolor</span> <span style="font-size:16pt">id</span> <span style="font-size:19pt">nibh</span> <span style="font-size:18pt">ultricies</span> <span style="font-size:16pt">vehicula</span>
+                  <%= render(partial: 'layouts/tag_cloud', locals: { cloud: @tags[:used], name: 'tag_used' }) %>
                 </div>
               </div>
             </div>
@@ -66,6 +64,8 @@
     </div>
   </div>
   <%= form_for(@recipe, html: { style: 'margin-bottom: 80px' }) do |f| %>
+    <%= f.hidden_field(:regions, id: 'iregion_used', value: @recipe.tags.where(category: 0).map do |tag| tag.id end.join(' ') ) %>
+    <%= f.hidden_field(:tags, id: 'itag_used', value: @recipe.tags.where(category: 1).map do |tag| tag.id end.join(' ') ) %>
   <div class="row">
     <div class="span5">
       <h4>Zutaten für <select class="inline">
