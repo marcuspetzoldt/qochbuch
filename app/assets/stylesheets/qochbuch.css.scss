@@ -160,3 +160,26 @@ span > a:hover {
     background-color: #ffeeee;
   }
 }
+
+@mixin responsive {
+  cursor: pointer;
+  &:hover {
+    background-color: #ffffa0;
+  }
+}
+
+.region_used_tag_cloud {
+  @include responsive;
+}
+
+.region_usable_tag_cloud {
+  @include responsive;
+}
+
+.tag_used_tag_cloud {
+  @include responsive;
+}
+
+.tag_usable_tag_cloud {
+  @include responsive;
+}

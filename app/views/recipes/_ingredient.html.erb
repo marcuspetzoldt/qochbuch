@@ -1,0 +1,8 @@
+<% unless ingredient[:amount].blank? && ingredient[:tag].blank? %>
+  <% if edit %>
+    <div><input type="text" value="<%= ingredient[:amount] if ingredient[:amount] != 0 %>" name="recipe[ingredients[amount]][]" pattern="[0-9]+.?[0-9]*" style="width:40px; padding-left: 0" /><select name="recipe[ingredients[measure]][]" style="width: 80px; padding-left: 0"><%= options_for_select((Measure.all.map.each_with_index do |msr, idx| [msr.name, msr.id] end), ingredient[:measure_id]) %> %></select><input type="text" value="<%= ingredient[:tag] %>" name="recipe[ingredients[tag]][]" style="width:214px; padding-left: 0" /><%= link_to('#', name: 'remove_ingredient', style: 'margin-left: 4px; padding-left: 4px; padding-right: 4px; vertical-align: top', class: 'btn') do %><i class="icon icon-remove"></i><% end %></div>
+  <% else %>
+    <dt><%= ingredient[:amount] %> <%= ingredient[:measure ]%></dt>
+    <dd><%= ingredient[:tag] %></dd>
+  <% end %>
+<% end %>

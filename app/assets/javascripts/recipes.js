@@ -16,6 +16,8 @@ $(document).on('click', 'span.region_used_tag_cloud', function() {
     move_tag(this, 'region_used', 'region_usable');
     refresh_tag_list('region_used')
 })
+
+/* Tags */
 $(document).on('click', 'span.tag_usable_tag_cloud', function() {
     move_tag(this, 'tag_usable', 'tag_used');
     refresh_tag_list('tag_used')
@@ -25,6 +27,20 @@ $(document).on('click', 'span.tag_used_tag_cloud', function() {
     refresh_tag_list('tag_used')
 })
 
+/* Evolve Ingredients Form */
+$(document).on('click', 'a[name=add_ingredient]', function() {
+    var $new_ingredient = $(this).parent().parent().children().first().clone();
+
+    $new_ingredient.css('display', 'inline-block');
+    $(this).attr('name', 'remove_ingredient');
+    $(this).html('<i class="icon icon-remove"></i>');
+    $(this).parent().after($new_ingredient);
+    return false;
+})
+$(document).on('click', 'a[name=remove_ingredient]', function() {
+    $(this).parent().remove()
+    return false;
+})
 
 function refresh_tag_list(tag) {
     var $value = ''

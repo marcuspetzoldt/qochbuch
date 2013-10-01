@@ -68,24 +68,17 @@
     <%= f.hidden_field(:tags, id: 'itag_used', value: @recipe.tags.where(category: 1).map do |tag| tag.id end.join(' ') ) %>
   <div class="row">
     <div class="span5">
-      <h4>Zutaten für <select class="inline">
-          <option>1</option>
-          <option selected>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-          <option>6</option>
-        </select> Portionen
-      </h4>
+      <h4>Zutaten für <%= f.select(:portion, options_for_select(1..12), {include_blank: true}, class: 'inline') %> Portionen</h4>
       <div class="control-group">
         <div class="control-label">
           <span style="width:44px; padding-left: 4px; display: inline-block">Menge</span><span style="width: 80px; padding-left: 4px; display: inline-block">Maß</span>Zutat
         </div>
-        <div class="controls"><div style="display: none"><input type="text" pattern="([0-9]+,?[0-9]*|etwas)" style="width:40px; padding-left: 0" /><select style="width:80px; padding-left: 0"><option>Blatt</option><option>Dose</option><option>EL</option><option>Msp.</option><option>Spritzer</option><option>Stück</option><option>TL</option><option>Zweig(e)</option><option>g</option><option>große</option><option>kleine</option><option>l</option><option>mittlere</option></select><input style="width:214px; padding-left: 0" type="text"/><button onclick="return addIngredientInputRow(this)" id="btn" class="btn" style="margin-left: 4px; padding-left: 4px; padding-right: 4px; vertical-align: top"><i class="icon icon-plus"></i></button></div>
-        <div><input type="text" pattern="([0-9]+,?[0-9]*|etwas)" style="width:40px; padding-left: 0" /><select style="width:80px; padding-left: 0"><option>Blatt</option><option>Dose</option><option>EL</option><option>Msp.</option><option>Spritzer</option><option>Stück</option><option>TL</option><option>Zweig(e)</option><option>g</option><option>große</option><option>kleine</option><option>l</option><option>mittlere</option></select><input style="width:214px; padding-left: 0" type="text"/><button onclick="return addIngredientInputRow(this)" class="btn" style="margin-left: 4px; padding-left:4px; padding-right:4px; vertical-align: top"><i class="icon icon-plus"></i></button></div>
+        <div class="controls">
+          <div style="display: none"><input type="text" name="recipe[ingredients[amount]][]" pattern="([0-9]+,?[0-9]*|etwas)" style="width:40px; padding-left: 0" /><select name="recipe[ingredients[measure]][]" style="width: 80px; padding-left: 0"><%= options_for_select(Measure.all.map.each_with_index do |msr, idx| [msr.name, msr.id] end) %></select><input type="text" name="recipe[ingredients[tag]][]" style="width:214px; padding-left: 0" /><%= link_to('#', name: 'add_ingredient', style: 'margin-left: 4px; padding-left: 4px; padding-right: 4px; vertical-align: top', class: 'btn') do %><i class="icon icon-plus"></i><% end %></div>
+          <%= render(partial: 'ingredient', collection: @ingredients, locals: { edit: true }) %>
+          <div><input type="text" name="recipe[ingredients[amount]][]" pattern="([0-9]+,?[0-9]*|etwas)" style="width:40px; padding-left: 0" /><select name="recipe[ingredients[measure]][]" style="width: 80px; padding-left: 0"><%= options_for_select(Measure.all.map.each_with_index do |msr, idx| [msr.name, msr.id] end) %></select><input type="text" name="recipe[ingredients[tag]][]" style="width:214px; padding-left: 0" /><%= link_to('#', name: 'add_ingredient', style: 'margin-left: 4px; padding-left: 4px; padding-right: 4px; vertical-align: top', class: 'btn') do %><i class="icon icon-plus"></i><% end %></div>
         </div>
       </div>
-
     </div>
     <div class="span7">
       <h4>Zubereitung</h4>

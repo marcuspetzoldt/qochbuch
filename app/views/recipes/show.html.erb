@@ -55,30 +55,9 @@
 
 <div class="row">
   <div class="span4">
-    <h4>Zutaten für <select class="inline">
-        <option>1</option>
-        <option selected>2</option>
-        <option>3</option>
-        <option>4</option>
-        <option>5</option>
-        <option>6</option>
-      </select> Portionen
-    </h4>
+    <h4>Zutaten für <%= select_tag(:portion, options_for_select(1..12, @recipe.portion), class: 'inline') %> Portionen</h4>
     <dl class="dl-horizontal">
-      <dt>4 große</dt>
-      <dd>Kartoffeln</dd>
-      <dt>2 Zweige</dt>
-      <dd>Rosmarin</dd>
-      <dt>1 Zweig</dt>
-      <dd>Thymian</dd>
-      <dt>250 g</dt>
-      <dd>Quark</dd>
-      <dt>etwas</dt>
-      <dd>Milch</dd>
-      <dt></dt>
-      <dd>Salz und Pfeffer</dd>
-      <dt>2 EL</dt>
-      <dd>Schnittlauch</dd>
+      <%= render(partial: 'ingredient', collection: @ingredients, locals: { edit: false } ) %>
     </dl>
   </div>
   <div class="span8">

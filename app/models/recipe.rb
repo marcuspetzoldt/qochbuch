@@ -4,13 +4,23 @@ class Recipe < ActiveRecord::Base
   has_one :vote
   has_many :taggings
   has_many :tags, through: :taggings
+  accepts_nested_attributes_for :taggings
+  accepts_nested_attributes_for :tags
 
   validates(:time, presence: true, format: { with: /\A[1-9][0-9]*\z/ })
   validates(:level, presence: true, inclusion: { in: 0..4 })
   validates(:title, presence: true, length: { maximum: 40 })
   validates(:description, presence: false, length: { maximum: 200 })
   validates(:directions, presence: true)
+  validates(:portion, presence: true)
 
+  def self.ggt(a,b)
+    if b == 0
+      a
+    else
+      self.ggt(a, a.modulo(b))
+    end
+  end
 
   def self.levels
     ['Sehr leicht', 'Leicht', 'Normal', 'Schwer', 'Sehr schwer']
