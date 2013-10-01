@@ -42,6 +42,18 @@ $(document).on('click', 'a[name=remove_ingredient]', function() {
     return false;
 })
 
+/* Calculate portion */
+$(document).on('change', 'select#portion', function() {
+    $(this.form).submit();
+})
+
+/* Busy spinner */
+$(document).on('click', 'button#commit', function() {
+    var $busy = $('div#busy')
+    $busy.prepend('<div style="position:absolute; top: 0; left:0; width:100%; height: '+$('html').height()+'px; background-color:gray; opacity: .8;"></div>')
+    $busy.css('visibility', 'visible').fadeIn(850);
+})
+
 function refresh_tag_list(tag) {
     var $value = ''
 

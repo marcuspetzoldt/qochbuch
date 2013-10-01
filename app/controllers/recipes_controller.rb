@@ -87,6 +87,15 @@ class RecipesController < ApplicationController
     render js: "$('img#pic#{nr}').attr('src', '/uploads/#{file_name}')"
   end
 
+begin
+  def calculate
+    @recipe = Recipe.find(params[:id])
+    @ingredients = get_ingredients
+    Rails.logger.info("calculate: #{params}")
+    render 'calculate'
+  end
+end
+
   private
 
     def recipe_params

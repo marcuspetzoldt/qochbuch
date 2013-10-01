@@ -14,14 +14,6 @@ class Recipe < ActiveRecord::Base
   validates(:directions, presence: true)
   validates(:portion, presence: true)
 
-  def self.ggt(a,b)
-    if b == 0
-      a
-    else
-      self.ggt(a, a.modulo(b))
-    end
-  end
-
   def self.levels
     ['Sehr leicht', 'Leicht', 'Normal', 'Schwer', 'Sehr schwer']
   end

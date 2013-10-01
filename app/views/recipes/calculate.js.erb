@@ -1,0 +1,5 @@
+<% Rails.logger.info("calculate recipe: #{@ingredients}") %>
+<% Rails.logger.info("calculate factor: #{params[:portion]}") %>
+var $ing = $('<%=j render partial: 'recipes/ingredient', collection: @ingredients, locals: { edit: false, factor: params[:portion] } %>');
+$('dl#ingredients').html($ing).hide().fadeIn(850);
+

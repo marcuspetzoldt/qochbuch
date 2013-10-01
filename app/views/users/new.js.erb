@@ -1,9 +1,10 @@
-var form = $('<%=j render partial: 'users/signon' %>');
-var signon = $('#signon');
-if (signon.length) {
-  signon.html(form)
+var $form = $('<%=j render partial: 'users/signon' %>');
+var $signon = $('#signon');
+$form.prepend('<div style="position:absolute; top: 0; left:0; width:100%; height: '+$(document).height()+'px; background-color:gray; opacity: .8;"></div>')
+if ($signon.length) {
+  $signon.html($form)
 } else {
-  $('body').last().append(form)
+  $('body').append($form)
 }
 $('#formSignon').hide().fadeIn(850);
 $('#cancelSignon').click(function() {$('#formSignon').fadeOut(850)});

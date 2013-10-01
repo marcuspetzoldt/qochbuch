@@ -55,10 +55,13 @@
 
 <div class="row">
   <div class="span4">
+    <%= form_for(@recipe, url: calculate_path(@recipe), remote: true) do |f| %>
+      <%= hidden_field_tag(request_forgery_protection_token.to_s, form_authenticity_token) %>
     <h4>Zutaten für <%= select_tag(:portion, options_for_select(1..12, @recipe.portion), class: 'inline') %> Portionen</h4>
-    <dl class="dl-horizontal">
-      <%= render(partial: 'ingredient', collection: @ingredients, locals: { edit: false } ) %>
+    <dl id='ingredients' class="dl-horizontal">
+      <%= render(partial: 'ingredient', collection: @ingredients, locals: { edit: false, factor: @recipe.portion } ) %>
     </dl>
+    <% end %>
   </div>
   <div class="span8">
     <h4>Zubereitung</h4>

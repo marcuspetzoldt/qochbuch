@@ -12,6 +12,7 @@ Qochbuch::Application.routes.draw do
   match '/change_password', to: 'users#change_password', via: 'patch'
   match '/upload', to: 'recipes#upload', via: ['post', 'patch']
   match '/recipes/:recipe_id/votes/:id/edit', to: 'votes#edit', via: 'get', as: 'recipes_votes_edit'
+  match '/recipes/:id/calculate', to: 'recipes#calculate', via: 'patch', as: 'calculate'
 # resources :users do
 #   resources :recipes do
 #     resources :votes
