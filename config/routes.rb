@@ -4,6 +4,7 @@ Qochbuch::Application.routes.draw do
   resources :recipes
   get "landing_pages/help"
   get "landing_pages/about"
+  match '/search', to: 'landing_pages#search', via: 'post'
   match '/next', to: 'landing_pages#next', via: 'get'
   match '/previous', to: 'landing_pages#previous', via: 'get'
   match '/signin', to: 'users#new', via: 'get', defaults: { what: 'signin' }

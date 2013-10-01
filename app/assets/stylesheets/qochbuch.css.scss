@@ -183,3 +183,11 @@ span > a:hover {
 .tag_usable_tag_cloud {
   @include responsive;
 }
+
+.search_usable_tag_cloud {
+  @include responsive;
+}
+
+.search_used_tag_cloud {
+  @include responsive;
+}

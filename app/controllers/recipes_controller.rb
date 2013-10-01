@@ -1,10 +1,12 @@
 class RecipesController < ApplicationController
 
+  include ApplicationHelper
+
   def new
     if signed_in?()
       @recipe = Recipe.new
-      @regions = cloud(0, @recipe.tags.where(category: 0).order(:tag))
-      @tags = cloud(1, @recipe.tags.where(category: 1).order(:tag))
+      @regions = cloud(0, @recipe.tags.where(category: 0).order(:tag), true)
+      @tags = cloud(1, @recipe.tags.where(category: 1).order(:tag), true)
       respond_to do |format|
         format.html
       end
@@ -31,8 +33,8 @@ class RecipesController < ApplicationController
 
   def edit
     @recipe = Recipe.find(params[:id])
-    @regions = cloud(0, @recipe.tags.where(category: 0).order(:tag))
-    @tags = cloud(1, @recipe.tags.where(category: 1).order(:tag))
+    @regions = cloud(0, @recipe.tags.where(category: 0).order(:tag), true)
+    @tags = cloud(1, @recipe.tags.where(category: 1).order(:tag), true)
     @ingredients = get_ingredients
     render('new')
   end
@@ -103,24 +105,6 @@ end
         :title, :description, :directions)
     end
 
-    def cloud(category, used_tags)
-      # get all tags categorized as category
-      # normalize tag count
-
-      used_tags = [] if used_tags.nil?
-      usable_tags = Tag.where(category: category).order(:tag) - used_tags
-      used_tags.map! do |t| { id: t.id, tag: t.tag, font_size: t.recipes.count } end
-      usable_tags.map! do |t| { id: t.id, tag: t.tag, font_size: t.recipes.count } end
-      max_font_size = ((used_tags + usable_tags).max do |a,b| a[:font_size] <=> b[:font_size] end)[:font_size]
-      if max_font_size == 0
-        max_font_size = 1
-      end
-      factor = 24.0/max_font_size
-      used_tags.each do |t| t[:font_size] = (t[:font_size]*factor).to_i + 12 end
-      usable_tags.each do |t| t[:font_size] = (t[:font_size]*factor).to_i + 12 end
-      return { used: used_tags, usable: usable_tags }
-    end
-
     def get_tags
       tag_ids = (params[:recipe][:regions].strip + ' ' + params[:recipe][:tags].strip).split(' ')
       Tag.where(id: tag_ids)
@@ -158,8 +142,8 @@ end
     end
 
     def redisplay_form
-      @regions = cloud(0, Tag.where(id: params[:recipe][:regions].strip.split(' ')))
-      @tags = cloud(1, Tag.where(id: params[:recipe][:tags].strip.split(' ')))
+      @regions = cloud(0, Tag.where(id: params[:recipe][:regions].strip.split(' ')), true)
+      @tags = cloud(1, Tag.where(id: params[:recipe][:tags].strip.split(' ')), true)
       @ingredients = get_ingredients
       render('new')
     end
