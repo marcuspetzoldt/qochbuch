@@ -1,4 +1,9 @@
 class UsersController < ApplicationController
+
+  include ApplicationHelper
+
+  before_filter :require_login, except: [:new, :create]
+
   def new
     @user = User.new
     respond_to do |format|
@@ -34,7 +39,8 @@ class UsersController < ApplicationController
     end
     # Wait for the fade-out of the form to happen (850ms)
     sleep(1)
-    render js: 'location.reload()'
+#   render js: 'location.reload(true)'
+    render js: "window.location='#{root_path}'"
   end
 
   def signout
@@ -67,7 +73,8 @@ class UsersController < ApplicationController
     end
     # Wait for the fade-out of the form to happen (850ms)
     sleep(1)
-    render js: 'location.reload()'
+#   render js: 'location.reload(true)'
+    render js: "window.location='#{root_path}'"
 
   end
 

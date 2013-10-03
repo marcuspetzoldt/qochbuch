@@ -1,5 +1,11 @@
 module ApplicationHelper
 
+  def require_login
+    unless signed_in?
+      redirect_to(root_path)
+    end
+  end
+
   def cloud(category, used_tags, outer)
     # get all tags categorized as category
     # normalize tag count
@@ -11,12 +17,16 @@ module ApplicationHelper
     unless outer
       usable_tags.delete_if do |t| t[:font_size] == 0 end
     end
-    max_font_size = ((used_tags + usable_tags).max do |a,b| a[:font_size] <=> b[:font_size] end)[:font_size]
-    min_font_size = ((used_tags + usable_tags).min do |a,b| a[:font_size] <=> b[:font_size] end)[:font_size]
-    factor = 24.0/(max_font_size - min_font_size + 1)
-    used_tags.each do |t| t[:font_size] = (t[:font_size]*factor).to_i + 12 end
-    usable_tags.each do |t| t[:font_size] = (t[:font_size]*factor).to_i + 12 end
-    return { used: used_tags, usable: usable_tags }
+    unless usable_tags.empty?
+      max_font_size = ((used_tags + usable_tags).max do |a,b| a[:font_size] <=> b[:font_size] end)[:font_size]
+      min_font_size = ((used_tags + usable_tags).min do |a,b| a[:font_size] <=> b[:font_size] end)[:font_size]
+      factor = 24.0/(max_font_size - min_font_size + 1)
+      used_tags.each do |t| t[:font_size] = (t[:font_size]*factor).to_i + 12 end
+      usable_tags.each do |t| t[:font_size] = (t[:font_size]*factor).to_i + 12 end
+      return { used: used_tags, usable: usable_tags }
+    else
+      return { used: [], usable: usable_tags }
+    end
   end
 
 end

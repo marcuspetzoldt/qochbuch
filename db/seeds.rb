@@ -8,7 +8,6 @@
 
 # Tags Region
 
-=begin
 africa = Tag.create(category: 0, father: nil, tag: 'Afrika')
 Tag.create(category: 0, father: africa.id, tag: 'Marokko')
 Tag.create(category: 0, father: africa.id, tag: 'Südafrika')
@@ -107,7 +106,7 @@ Tag.create(category: 1, father: nil, tag: 'Salat')
 Tag.create(category: 1, father: nil, tag: 'Eier & Käse')
 Tag.create(category: 1, father: nil, tag: 'Fleisch & Wurst')
 Tag.create(category: 1, father: nil, tag: 'Früchte')
-Tag.create(category: 1, father: nil, tag: 'Fisch')
+Tag.create(category: 1, father: nil, tag: 'Tapas')
 
 # Miscellaneous
 Tag.create(category: 1, father: nil, tag: 'Dressing')
@@ -136,7 +135,6 @@ Tag.create(category: 1, father: nil, tag: 'Schmoren')
 Tag.create(category: 1, father: nil, tag: 'Wok')
 Tag.create(category: 1, father: nil, tag: 'Überbacken')
 Tag.create(category: 1, father: nil, tag: 'Eintopf')
-=end
 
 # Measures
 Measure.create(name: '')
@@ -149,3 +147,4 @@ Measure.create(name: 'Scheibe')
 Measure.create(name: 'Dose')
 Measure.create(name: 'Tube')
 Measure.create(name: 'Packung')
+Measure.create(name: 'Bund')

@@ -41,7 +41,7 @@ class LandingPagesController < ApplicationController
       end
     end
 
-    Recipe.all_ids = a
+    Recipe.all_ids = a.shuffle
     @recipes = Recipe.suggestions
     session[:search] = params[:isearch_used].strip.split(' ')
     @tags = cloud([0,1], Tag.where(id: session[:search]), false)

@@ -2,16 +2,14 @@ class RecipesController < ApplicationController
 
   include ApplicationHelper
 
+  before_filter :require_login, except: [:show, :calculate]
+
   def new
-    if signed_in?()
-      @recipe = Recipe.new
-      @regions = cloud(0, @recipe.tags.where(category: 0).order(:tag), true)
-      @tags = cloud(1, @recipe.tags.where(category: 1).order(:tag), true)
-      respond_to do |format|
-        format.html
-      end
-    else
-      redirect_to(root_path)
+    @recipe = Recipe.new
+    @regions = cloud(0, @recipe.tags.where(category: 0).order(:tag), true)
+    @tags = cloud(1, @recipe.tags.where(category: 1).order(:tag), true)
+    respond_to do |format|
+      format.html
     end
   end
 
@@ -89,14 +87,12 @@ class RecipesController < ApplicationController
     render js: "$('img#pic#{nr}').attr('src', '/uploads/#{file_name}')"
   end
 
-begin
   def calculate
     @recipe = Recipe.find(params[:id])
     @ingredients = get_ingredients
     Rails.logger.info("calculate: #{params}")
     render 'calculate'
   end
-end
 
   private
 
