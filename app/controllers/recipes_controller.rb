@@ -79,9 +79,14 @@ class RecipesController < ApplicationController
       end
     end
     if uploaded_io
-      file_name = "#{current_user.id}_#{nr}#{File.extname(uploaded_io.original_filename)}"
-      File.open(Rails.root.join('public', 'uploads', file_name), 'wb') do |file|
-        file.write(uploaded_io.read)
+      if uploaded_io.tempfile.size < 1.megabyte
+        file_name = "#{current_user.id}_#{nr}#{File.extname(uploaded_io.original_filename)}"
+        File.open(Rails.root.join('public', 'uploads', file_name), 'wb') do |file|
+          file.write(uploaded_io.read)
+        end
+      else
+        render(js: "$('div#errors').html('<div class=\"alert alert-error\">\"#{uploaded_io.original_filename}\" exceeds the 1MB file size limit.</div>')")
+        return
       end
     end
     render js: "$('img#pic#{nr}').attr('src', '/uploads/#{file_name}')"
@@ -112,12 +117,12 @@ class RecipesController < ApplicationController
         Rails.logger.info(params)
         ing = params[:recipe][:ingredients]
         1.upto(ing[:amount].count-1).map do |i|
-          {amount: ing[:amount][i], measure_id: ing[:measure][i], measure: nil, tag: ing[:tag][i] }
+          {amount: ing[:amount][i], unit_id: ing[:unit][i], unit: nil, tag: ing[:tag][i] }
         end
       else
         @recipe.taggings.map do |t|
           if t.tag.category == 2
-            {amount: t.amount, measure_id: t.measure_id, measure: t.measure.name, tag: t.tag.tag }
+            {amount: t.amount, unit_id: t.unit_id, unit: t.unit.name, tag: t.tag.tag }
           end
         end.compact
       end
@@ -132,7 +137,7 @@ class RecipesController < ApplicationController
           if tag.nil?
             tag = Tag.create(category: 2, father: nil, tag: ing[:tag][i])
           end
-          Tagging.create(amount: ing[:amount][i], measure_id: ing[:measure][i].to_i, tag_id: tag.id, recipe_id: @recipe.id)
+          Tagging.create(amount: ing[:amount][i], unit_id: ing[:unit][i].to_i, tag_id: tag.id, recipe_id: @recipe.id)
         end
       end
     end

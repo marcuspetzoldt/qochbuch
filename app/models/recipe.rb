@@ -1,4 +1,5 @@
 class Recipe < ActiveRecord::Base
+
   after_save { save_images }
   belongs_to :user
   has_one :vote

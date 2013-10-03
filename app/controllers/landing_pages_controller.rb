@@ -4,7 +4,8 @@ class LandingPagesController < ApplicationController
 
   def home
     unless session[:search]
-      session[:search] = Recipe.all_ids = Recipe.all.ids
+      session[:search] = []
+      Recipe.all_ids = Recipe.all.ids
     end
     @recipes = Recipe.suggestions
     @tags = cloud([0,1], Tag.where(id: session[:search]), false)
@@ -20,12 +21,6 @@ class LandingPagesController < ApplicationController
     @recipes = Recipe.suggestions(-1)
     @tags = cloud([0,1], Tag.where(id: session[:search]), false)
     render(:home)
-  end
-
-  def help
-  end
-
-  def about
   end
 
   def search

@@ -11,13 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131001090513) do
-
-  create_table "measures", force: true do |t|
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+ActiveRecord::Schema.define(version: 20131003120954) do
 
   create_table "recipes", force: true do |t|
     t.integer  "time"
@@ -31,13 +25,13 @@ ActiveRecord::Schema.define(version: 20131001090513) do
     t.integer  "portion"
   end
 
-  add_index "recipes", ["user_id"], name: "index_recipes_on_user_id"
+  add_index "recipes", ["user_id"], name: "index_recipes_on_user_id", using: :btree
 
   create_table "taggings", force: true do |t|
     t.integer  "recipe_id"
     t.integer  "tag_id"
     t.float    "amount"
-    t.integer  "measure_id"
+    t.integer  "unit_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -50,6 +44,12 @@ ActiveRecord::Schema.define(version: 20131001090513) do
     t.datetime "updated_at"
   end
 
+  create_table "units", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "users", force: true do |t|
     t.string   "name"
     t.string   "email"
@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(version: 20131001090513) do
     t.string   "password_digest"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
   create_table "votes", force: true do |t|
     t.datetime "created_at"
@@ -68,8 +68,8 @@ ActiveRecord::Schema.define(version: 20131001090513) do
     t.integer  "vote"
   end
 
-  add_index "votes", ["recipe_id"], name: "index_votes_on_recipe_id"
-  add_index "votes", ["user_id", "recipe_id"], name: "index_votes_on_user_id_and_recipe_id", unique: true
-  add_index "votes", ["user_id"], name: "index_votes_on_user_id"
+  add_index "votes", ["recipe_id"], name: "index_votes_on_recipe_id", using: :btree
+  add_index "votes", ["user_id", "recipe_id"], name: "index_votes_on_user_id_and_recipe_id", unique: true, using: :btree
+  add_index "votes", ["user_id"], name: "index_votes_on_user_id", using: :btree
 
 end

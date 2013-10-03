@@ -8,10 +8,12 @@
   <div class="row">
     <div class="span12">
 
-      <%= render('shared/error_messages', individuum: @recipe) %>
-      <% flash.each do |key, value| %>
-        <div class="alert alert-<%= key %>" style="margin: 8px"><%= value %></div>
-      <% end %>
+      <div id="errors">
+        <%= render('shared/error_messages', individuum: @recipe) %>
+        <% flash.each do |key, value| %>
+          <div class="alert alert-<%= key %>" style="margin: 8px"><%= value %></div>
+        <% end %>
+      </div>
 
       <div class="accordion" id="accordion2">
         <div class="accordion-group">
@@ -21,14 +23,20 @@
             </a>
           </div>
           <div id="collapseOne" class="accordion-body collapse">
-            <div class="accordion-inner">
+            <div class="accordion-inner" style="padding:0">
+              <!--
               <div style="float:left; width: calc(50% - 8px)">
+              -->
+              <div class="span6" style="margin:0; padding: 8px 4px 8px 4px">
                 <div id="region_usable" class="muted" style="text-align: justify">
                   <div class="tag tag-success">&#10004;</div>
                   <%= render(partial: 'layouts/tag_cloud', locals: { cloud: @regions[:usable], name: 'region_usable' }) %>
                 </div>
               </div>
+              <!--
               <div style="float:right; width: calc(50% - 8px)">
+              -->
+              <div class="span6" style="margin:0; padding: 8px 4px 8px 4px">
                 <div id="region_used" class="muted" style="text-align: justify">
                   <div class="tag tag-error">&#10008;</div>
                   <%= render(partial: 'layouts/tag_cloud', locals: { cloud: @regions[:used], name: 'region_used' }) %>
@@ -44,14 +52,14 @@
             </a>
           </div>
           <div id="collapseTwo" class="accordion-body collapse">
-            <div class="accordion-inner">
-              <div style="float:left; width: calc(50% - 8px)">
+            <div class="accordion-inner" style="padding:0">
+              <div class="span6" style="margin:0; padding: 8px 4px 8px 4px">
                 <div id="tag_usable" class="muted" style="text-align: justify">
                   <div class="tag tag-success">&#10004;</div>
                   <%= render(partial: 'layouts/tag_cloud', locals: { cloud: @tags[:usable], name: 'tag_usable' }) %>
                 </div>
               </div>
-              <div style="float:right; width: calc(50% - 8px)">
+              <div class="span6" style="margin:0; padding: 8px 4px 8px 4px">
                 <div id="tag_used" class="muted" style="text-align: justify">
                   <div class="tag tag-error">&#10008;</div>
                   <%= render(partial: 'layouts/tag_cloud', locals: { cloud: @tags[:used], name: 'tag_used' }) %>
@@ -74,9 +82,9 @@
           <span style="width:44px; padding-left: 4px; display: inline-block">Menge</span><span style="width: 80px; padding-left: 4px; display: inline-block">Maß</span>Zutat
         </div>
         <div class="controls">
-          <div style="display: none"><input type="text" name="recipe[ingredients[amount]][]" pattern="([0-9]+,?[0-9]*|etwas)" style="width:40px; padding-left: 0" /><select name="recipe[ingredients[measure]][]" style="width: 80px; padding-left: 0"><%= options_for_select(Measure.all.map.each_with_index do |msr, idx| [msr.name, msr.id] end) %></select><input type="text" name="recipe[ingredients[tag]][]" style="width:214px; padding-left: 0" /><%= link_to('#', name: 'add_ingredient', style: 'margin-left: 4px; padding-left: 4px; padding-right: 4px; vertical-align: top', class: 'btn') do %><i class="icon icon-plus"></i><% end %></div>
+          <div style="display: none"><input type="text" name="recipe[ingredients[amount]][]" pattern="([0-9]+,?[0-9]*|etwas)" style="width:40px; padding-left: 0" /><select name="recipe[ingredients[unit]][]" style="width: 80px; padding-left: 0"><%= options_for_select(Unit.all.map.each_with_index do |msr, idx| [msr.name, msr.id] end) %></select><input type="text" name="recipe[ingredients[tag]][]" style="width:214px; padding-left: 0" /><%= link_to('#', name: 'add_ingredient', style: 'margin-left: 4px; padding-left: 4px; padding-right: 4px; vertical-align: top', class: 'btn') do %><i class="icon icon-plus"></i><% end %></div>
           <%= render(partial: 'ingredient', collection: @ingredients, locals: { edit: true }) %>
-          <div><input type="text" name="recipe[ingredients[amount]][]" pattern="([0-9]+,?[0-9]*|etwas)" style="width:40px; padding-left: 0" /><select name="recipe[ingredients[measure]][]" style="width: 80px; padding-left: 0"><%= options_for_select(Measure.all.map.each_with_index do |msr, idx| [msr.name, msr.id] end) %></select><input type="text" name="recipe[ingredients[tag]][]" style="width:214px; padding-left: 0" /><%= link_to('#', name: 'add_ingredient', style: 'margin-left: 4px; padding-left: 4px; padding-right: 4px; vertical-align: top', class: 'btn') do %><i class="icon icon-plus"></i><% end %></div>
+          <div><input type="text" name="recipe[ingredients[amount]][]" pattern="([0-9]+,?[0-9]*|etwas)" style="width:40px; padding-left: 0" /><select name="recipe[ingredients[unit]][]" style="width: 80px; padding-left: 0"><%= options_for_select(Unit.all.map.each_with_index do |msr, idx| [msr.name, msr.id] end) %></select><input type="text" name="recipe[ingredients[tag]][]" style="width:214px; padding-left: 0" /><%= link_to('#', name: 'add_ingredient', style: 'margin-left: 4px; padding-left: 4px; padding-right: 4px; vertical-align: top', class: 'btn') do %><i class="icon icon-plus"></i><% end %></div>
         </div>
       </div>
     </div>
