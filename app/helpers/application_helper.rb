@@ -11,12 +11,13 @@ module ApplicationHelper
     # normalize tag count
 
     used_tags = [] if used_tags.nil?
-    usable_tags = Tag.where(category: category).order(:tag) - used_tags
+    if outer
+      usable_tags = Tag.where(category: category).order(:tag) - used_tags
+    else
+      usable_tags = Tag.joins("JOIN taggings ON tags.id = taggings.tag_id").where(category: category).distinct.order(:tag) - used_tags
+    end
     used_tags.map! do |t| { id: t.id, tag: t.tag, font_size: t.recipes.count } end
     usable_tags.map! do |t| ({ id: t.id, tag: t.tag, font_size: t.recipes.count }) end
-    unless outer
-      usable_tags.delete_if do |t| t[:font_size] == 0 end
-    end
     unless usable_tags.empty?
       max_font_size = ((used_tags + usable_tags).max do |a,b| a[:font_size] <=> b[:font_size] end)[:font_size]
       min_font_size = ((used_tags + usable_tags).min do |a,b| a[:font_size] <=> b[:font_size] end)[:font_size]

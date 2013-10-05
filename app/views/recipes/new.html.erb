@@ -85,6 +85,12 @@
     <div class="span7">
       <h4>Zubereitung</h4>
       <div class="control-group">
+        <%= f.label(:title, class: 'control-label') %>
+        <div class="controls">
+          <%= f.text_field(:title, class: 'input-block-level', maxlength: '60', placeholder: :title) %>
+        </div>
+      </div>
+      <div class="control-group">
         <%= f.label(:time, class: 'control-label') %>
         <div class="controls">
           <div class="input-append">
@@ -97,12 +103,6 @@
         <%= f.label(:level, class: 'control-label') %>
         <div class="controls">
           <%= f.select(:level, Recipe.levels.map.each_with_index do |lvl, idx| [lvl, idx] end) %>
-        </div>
-      </div>
-      <div class="control-group">
-        <%= f.label(:title, class: 'control-label') %>
-        <div class="controls">
-          <%= f.text_field(:title, class: 'input-block-level', maxlength: '60', placeholder: :title) %>
         </div>
       </div>
       <div class="control-group">

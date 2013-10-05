@@ -52,7 +52,12 @@ class LandingPagesController < ApplicationController
 
     def go_home(direction=0)
       @recipes = Recipe.suggestions(direction)
-      @tags = cloud([0,1], Tag.where(id: session[:search_tags].split(' ')), false)
+      if session[:search_tags].nil?
+        ids = []
+      else
+        ids = session[:search_tags].split(' ')
+      end
+      @tags = cloud([0,1], Tag.where(id: ids), false)
       render('home')
     end
 

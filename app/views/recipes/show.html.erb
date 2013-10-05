@@ -12,7 +12,7 @@
       <p class="big" style="position: relative; left: 0; top: -30px; font-size: 200%; color: #bbb"><%= render(partial: 'rating', locals: { display_only: false }) %></p>
     </div>
   </div>
-  <div class="span6">
+  <div class="offset1 span6">
     <div id="myCarousel" class="carousel slide">
       <div class="carousel-inner">
         <% 3.times do |i| %>
@@ -29,13 +29,6 @@
       <a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
       <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
     </div><!-- /.carousel -->
-  </div>
-  <div class="span2">
-    <% 3.times do |i| %>
-      <div class="preview">
-        <img src="<%= Recipe.image_name(@recipe, i+1) %>" alt="<%= "#{@recipe.title} Bild #{i+1} Vorschau" %>" />
-      </div>
-    <% end %>
   </div>
 </div>
 
