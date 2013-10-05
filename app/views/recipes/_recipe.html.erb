@@ -1,7 +1,7 @@
 <% @recipe = recipe %>
 <li class="span4">
   <div class="thumbnail">
-    <% if recipe.new_record? %>
+    <% if @recipe.new_record? %>
       <p class="thumbnail">
         <%= image_tag('placeholder.png', alt: 'Platzhalter') %>
       </p>

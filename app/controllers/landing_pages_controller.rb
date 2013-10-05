@@ -3,44 +3,57 @@ class LandingPagesController < ApplicationController
   include ApplicationHelper
 
   def home
-    unless session[:search]
-      session[:search] = []
-      Recipe.all_ids = Recipe.all.ids
-    end
+    session[:search_text] = nil
+    session[:search_tags] = nil
+    Recipe.matching_recipes = Recipe.all.ids
     @recipes = Recipe.suggestions
     @tags = cloud([0,1], Tag.where(id: session[:search]), false)
   end
 
   def next
-    @recipes = Recipe.suggestions(1)
-    @tags = cloud([0,1], Tag.where(id: session[:search]), false)
-    render(:home)
+    go_home(1)
   end
 
   def previous
-    @recipes = Recipe.suggestions(-1)
-    @tags = cloud([0,1], Tag.where(id: session[:search]), false)
-    render(:home)
+    go_home(-1)
   end
 
   def search
 
-    a = Recipe.all.ids
+    # TODO add results from tags
+    session[:search_text] = params[:search_text].strip
+    unless session[:search_text].blank?
+      a = Recipe.where("MATCH(title, description, directions) AGAINST('#{session[:search_text]}' IN BOOLEAN MODE)").ids
+    end
 
-    if params[:isearch_used]
-      tags = params[:isearch_used].strip.split(' ')
-      if tags
-        tags.each do |tag|
-          a = a & (Tag.find(tag).recipes.map do |r| r.id end)
-        end
+    session[:search_tags] = params[:isearch_used].strip
+    tags = session[:search_tags].split(' ')
+    unless tags.empty?
+      b = Recipe.joins("JOIN taggings ON recipes.id = taggings.recipe_id JOIN tags ON taggings.tag_id = tags.id WHERE tags.id IN (#{tags.join(',')})").distinct.pluck(:id)
+    end
+
+    if a.nil?
+      if b.nil?
+        a = Recipe.all.ids
+      else
+        a = b
+      end
+    else
+      unless b.nil?
+        a = a & b
       end
     end
 
-    Recipe.all_ids = a.shuffle
-    @recipes = Recipe.suggestions
-    session[:search] = params[:isearch_used].strip.split(' ')
-    @tags = cloud([0,1], Tag.where(id: session[:search]), false)
-    render 'home'
+    Recipe.matching_recipes = a.shuffle
+    go_home
   end
+
+  private
+
+    def go_home(direction=0)
+      @recipes = Recipe.suggestions(direction)
+      @tags = cloud([0,1], Tag.where(id: session[:search_tags].split(' ')), false)
+      render('home')
+    end
 
 end

@@ -22,21 +22,21 @@ class Recipe < ActiveRecord::Base
   def self.suggestions(direction=0)
 
     if direction > 0
-      # next three recipes from shuffled all_ids
+      # next three recipes from shuffled matching_recipes
       @position_in_resultset += 3
-      if @position_in_resultset >= all_ids.size
+      if @position_in_resultset >= matching_recipes.size
         @position_in_resultset = 0
       end
     end
     if direction < 0
-      # previous three recipes from shuffled all_ids
+      # previous three recipes from shuffled matching_recipes
       @position_in_resultset -= 3
       if @position_in_resultset < 0
-        @position_in_resultset = 3 * all_ids.size.div(3)
+        @position_in_resultset = 3 * matching_recipes.size.div(3)
       end
     end
     3.times.map do |i|
-      Recipe.find_by(id: all_ids[@position_in_resultset+i]) || Recipe.new
+      Recipe.find_by(id: matching_recipes[@position_in_resultset+i]) || Recipe.new
     end
   end
 
@@ -58,14 +58,14 @@ class Recipe < ActiveRecord::Base
     (Vote.where(recipe_id: id).average(:vote) || 0.0).round(2)
   end
 
-  def self.all_ids=(ids)
-    @all_ids = ids
+  def self.matching_recipes=(ids)
+    @matching_recipes = ids
     @position_in_resultset = 0
   end
 
   # all ids matching the last search
-  def self.all_ids
-    @all_ids ||= all.ids
+  def self.matching_recipes
+    @matching_recipes ||= all.ids
   end
 
   private

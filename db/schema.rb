@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131003120954) do
+ActiveRecord::Schema.define(version: 20131004162952) do
 
   create_table "recipes", force: true do |t|
     t.integer  "time"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20131003120954) do
     t.integer  "portion"
   end
 
+  add_index "recipes", ["title", "description", "directions"], name: "ft_recipes", type: :fulltext
   add_index "recipes", ["user_id"], name: "index_recipes_on_user_id", using: :btree
 
   create_table "taggings", force: true do |t|
@@ -36,6 +37,10 @@ ActiveRecord::Schema.define(version: 20131003120954) do
     t.datetime "updated_at"
   end
 
+  add_index "taggings", ["recipe_id"], name: "fk_taggings_user_id", using: :btree
+  add_index "taggings", ["tag_id"], name: "fk_taggings_tag_id", using: :btree
+  add_index "taggings", ["unit_id"], name: "fk_taggings_unit_id", using: :btree
+
   create_table "tags", force: true do |t|
     t.integer  "category"
     t.integer  "father"
@@ -43,6 +48,10 @@ ActiveRecord::Schema.define(version: 20131003120954) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "tags", ["category", "tag"], name: "idx_tags_category_tag", using: :btree
+  add_index "tags", ["tag"], name: "ft_tags", type: :fulltext
+  add_index "tags", ["tag"], name: "idx_tags_tag", using: :btree
 
   create_table "units", force: true do |t|
     t.string   "name"

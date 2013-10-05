@@ -24,18 +24,12 @@
           </div>
           <div id="collapseOne" class="accordion-body collapse">
             <div class="accordion-inner" style="padding:0">
-              <!--
-              <div style="float:left; width: calc(50% - 8px)">
-              -->
               <div class="span6" style="margin:0; padding: 8px 4px 8px 4px">
                 <div id="region_usable" class="muted" style="text-align: justify">
                   <div class="tag tag-success">&#10004;</div>
                   <%= render(partial: 'layouts/tag_cloud', locals: { cloud: @regions[:usable], name: 'region_usable' }) %>
                 </div>
               </div>
-              <!--
-              <div style="float:right; width: calc(50% - 8px)">
-              -->
               <div class="span6" style="margin:0; padding: 8px 4px 8px 4px">
                 <div id="region_used" class="muted" style="text-align: justify">
                   <div class="tag tag-error">&#10008;</div>

@@ -20,8 +20,5 @@
       <%= render(partial: 'layouts/tag_cloud', locals: { cloud: @tags[:used], name: 'search_used' }) %>
     </div>
   </div>
-  <%= form_tag(search_path) do %>
-    <%= hidden_field_tag(:tags, nil, id: 'isearch_used', name: 'isearch_used') %>
-  <% end %>
 </div>
 

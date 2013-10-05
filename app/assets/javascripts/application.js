@@ -12,7 +12,6 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require jquery.remotipart
 //= require ckeditor/init
 //= require bootstrap
 //= require turbolinks
