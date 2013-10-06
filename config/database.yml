@@ -3,14 +3,23 @@
 #
 #   Ensure the mysql2 gem is defined in your Gemfile, don't forget to copy mysqllib.dll to ruby/bin
 #   gem 'mysql2'
+# development:
+#   adapter: mysql2
+#   host: localhost
+#   encoding: utf8
+#   database: db/development
+#   pool: 5
+#   username: root
+#   password: mImzKaw.WfeS.56l
+#   timeout: 5000
+
 development:
-  adapter: mysql2
-  host: localhost
-  encoding: utf8
-  database: db/development
+  adapter: postgresql
+  encoding: unicode
+  database: qochbuch_dev
   pool: 5
-  username: root
-  password: mImzKaw.WfeS.56l
+  username: postgres
+  password: pImzKaw.WfeS.56s
   timeout: 5000
 
 # Warning: The database defined as "test" will be erased and
@@ -23,11 +32,10 @@ test:
   timeout: 5000
 
 production:
-  adapter: mysql2
-  host: localhost
-  encoding: utf8
-  database: db/qochbuch
+  adapter: postgresql
+  encoding: unicode
+  database: qochbuch
   pool: 5
-  username: root
-  password: mImzKaw.WfeS.56l
+  username: postgres
+  password:
   timeout: 5000
