@@ -13,17 +13,31 @@
     </libraries>
     <schema name="" catalog=""/>
   </data-source>
-  <data-source source="LOCAL" name="Rails qochbuch: development" product="" version="" jdbc-version="" driver-name="" driver-version="" uuid="28eccafd-1e25-4fe3-be8c-eb8e77d3e5f1">
-    <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
-    <jdbc-url>jdbc:mysql://127.0.0.1/db/development</jdbc-url>
+  <data-source source="LOCAL" name="Rails qochbuch: development" product="" version="" jdbc-version="" driver-name="" driver-version="" uuid="4670b939-46ff-49ec-85cf-9aa7c0147377">
+    <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+    <jdbc-url>jdbc:postgresql:qochbuch_dev</jdbc-url>
     <user-name>root</user-name>
-    <user-password>dfc7dfe3dfc7dfd0dfe1dfcbdfdddf84dffddfccdfcfdff9df84df9fdf9cdfc6</user-password>
+    <user-password>dfdadfe3dfc7dfd0dfe1dfcbdfdddf84dffddfccdfcfdff9df84df9fdf9cdfc6</user-password>
     <libraries>
       <library>
-        <url>file://$USER_HOME$/.RubyMine50/config/jdbc-drivers/mysql-connector-license.txt</url>
+        <url>file://$USER_HOME$/.RubyMine50/config/jdbc-drivers/postgresql-driver-license.txt</url>
       </library>
       <library>
-        <url>jar://$USER_HOME$/.RubyMine50/config/jdbc-drivers/mysql-connector-java-5.1.26-bin.jar!/</url>
+        <url>jar://$USER_HOME$/.RubyMine50/config/jdbc-drivers/postgresql-9.2-1002.jdbc3.jar!/</url>
+      </library>
+    </libraries>
+  </data-source>
+  <data-source source="LOCAL" name="Rails qochbuch: production" product="" version="" jdbc-version="" driver-name="" driver-version="" uuid="93b4af3a-0d8f-42be-82f4-ff173b3ae1f0">
+    <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+    <jdbc-url>jdbc:postgresql:qochbuch</jdbc-url>
+    <user-name>root</user-name>
+    <user-password>dfdadfe3dfc7dfd0dfe1dfcbdfdddf84dffddfccdfcfdff9df84df9fdf9cdfc6</user-password>
+    <libraries>
+      <library>
+        <url>file://$USER_HOME$/.RubyMine50/config/jdbc-drivers/postgresql-driver-license.txt</url>
+      </library>
+      <library>
+        <url>jar://$USER_HOME$/.RubyMine50/config/jdbc-drivers/postgresql-9.2-1002.jdbc3.jar!/</url>
       </library>
     </libraries>
   </data-source>

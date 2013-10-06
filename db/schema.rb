@@ -25,7 +25,6 @@ ActiveRecord::Schema.define(version: 20131004162952) do
     t.integer  "portion"
   end
 
-  add_index "recipes", ["title", "description", "directions"], name: "ft_recipes", type: :fulltext
   add_index "recipes", ["user_id"], name: "index_recipes_on_user_id", using: :btree
 
   create_table "taggings", force: true do |t|
@@ -50,7 +49,6 @@ ActiveRecord::Schema.define(version: 20131004162952) do
   end
 
   add_index "tags", ["category", "tag"], name: "idx_tags_category_tag", using: :btree
-  add_index "tags", ["tag"], name: "ft_tags", type: :fulltext
   add_index "tags", ["tag"], name: "idx_tags_tag", using: :btree
 
   create_table "units", force: true do |t|
