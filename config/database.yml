@@ -1,18 +1,8 @@
 # SQLite version 3.x
 #   gem install mysql2 --platform-ruby -- '--with-mysql-include=x --with-mysql-lib=x --with-mysql-dir=x'
 #
-#   Ensure the mysql2 gem is defined in your Gemfile, don't forget to copy mysqllib.dll to ruby/bin
-#   gem 'mysql2'
-# development:
-#   adapter: mysql2
-#   host: localhost
-#   encoding: utf8
-#   database: db/development
-#   pool: 5
-#   username: root
-#   password: mImzKaw.WfeS.56l
-#   timeout: 5000
-
+#   Ensure the pg gem is defined in your Gemfile
+#   gem 'pg'
 development:
   adapter: postgresql
   encoding: unicode
