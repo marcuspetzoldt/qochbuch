@@ -6,6 +6,7 @@ ruby '2.0.0'
 gem 'rails', '4.0.0'
 gem 'bootstrap-sass'
 gem 'ckeditor'
+gem 'ckeditor_rails'
 gem 'remotipart'
 
 group :development, :test do
