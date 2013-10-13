@@ -15,6 +15,7 @@ class RecipesController < ApplicationController
   end
 
   def create
+    # TODO: tags and regions must not be empty
     if params[:commit]
       @recipe = Recipe.new(recipe_params)
       @recipe.user_id = current_user.id
