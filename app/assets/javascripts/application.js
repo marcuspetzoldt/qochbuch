@@ -15,6 +15,6 @@
 //= require jquery.remotipart
 //= require ckeditor/init
 //= require ckeditor-jquery
+//= require cloudinary
 //= require bootstrap
-//= require turbolinks
 //= require_tree .

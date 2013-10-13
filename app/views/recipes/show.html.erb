@@ -15,16 +15,7 @@
   <div class="offset1 span6">
     <div id="myCarousel" class="carousel slide">
       <div class="carousel-inner">
-        <% 3.times do |i| %>
-        <div class="item<%= " active" if i==0 %>">
-          <img src="<%= Recipe.image_name(@recipe, i+1) %>" alt="<%= "#{@recipe.title} Bild #{i+1}" %>" />
-          <div class="container">
-            <div class="carousel-caption">
-              <%= i+1 %>/3
-            </div>
-          </div>
-        </div>
-        <% end %>
+        <%= render(partial: 'carousel', collection: @recipe.images) %>
       </div>
       <a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
       <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>

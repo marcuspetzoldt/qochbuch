@@ -1,12 +1,11 @@
 class Recipe < ActiveRecord::Base
 
-  after_save { save_images }
   belongs_to :user
   has_one :vote
   has_many :taggings
   has_many :tags, through: :taggings
-  accepts_nested_attributes_for :taggings
-  accepts_nested_attributes_for :tags
+  has_many :images
+  accepts_nested_attributes_for :images, limit: 3
 
   validates(:time, presence: true, format: { with: /\A[1-9][0-9]*\z/ })
   validates(:level, presence: true, inclusion: { in: 0..4 })
@@ -40,19 +39,6 @@ class Recipe < ActiveRecord::Base
     end
   end
 
-  def self.image_name(for_recipe, image_nr)
-    image_name = nil
-    if for_recipe && for_recipe.id
-      path = Pathname.glob(Rails.root.join('public', 'uploads', for_recipe.id.to_s, "#{for_recipe.user.id}_#{image_nr}.*"))[0]
-      if path
-        image_name = "/#{path.relative_path_from(Rails.root.join('public'))}"
-      end
-    end
-    # Default to placeholder.png if image doesn't exist
-    image_name ||= Pathname.new('/assets/placeholder.png')
-    return image_name
-  end
-
   # Average rating of given recipe, with two decimal places
   def rating
     (Vote.where(recipe_id: id).average(:vote) || 0.0).round(2)
@@ -71,13 +57,5 @@ class Recipe < ActiveRecord::Base
   private
 
     @position_in_resultset = 0
-
-    def save_images
-      image_path = Rails.root.join('public', 'uploads', id.to_s)
-      FileUtils.mkdir(image_path) unless File.exists?(image_path)
-      Dir.glob(Rails.root.join('public', 'uploads', "#{user.id}_*")).each do |file|
-        FileUtils.mv(file, image_path, force: true)
-      end
-    end
 
 end

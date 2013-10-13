@@ -6,6 +6,7 @@ class RecipesController < ApplicationController
 
   def new
     @recipe = Recipe.new
+    @recipe.user_id = current_user.id
     @regions = cloud(0, @recipe.tags.where(category: 0).order(:tag), true)
     @tags = cloud(1, @recipe.tags.where(category: 1).order(:tag), true)
     respond_to do |format|
@@ -60,38 +61,6 @@ class RecipesController < ApplicationController
     end
   end
 
-  def upload
-    uploaded_io = nil
-    nr = nil
-
-    if params[:recipe][:pic1]
-      uploaded_io = params[:recipe][:pic1]
-      nr = 1
-    else
-      if params[:recipe][:pic2]
-        uploaded_io = params[:recipe][:pic2]
-        nr = 2
-      else
-        if params[:recipe][:pic3]
-          uploaded_io = params[:recipe][:pic3]
-          nr = 3
-        end
-      end
-    end
-    if uploaded_io
-      if uploaded_io.tempfile.size < 1.megabyte
-        file_name = "#{current_user.id}_#{nr}#{File.extname(uploaded_io.original_filename)}"
-        File.open(Rails.root.join('public', 'uploads', file_name), 'wb') do |file|
-          file.write(uploaded_io.read)
-        end
-      else
-        render(js: "$('div#errors').html('<div class=\"alert alert-error\">\"#{uploaded_io.original_filename}\" exceeds the 1MB file size limit.</div>')")
-        return
-      end
-    end
-    render js: "$('img#pic#{nr}').attr('src', '/uploads/#{file_name}')"
-  end
-
   def calculate
     @recipe = Recipe.find(params[:id])
     @ingredients = get_ingredients
@@ -103,7 +72,7 @@ class RecipesController < ApplicationController
 
     def recipe_params
       params.require(:recipe).permit(:time, :level, :portion,
-        :title, :description, :directions)
+        :title, :description, :directions, images_attributes: [:id, :name, :tmp_name])
     end
 
     def get_tags

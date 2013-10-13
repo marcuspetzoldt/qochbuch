@@ -1,8 +1,10 @@
+  <%= form_for(@recipe, html: { style: 'margin-bottom: 80px' }) do |f| %>
+    <%= f.hidden_field(:regions, id: 'iregion_used', value: @recipe.tags.where(category: 0).map do |tag| tag.id end.join(' ') ) %>
+    <%= f.hidden_field(:tags, id: 'itag_used', value: @recipe.tags.where(category: 1).map do |tag| tag.id end.join(' ') ) %>
+    <%= cloudinary_js_config %>
   <div class="row">
     <% 3.times do |i| %>
-    <div class="span4">
-      <%= render(partial: 'form_for_pic', locals: { nr: i+1, image_path: Recipe.image_name(@recipe, i+1) }) %>
-    </div>
+      <%= render(partial: 'form_for_pic', locals: { nr: i+1, image: @recipe.images[i] }) %>
     <% end %>
   </div>
   <div class="row">
@@ -65,9 +67,6 @@
       </div>
     </div>
   </div>
-  <%= form_for(@recipe, html: { style: 'margin-bottom: 80px' }) do |f| %>
-    <%= f.hidden_field(:regions, id: 'iregion_used', value: @recipe.tags.where(category: 0).map do |tag| tag.id end.join(' ') ) %>
-    <%= f.hidden_field(:tags, id: 'itag_used', value: @recipe.tags.where(category: 1).map do |tag| tag.id end.join(' ') ) %>
   <div class="row">
     <div class="span5">
       <h4>Zutaten für <%= f.select(:portion, options_for_select(1..12, @recipe.portion), {include_blank: true}, class: 'inline') %> Portionen</h4>

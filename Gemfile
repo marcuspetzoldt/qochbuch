@@ -8,6 +8,7 @@ gem 'bootstrap-sass'
 gem 'ckeditor'
 gem 'ckeditor_rails'
 gem 'remotipart'
+gem 'cloudinary'
 
 group :development, :test do
   gem 'rspec-rails', '2.13.1'
@@ -47,7 +48,7 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks'
+# gem 'turbolinks'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'

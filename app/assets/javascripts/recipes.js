@@ -1,10 +1,17 @@
 /* Upload pictures */
-$(document).on('click', 'img#pic1', function() { $('input#recipe_pic1').click() })
-$(document).on('click', 'img#pic2', function() { $('input#recipe_pic2').click() })
-$(document).on('click', 'img#pic3', function() { $('input#recipe_pic3').click() })
-$(document).on('change', 'input#recipe_pic1', function() { $('form#new_recipe_pic1').submit() })
-$(document).on('change', 'input#recipe_pic2', function() { $('form#new_recipe_pic2').submit() })
-$(document).on('change', 'input#recipe_pic3', function() { $('form#new_recipe_pic3').submit() })
+$(document).on('click', 'img#preview_pic1', function() { $('input#upload_pic1').click() })
+$(document).on('click', 'img#preview_pic2', function() { $('input#upload_pic2').click() })
+$(document).on('click', 'img#preview_pic3', function() { $('input#upload_pic3').click() })
+/* TODO: Spinner */
+
+$(document).on('cloudinarydone', '.cloudinary-fileupload', function(e, data) {
+  $(this).parent().children().first().html(
+    $.cloudinary.image(data.result.public_id,
+      { format: data.result.format, version: data.result.version,
+        crop: 'fill', width: 600, height: 400 })
+  );
+  return true;
+});
 
 /* Managing tag clouds */
 /* Region */

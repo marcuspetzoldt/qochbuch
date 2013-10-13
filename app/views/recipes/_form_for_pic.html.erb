@@ -1,5 +1,19 @@
-<%= form_for(@recipe, url: upload_path, html: { id: "new_recipe_pic#{nr}" }, remote: true) do |f|%>
-  <img src="<%= image_path %>" style="cursor: pointer" id="pic<%= nr %>" />
-  <%= f.file_field("pic#{nr}".to_sym, id: "recipe_pic#{nr}", accept: 'image/*', style: 'position: fixed; left: 0; top: 0') %>
-  <%= hidden_field_tag(request_forgery_protection_token.to_s, form_authenticity_token) %>
-<% end %>
+<div class="span4">
+  <div id="cloudinary_preview<%= nr %>">
+    <% if image %>
+      <%= cl_image_tag(image.name, transformation: :download, style: 'cursor: pointer', id: "preview_pic#{nr}") %>
+    <% else %>
+      <%= image_tag('placeholder.png', style: 'cursor: pointer', id: "preview_pic#{nr}") %>
+    <% end %>
+  </div>
+  <% if image %>
+    <% if image.id %>
+      <%= hidden_field_tag("recipe[images_attributes][#{nr-1}][public_id]", image.public_id) %>
+      <%= hidden_field_tag("recipe[images_attributes][#{nr-1}][version]", image.version) %>
+      <%= hidden_field_tag("recipe[images_attributes][#{nr-1}][id]", image.id) %>
+    <% else %>
+      <%= hidden_field_tag("recipe[images_attributes][#{nr-1}][tmp_name]", image.tmp_name) %>
+    <% end %>
+  <% end %>
+  <%= cl_image_upload_tag("recipe[images_attributes][#{nr-1}][tmp_name]", transformation: :upload, html: { accept: 'image/*', style: "opacity: 0", id: "upload_pic#{nr}" }) %>
+</div>
