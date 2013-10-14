@@ -9,6 +9,7 @@ gem 'ckeditor'
 gem 'ckeditor_rails'
 gem 'remotipart'
 gem 'cloudinary'
+gem 'textacular'
 
 group :development, :test do
   gem 'rspec-rails', '2.13.1'

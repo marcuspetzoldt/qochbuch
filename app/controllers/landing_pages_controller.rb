@@ -23,7 +23,10 @@ class LandingPagesController < ApplicationController
     # TODO add results from tags
     session[:search_text] = params[:search_text].strip
     unless session[:search_text].blank?
-      a = Recipe.where("MATCH(title, description, directions) AGAINST('#{session[:search_text]}' IN BOOLEAN MODE)").ids
+      # mysql
+      # a = Recipe.where("MATCH(title, description, directions) AGAINST('#{session[:search_text]}' IN BOOLEAN MODE)").ids
+      # postgresql
+      a = Search.new(session[:search_text])
     end
 
     session[:search_tags] = params[:isearch_used].strip
