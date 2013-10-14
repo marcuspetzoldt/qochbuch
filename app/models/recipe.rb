@@ -7,12 +7,17 @@ class Recipe < ActiveRecord::Base
   has_many :images
   accepts_nested_attributes_for :images, limit: 3
 
+  attr_accessor :tagslist
+  attr_accessor :regionslist
+
   validates(:time, presence: true, format: { with: /\A[1-9][0-9]*\z/ })
   validates(:level, presence: true, inclusion: { in: 0..4 })
   validates(:title, presence: true, length: { maximum: 40 })
   validates(:description, presence: false, length: { maximum: 200 })
   validates(:directions, presence: true)
   validates(:portion, presence: true)
+  validates(:tagslist, presence: true)
+  validates(:regionslist, presence: true)
 
   def self.levels
     ['Sehr leicht', 'Leicht', 'Normal', 'Schwer', 'Sehr schwer']

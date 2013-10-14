@@ -1,6 +1,6 @@
   <%= form_for(@recipe, html: { style: 'margin-bottom: 80px' }) do |f| %>
-    <%= f.hidden_field(:regions, id: 'iregion_used', value: @recipe.tags.where(category: 0).map do |tag| tag.id end.join(' ') ) %>
-    <%= f.hidden_field(:tags, id: 'itag_used', value: @recipe.tags.where(category: 1).map do |tag| tag.id end.join(' ') ) %>
+    <%= f.hidden_field(:regionslist, id: 'iregion_used', value: @recipe.tags.where(category: 0).map do |tag| tag.id end.join(' ') ) %>
+    <%= f.hidden_field(:tagslist, id: 'itag_used', value: @recipe.tags.where(category: 1).map do |tag| tag.id end.join(' ') ) %>
     <%= cloudinary_js_config %>
   <div class="row">
     <% 3.times do |i| %>

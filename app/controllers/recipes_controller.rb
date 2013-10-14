@@ -15,7 +15,6 @@ class RecipesController < ApplicationController
   end
 
   def create
-    # TODO: tags and regions must not be empty
     if params[:commit]
       @recipe = Recipe.new(recipe_params)
       @recipe.user_id = current_user.id
@@ -73,11 +72,11 @@ class RecipesController < ApplicationController
 
     def recipe_params
       params.require(:recipe).permit(:time, :level, :portion,
-        :title, :description, :directions, images_attributes: [:id, :name, :tmp_name])
+        :title, :description, :directions, :tagslist, :regionslist, images_attributes: [:id, :name, :tmp_name])
     end
 
     def get_tags
-      tag_ids = (params[:recipe][:regions].strip + ' ' + params[:recipe][:tags].strip).split(' ')
+      tag_ids = (params[:recipe][:regionslist].strip + ' ' + params[:recipe][:tagslist].strip).split(' ')
       Tag.where(id: tag_ids)
     end
 
@@ -113,8 +112,8 @@ class RecipesController < ApplicationController
     end
 
     def redisplay_form
-      @regions = cloud(0, Tag.where(id: params[:recipe][:regions].strip.split(' ')), true)
-      @tags = cloud(1, Tag.where(id: params[:recipe][:tags].strip.split(' ')), true)
+      @regions = cloud(0, Tag.where(id: params[:recipe][:regionslist].strip.split(' ')), true)
+      @tags = cloud(1, Tag.where(id: params[:recipe][:tagslist].strip.split(' ')), true)
       @ingredients = get_ingredients
       render('new')
     end

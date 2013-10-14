@@ -20,7 +20,6 @@ class LandingPagesController < ApplicationController
 
   def search
 
-    # TODO add results from tags
     session[:search_text] = params[:search_text].strip
     unless session[:search_text].blank?
       # mysql
