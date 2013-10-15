@@ -1,5 +1,5 @@
 <div class="item<%= " active" if carousel_counter == 0 %>">
-  <%= cl_image_tag(carousel.name, transformation: :download, alt: "#{@recipe.title} Bild #{carousel.name}" ) %>
+  <%= cl_image_tag(carousel.name, transformation: :download, alt: "#{@recipe.title} #{t('views.landing_pages.image')} #{carousel.name}" ) %>
   <div class="container">
     <div class="carousel-caption">
       <%= carousel_counter+1 %>/<%= @recipe.images.count %>
