@@ -1,16 +1,27 @@
 /* Upload pictures */
-$(document).on('click', 'img#preview_pic1', function() { $('input#upload_pic1').click() })
-$(document).on('click', 'img#preview_pic2', function() { $('input#upload_pic2').click() })
-$(document).on('click', 'img#preview_pic3', function() { $('input#upload_pic3').click() })
-/* TODO: Spinner */
+$(document).on('click', 'img#preview_pic1', function() { $('input#upload_pic1').click() });
+$(document).on('click', 'img#preview_pic2', function() { $('input#upload_pic2').click() });
+$(document).on('click', 'img#preview_pic3', function() { $('input#upload_pic3').click() });
 
+/* Upload Spinner */
+$(document).on('change', 'input#upload_pic1', function() {
+    $('img#preview_pic1').attr('src', '/assets/upload.gif').css('margin', '50px 100px 50px 100px')
+});
+$(document).on('change', 'input#upload_pic2', function() {
+    $('img#preview_pic2').attr('src', '/assets/upload.gif').css('margin', '50px 100px 50px 100px')
+});
+$(document).on('change', 'input#upload_pic3', function() {
+    $('img#preview_pic3').attr('src', '/assets/upload.gif').css('margin', '50px 100px 50px 100px')
+});
+
+/* Cloudinary Preview */
 $(document).on('cloudinarydone', '.cloudinary-fileupload', function(e, data) {
-  $(this).parent().children().first().html(
+    $(this).parent().children().first().html(
     $.cloudinary.image(data.result.public_id,
-      { format: data.result.format, version: data.result.version,
-        crop: 'fill', width: 600, height: 400 })
-  );
-  return true;
+        { format: data.result.format, version: data.result.version,
+            crop: 'fill', width: 600, height: 400 }).css('margin', '0')
+    );
+    return true;
 });
 
 /* Managing tag clouds */
