@@ -41,7 +41,7 @@
   <div class="span4">
     <%= form_for(@recipe, url: calculate_path(@recipe), remote: true) do |f| %>
       <%= hidden_field_tag(request_forgery_protection_token.to_s, form_authenticity_token) %>
-    <h4><%= t('views.recipes.ingredients') %> <%= select_tag(:portion, options_for_select(1..12, @recipe.portion), class: 'inline') %> <%= t('activerecord.attributes.recipe.portion', count: @recipe.portion || 0) %></h4>
+    <h4><%= t('views.recipes.ingredients') %> <%= select_tag(:portion, options_for_select(1..12, @recipe.portion), class: 'inline') %> <span id="portions"><%= t('activerecord.attributes.recipe.portion', count: @recipe.portion || 0) %></span></h4>
     <dl id='ingredients' class="dl-horizontal">
       <%= render(partial: 'ingredient', collection: @ingredients, locals: { edit: false, factor: @recipe.portion } ) %>
     </dl>

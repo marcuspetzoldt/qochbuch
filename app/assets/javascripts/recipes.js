@@ -54,6 +54,14 @@ $(document).on('change', 'select#portion', function() {
     $(this.form).submit();
 })
 
+$(document).on('change', 'select#recipe_portion', function() {
+    if (this.value == 1) {
+        $('span#portions').html($('span#portion_singular').html())
+    } else {
+        $('span#portions').html($('span#portion_plural').html())
+    }
+})
+
 /* Busy spinner */
 $(document).on('click', 'button#commit', function() {
     var $busy = $('div#busy')
