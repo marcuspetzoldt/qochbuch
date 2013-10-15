@@ -21,7 +21,7 @@
         <div class="accordion-group">
           <div class="accordion-heading">
             <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
-              Region<i class="icon icon-chevron-down pull-right"></i>
+              <%= t('views.recipes.regions') %><i class="icon icon-chevron-down pull-right"></i>
             </a>
           </div>
           <div id="collapseOne" class="accordion-body collapse">
@@ -44,7 +44,7 @@
         <div class="accordion-group">
           <div class="accordion-heading">
             <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
-              Kategorie<i class="icon icon-chevron-down pull-right"></i>
+              <%= t('views.recipes.tags') %><i class="icon icon-chevron-down pull-right"></i>
             </a>
           </div>
           <div id="collapseTwo" class="accordion-body collapse">
@@ -69,10 +69,10 @@
   </div>
   <div class="row">
     <div class="span5">
-      <h4>Zutaten für <%= f.select(:portion, options_for_select(1..12, @recipe.portion), {include_blank: true}, class: 'inline') %> Portionen</h4>
+      <h4><%= t('views.recipes.ingredients') %> <%= f.select(:portion, options_for_select(1..12, @recipe.portion), {include_blank: true}, class: 'inline') %> <%= t('activerecord.attributes.recipe.portion', count: @recipe.portion || 0) %></h4>
       <div class="control-group">
         <div class="control-label">
-          <span style="width:44px; padding-left: 4px; display: inline-block">Menge</span><span style="width: 80px; padding-left: 4px; display: inline-block">Maß</span>Zutat
+          <span style="width:44px; padding-left: 4px; display: inline-block"><%= t('activerecord.attributes.tagging.amount') %></span><span style="width: 80px; padding-left: 4px; display: inline-block"><%= t('activerecord.attributes.unit.unit') %></span><%= t('views.recipes.ingredient') %>
         </div>
         <div class="controls">
           <div style="display: none"><input type="text" name="recipe[ingredients[amount]][]" pattern="([0-9]+,?[0-9]*|etwas)" style="width:40px; padding-left: 0" /><select name="recipe[ingredients[unit]][]" style="width: 80px; padding-left: 0"><%= options_for_select(Unit.all.map.each_with_index do |msr, idx| [msr.name, msr.id] end) %></select><input type="text" name="recipe[ingredients[tag]][]" style="width:214px; padding-left: 0" /><%= link_to('#', name: 'add_ingredient', style: 'margin-left: 4px; padding-left: 4px; padding-right: 4px; vertical-align: top', class: 'btn') do %><i class="icon icon-plus"></i><% end %></div>
@@ -82,7 +82,7 @@
       </div>
     </div>
     <div class="span7">
-      <h4>Zubereitung</h4>
+      <h4><%= t('activerecord.attributes.recipe.directions') %></h4>
       <div class="control-group">
         <%= f.label(:title, class: 'control-label') %>
         <div class="controls">
@@ -94,7 +94,7 @@
         <div class="controls">
           <div class="input-append">
             <%= f.number_field(:time, min: '1', pattern: '[1-9][0-9]*', placeholder: :time) %>
-            <span class="add-on">min</span>
+            <span class="add-on"><%= t('views.recipes.minute_abbr') %></span>
           </div>
         </div>
       </div>
@@ -118,8 +118,8 @@
       </div>
       <div class="control-group">
         <div class="controls">
-          <%= f.button('Speichern', class: 'btn btn-primary', name: 'commit', id: 'commit') %>&nbsp;
-          <%= f.button('Abbrechen', class: 'btn', name: 'cancel', id: 'cancel') %>
+          <%= f.button(t('views.recipes.save'), class: 'btn btn-primary', name: 'commit', id: 'commit') %>&nbsp;
+          <%= f.button(t('views.recipes.cancel'), class: 'btn', name: 'cancel', id: 'cancel') %>
         </div>
       </div>
     </div>
@@ -129,7 +129,7 @@
   <div class="container">
     <div class="row">
       <div class="span6 offset3 img-rounded" style="position:fixed; top: 25%; border: 2px solid black; background-color: white; text-align: center; padding-bottom: 20px">
-        <h4>Rezept wird gespeichert ...</h4>
+        <h4><%= t('views.recipes.save_progress') %></h4>
         <%= image_tag('ajax-loader.gif') %>
       </div>
     </div>

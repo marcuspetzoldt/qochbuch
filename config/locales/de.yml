@@ -1,0 +1,115 @@
+de:
+  views:
+    users:
+      signin: 'Anmelden'
+      cancel: 'Abbrechen'
+      signup: 'Account anlegen'
+      save: 'Speichern'
+      invalid_user_email_combination: 'E-Mail Adresse oder Kennwort ist falsch.'
+      wrong_password: 'Das alte Kennwort stimmt nicht.'
+    landing_pages:
+      placeholder: 'Platzhalter'
+      image: 'Bild'
+      search: 'Suche'
+      go: 'Los!'
+      homepage: 'Home'
+      more: 'Mehr'
+      edit: 'Bearbeiten'
+      new_recipe: 'Neues Rezept'
+      my_recipes: 'Meine Rezepte'
+      change_password: 'Kennwort ändern'
+      signout: 'Abmelden'
+    recipes:
+      edit: 'Bearbeiten'
+      author: 'Autor'
+      rating: 'Bewertung'
+      ingredients: 'Zutaten für'
+      ingredient: 'Zutat'
+      regions: 'Regionen'
+      tags: 'Schlagwörter'
+      minute_abbr: 'min'
+      save_progress: 'Rezept wird gespeichert ...'
+      save: 'Speichern'
+      cancel: 'Abbrechen'
+
+  activerecord:
+    models:
+      user:
+        one: 'Nutzer'
+        other: 'Nutzer'
+      recipe:
+        one: 'Rezept'
+        other: 'Rezepte'
+    attributes:
+      user:
+        email:
+          one: 'E-Mail'
+          other: 'E-Mails'
+        password:
+          one: 'Kennwort'
+          other: 'Kennwörter'
+        password_confirmation:
+          one: 'Kennwort bestätigen'
+          other: 'Kennwörter bestätigen'
+        name:
+          one: 'Name'
+          other: 'Namen'
+        old_password: 'Altes Kennwort'
+        new_password: 'Neues Kennwort'
+      recipe:
+        time: 'Zubereitungsdauer'
+        level: 'Schwierigkeit'
+        levels:
+          l0: 'Sehr leicht'
+          l1: 'Leicht'
+          l2: 'Normal'
+          l3: 'Schwer'
+          l4: 'Sehr schwer'
+        title: 'Titel'
+        description: 'Beschreibung'
+        directions: 'Zubereitung'
+        portion:
+          one: 'Portion'
+          other: 'Portionen'
+      tagging:
+        amount: 'Menge'
+      unit:
+        unit: 'Maß'
+
+    errors:
+      models:
+        user:
+          attributes:
+            name:
+              blank: "Geben Sie bitte Ihren Namen an."
+              too_long: "Der Name darf nicht länger als %{count} Zeichen sein."
+            email:
+              blank: "Geben Sie bitte Ihre E-Mail Adresse an."
+              invalid: "Die E-Mail Adresse enthält ungültige Zeichen."
+              taken: "Die E-Mail Adresse wird bereits von jemand anderem genutzt."
+            password:
+              blank: "Geben Sie bitten ein Kennwort ein."
+              too_short: "Das Kennwort muss mindestens %{count} Zeichen lang sein."
+            password_confirmation:
+              confirmation: "Die Kennwörter stimmen nicht überein."
+        recipe:
+          attributes:
+            title:
+              blank: "Geben Sie bitte einen Titel an."
+              too_long: "Der Titel darf nicht länger als %{count} Zeichen sein."
+            level:
+              blank: "Geben Sie bitte einen Schwierigkeitsgrad an."
+              inclusion: "Der Schwierigkeitsgrad ist ungültig."
+            description:
+              too_long: "Die Beschreibung darf nicht länger als %{count} Zeichen sein."
+            directions:
+              blank: "Geben Sie bitte die Anleitung zur Zubereitung an."
+            portion:
+              blank: "Geben Sie bitte an, für wieviele Portionen ihr Rezept gedacht ist."
+            tagslist:
+              blank: "Wählen Sie bitte mindestens ein Schlagwort aus."
+            regionslist:
+              blank: "Wählen Sie bitte mindestens eine Region aus."
+            time:
+              blank: "Bitte geben Sie eine Zubereitungsdauer in Minuten an."
+              invalid: "Die Zubereitungsdauer muss eine Ganzzahl sein."

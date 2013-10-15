@@ -1,8 +1,8 @@
 <% if individuum.errors.any? %>
   <div class="alert alert-error" style="margin: 8px">
     <ul>
-    <% individuum.errors.full_messages.each do |msg| %>
-      <li>* <%= msg %></li>
+    <% individuum.errors.each do |field, msg| %>
+      <li><%= msg %></li>
     <% end %>
     </ul>
   </div>

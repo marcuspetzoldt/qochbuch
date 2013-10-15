@@ -8,20 +8,20 @@
     <ul class="dropdown-menu">
       <li>
         <%= link_to(new_recipe_path, id:'linkNewRecipe') do %>
-          <i class="menu icon-plus"></i>Neues Rezept
+          <i class="menu icon-plus"></i><%= t('views.landing_pages.new_recipe') %>
         <% end %>
       </li>
-      <li><a href="#"><i class="menu icon-search"></i>Meine Rezepte</a></li>
+      <li><a href="#"><i class="menu icon-search"></i><%= t('views.landing_pages.my_recipes') %></a></li>
       <li class="divider"></li>
       <li>
         <%= link_to(change_password_path, method: 'patch', remote: true, id: 'linkChangePassword') do %>
-          <i class="menu icon-wrench"></i>Kennwort ändern
+          <i class="menu icon-wrench"></i><%= t('views.landing_pages.change_password') %>
         <% end %>
       </li>
       <li class="divider"></li>
       <li>
         <%= link_to(signout_path, method: 'delete', id: 'linkSignout') do %>
-          <i class="menu icon-off"></i>Abmelden
+          <i class="menu icon-off"></i><%= t('views.landing_pages.signout') %>
         <% end %>
       </li>
     </ul>

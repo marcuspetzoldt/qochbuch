@@ -20,7 +20,11 @@ class Recipe < ActiveRecord::Base
   validates(:regionslist, presence: true)
 
   def self.levels
-    ['Sehr leicht', 'Leicht', 'Normal', 'Schwer', 'Sehr schwer']
+    [ I18n.t('activerecord.attributes.recipe.levels.l0'),
+      I18n.t('activerecord.attributes.recipe.levels.l1'),
+      I18n.t('activerecord.attributes.recipe.levels.l2'),
+      I18n.t('activerecord.attributes.recipe.levels.l3'),
+      I18n.t('activerecord.attributes.recipe.levels.l4') ]
   end
 
   def self.suggestions(direction=0)

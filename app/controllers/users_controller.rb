@@ -30,7 +30,7 @@ class UsersController < ApplicationController
           sign_in(user)
         else
           @user = User.new(user_params)
-          flash.now[:error] = 'Invalid user / password combination.'
+          flash.now[:error] = t('views.users.invalid_user_email_combination')
           render('new')
           sleep(1)
           return
@@ -66,7 +66,7 @@ class UsersController < ApplicationController
           return
         end
       else
-        flash.now[:error] = 'Wrong password.'
+        flash.now[:error] = t('views.users.wrong_password')
         render('change_password')
         return
       end

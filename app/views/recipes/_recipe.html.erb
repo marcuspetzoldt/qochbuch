@@ -3,12 +3,12 @@
   <div class="thumbnail">
     <% if @recipe.new_record? %>
       <p class="thumbnail">
-        <%= image_tag('placeholder.png', alt: 'Platzhalter') %>
+        <%= image_tag('placeholder.png', alt: t('views.landing_pages.placeholder')) %>
       </p>
       <p style="height: 194px">&nbsp;</p>
     <% else %>
       <p class="thumbnail">
-        <%= cl_image_tag("#{@recipe.images[0].name if @recipe.images[0]}", transformation: :download, alt: "#{@recipe.title} Bild 1") %>
+        <%= cl_image_tag("#{@recipe.images[0].name if @recipe.images[0]}", transformation: :download, alt: "#{@recipe.title} #{t('views.landing_pages.image')} 1") %>
       </p>
       <h4 class="titel"><%= @recipe.title %></h4>
       <p>
@@ -17,10 +17,10 @@
         <span class="label"><%= Recipe.levels[@recipe.level] %></span>
       </p>
       <p style="height:80px"><%= @recipe.description %></p>
-      <%= link_to('Mehr', recipe_path(@recipe), class: 'btn btn-info') %>
+      <%= link_to(t('views.landing_pages.more'), recipe_path(@recipe), class: 'btn btn-info') %>
       <% if signed_in? %>
         <% if current_user.id == @recipe.user.id %>
-          <%= link_to('Bearbeiten', edit_recipe_path(@recipe), class: 'btn btn-success') %>
+          <%= link_to(t('views.landing_pages.edit'), edit_recipe_path(@recipe), class: 'btn btn-success') %>
         <% end %>
       <% end %>
     <% end %>

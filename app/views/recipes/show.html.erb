@@ -1,12 +1,12 @@
 <div class="row">
   <div class="span4">
-    <div class="well well-small" style="margin-bottom: 12px"><strong>Zubereitungszeit</strong></div>
-    <p style="padding-left: 8px"><%= @recipe.time %> min</p>
-    <div class="well well-small" style="margin-bottom: 12px"><strong>Schwierigkeit</strong></div>
+    <div class="well well-small" style="margin-bottom: 12px"><strong><%= t('activerecord.attributes.recipe.time') %></strong></div>
+    <p style="padding-left: 8px"><%= @recipe.time %> <%= t('views.recipes.minute_abbr') %></p>
+    <div class="well well-small" style="margin-bottom: 12px"><strong><%= t('activerecord.attributes.recipe.level') %></strong></div>
     <p style="padding-left:8px"><%= Recipe.levels[@recipe.level] %></p>
-    <div class="well well-small" style="margin-bottom: 12px"><strong>Autor</strong></div>
+    <div class="well well-small" style="margin-bottom: 12px"><strong><%= t('views.recipes.author') %></strong></div>
     <p style="padding-left:8px"><%= @recipe.user.name %></p>
-    <div class="well well-small" style="margin-bottom: 12px"><strong>Bewertung</strong></div>
+    <div class="well well-small" style="margin-bottom: 12px"><strong><%= t('views.recipes.rating') %></strong></div>
     <div style="padding-left: 8px">
       <p class="big"><%= render(partial: 'rating', locals: { display_only: true }) %></p>
       <p class="big" style="position: relative; left: 0; top: -30px; font-size: 200%; color: #bbb"><%= render(partial: 'rating', locals: { display_only: false }) %></p>
@@ -27,7 +27,7 @@
   <div class="span4">
     <% if signed_in? %>
       <% if @recipe.user.id == current_user.id %>
-        <%= link_to('Bearbeiten', edit_recipe_path(@recipe), class: "btn btn-success btn-block btn-large") %>
+        <%= link_to(t('views.recipes.edit'), edit_recipe_path(@recipe), class: "btn btn-success btn-block btn-large") %>
       <% end %>
     <% end %>
   </div>
@@ -41,14 +41,14 @@
   <div class="span4">
     <%= form_for(@recipe, url: calculate_path(@recipe), remote: true) do |f| %>
       <%= hidden_field_tag(request_forgery_protection_token.to_s, form_authenticity_token) %>
-    <h4>Zutaten für <%= select_tag(:portion, options_for_select(1..12, @recipe.portion), class: 'inline') %> Portionen</h4>
+    <h4><%= t('views.recipes.ingredients') %> <%= select_tag(:portion, options_for_select(1..12, @recipe.portion), class: 'inline') %> <%= t('activerecord.attributes.recipe.portion', count: @recipe.portion || 0) %></h4>
     <dl id='ingredients' class="dl-horizontal">
       <%= render(partial: 'ingredient', collection: @ingredients, locals: { edit: false, factor: @recipe.portion } ) %>
     </dl>
     <% end %>
   </div>
   <div class="span8">
-    <h4>Zubereitung</h4>
+    <h4><%= t('activerecord.attributes.recipe.directions') %></h4>
     <%= render inline: @recipe.directions %>
   </div>
 </div>

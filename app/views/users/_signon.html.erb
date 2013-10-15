@@ -5,8 +5,8 @@
         <%= form_for(@user, html: { class: 'form-horizontal' }, remote: true) do |f| %>
 
           <ul class="nav nav-tabs">
-            <li <% if params[:what] == 'signin' %>class="active"<% end %>><%= link_to('Anmelden', signin_path, remote: true, id: 'linkSignin') %></li>
-            <li <% if params[:what] == 'signup' %>class="active"<% end %>><%= link_to('Account anlegen', signup_path, remote: true, id: 'linkSignup') %></li>
+            <li <% if params[:what] == 'signin' %>class="active"<% end %>><%= link_to(t('views.users.signin'), signin_path, remote: true, id: 'linkSignin') %></li>
+            <li <% if params[:what] == 'signup' %>class="active"<% end %>><%= link_to(t('views.users.signup'), signup_path, remote: true, id: 'linkSignup') %></li>
           </ul>
 
           <%= render('shared/error_messages', individuum: @user) %>
@@ -19,30 +19,30 @@
 
           <% unless params[:what] == 'signin' %>
           <div class="control-group">
-            <%= f.label(:name, class: 'control-label') %>
+            <%= f.label(t('activerecord.attributes.user.name', count: 1), class: 'control-label') %>
             <div class="controls">
               <div class="input-prepend">
                 <span class="add-on"><i class="icon icon-user"></i></span>
-                <%= f.text_field(:name) %>
+                <%= f.text_field(:name, placeholder: t('activerecord.attributes.user.name', count: 1)) %>
               </div>
             </div>
           </div>
           <% end %>
           <div class="control-group">
-            <%= f.label(:email, class: 'control-label') %>
+            <%= f.label(t('activerecord.attributes.user.email', count: 1), class: 'control-label') %>
             <div class="controls">
               <div class="input-prepend">
                 <span class="add-on">@</span>
-                <%= f.email_field(:email) %>
+                <%= f.email_field(:email, placeholder: t('activerecord.attributes.user.email', count: 1)) %>
               </div>
             </div>
           </div>
           <div class="control-group">
-            <%= f.label(:password, class: 'control-label') %>
+            <%= f.label(t('activerecord.attributes.user.password', count: 1), class: 'control-label') %>
             <div class="controls">
               <div class="input-prepend">
                 <span class="add-on"><i class="icon icon-lock"></i></span>
-                <%= f.password_field :password %>
+                <%= f.password_field(:password, placeholder: t('activerecord.attributes.user.password', count: 1)) %>
               </div>
             </div>
             <% unless params[:what] == 'signin' %>
@@ -50,7 +50,7 @@
             <div class="controls">
               <div class="input-prepend">
                 <span class="add-on"><i class="icon icon-lock"></i></span>
-                <%= f.password_field :password_confirmation %>
+                <%= f.password_field(:password_confirmation, placeholder: t('activerecord.attributes.user.password_confirmation', count: 1)) %>
               </div>
             </div>
             <% end %>
@@ -58,11 +58,11 @@
           <div class="control-group">
             <div class="controls">
               <% if params[:what] == 'signin' %>
-                <%= f.button('Anmelden', class: 'btn btn-primary', id: 'commitSignon', name: 'commit') %>
+                <%= f.button(t('views.users.signin'), class: 'btn btn-primary', id: 'commitSignon', name: 'commit') %>
               <% else %>
-                <%= f.button('Account anlegen', class: 'btn btn-primary', id: 'commitSignon', name: 'commit') %>
+                <%= f.button(t('views.users.signup'), class: 'btn btn-primary', id: 'commitSignon', name: 'commit') %>
               <% end %>
-              &nbsp;<%= f.button('Abbrechen', class: 'btn', id: 'cancelSignon', name: 'cancel') %>
+              &nbsp;<%= f.button(t('views.users.cancel'), class: 'btn', id: 'cancelSignon', name: 'cancel') %>
             </div>
           </div>
         <% end %>
