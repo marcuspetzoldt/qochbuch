@@ -18,7 +18,7 @@ class Search < ActiveRecord::Base
   def self.new(query)
     query = query.to_s
     return [] if query.empty?
-    self.search(query).uniq.map do |r| r.searchable_id end
+    self.search(query).map do |r| r.searchable_id end.uniq
   end
 
   # Search records are never modified
