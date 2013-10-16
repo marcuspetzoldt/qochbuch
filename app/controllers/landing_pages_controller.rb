@@ -43,7 +43,7 @@ class LandingPagesController < ApplicationController
       session[:search_tags] = params[:isearch_used].strip
       tags = session[:search_tags].split(' ')
       unless tags.empty?
-        b = Recipe.joins("JOIN taggings ON recipes.id = taggings.recipe_id JOIN tags ON taggings.tag_id = tags.id WHERE tags.id IN (#{tags.join(',')})").distinct.pluck(:id)
+        b = Recipe.find_by_sql("SELECT DISTINCT r.id FROM recipes r JOIN taggings j ON r.id = j.recipe_id JOIN tags t on t.id = j.tag_id WHERE t.id IN (#{tags.join(',')}) GROUP BY r.id HAVING count(*) = #{tags.count}").map do |e| e.id end
       end
     end
 
