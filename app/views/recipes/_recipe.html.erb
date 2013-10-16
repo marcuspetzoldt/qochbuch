@@ -8,12 +8,12 @@
       <p style="height: 194px">&nbsp;</p>
     <% else %>
       <p class="thumbnail">
-        <% if recipe.images[0] %>
-          <%= link_to(recipe_path(recipe)) do %>
+        <%= link_to(recipe_path(recipe)) do %>
+          <% if recipe.images[0] %>
             <%= cl_image_tag("#{recipe.images[0].name if recipe.images[0]}", transformation: :download, alt: "#{recipe.title} #{t('views.landing_pages.image')} 1") %>
+          <% else %>
+            <%= image_tag('placeholder.png', alt: t('views.landing_pages.placeholder')) %>
           <% end %>
-        <% else %>
-          <%= image_tag('placeholder.png', alt: t('views.landing_pages.placeholder')) %>
         <% end %>
       </p>
       <h4 class="titel"><%= recipe.title %></h4>
