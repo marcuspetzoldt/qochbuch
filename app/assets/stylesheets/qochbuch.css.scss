@@ -71,18 +71,38 @@ span > a:hover {
   height: 330px;
 }
 
-.carousel-control {
-  top: calc(100% - 60px);
-  margin: 0;
+.carousel-ctrl {
+  position: absolute;
+  top: 150px;
+  left: -40px;
+  width: 40px;
+  height: 40px;
+  margin-top: -20px;
+  font-size: 100px;
+  font-weight: 100;
+  line-height: 30px;
+  color: #999999;
+  text-align: center;
+  &.right {
+    left: 460px;
+  }
+  &:hover {
+    text-decoration: none;
+    color: black;
+  }
+  &:focus {
+    text-decoration: none;
+    color: #999999;
+  }
 }
 
 .carousel-caption {
   background: rgba(0, 0, 0, 0.5);
-  margin-bottom:17px;
-  height:30px;
+  top: 264px;
   color: white;
   margin-left:200px;
   margin-right:200px;
+  margin-bottom:30px;
   padding: 4px;
   font-size: 200%;
   text-align: center;
