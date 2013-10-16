@@ -30,13 +30,13 @@ class Search < ActiveRecord::Base
   # to be explicit about how to tell different search
   # results apart; without this, we can't use :include
   # to avoid n + 1 query problems
-  def hash
-    [searchable_id, searchable_type].hash
-  end
+  #def hash
+  #  [searchable_id, searchable_type].hash
+  #end
 
-  def eql?(result)
-    searchable_id == result.searchable_id and
-    searchable_type == result.searchable_type
-  end
+  #def eql?(result)
+  #  searchable_id == result.searchable_id and
+  #  searchable_type == result.searchable_type
+  #end
 
 end

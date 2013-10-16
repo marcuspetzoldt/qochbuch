@@ -1,34 +1,35 @@
-<% @recipe = recipe %>
+<% if session[:search_id].nil? || session[:search_id] == recipe.user_id %>
 <li class="span4">
   <div class="thumbnail">
-    <% if @recipe.new_record? %>
+    <% if recipe.new_record? %>
       <p class="thumbnail">
         <%= image_tag('placeholder.png', alt: t('views.landing_pages.placeholder')) %>
       </p>
       <p style="height: 194px">&nbsp;</p>
     <% else %>
       <p class="thumbnail">
-        <% if @recipe.images[0] %>
-          <%= link_to(recipe_path(@recipe)) do %>
-            <%= cl_image_tag("#{@recipe.images[0].name if @recipe.images[0]}", transformation: :download, alt: "#{@recipe.title} #{t('views.landing_pages.image')} 1") %>
+        <% if recipe.images[0] %>
+          <%= link_to(recipe_path(recipe)) do %>
+            <%= cl_image_tag("#{recipe.images[0].name if recipe.images[0]}", transformation: :download, alt: "#{recipe.title} #{t('views.landing_pages.image')} 1") %>
           <% end %>
         <% else %>
           <%= image_tag('placeholder.png', alt: t('views.landing_pages.placeholder')) %>
         <% end %>
       </p>
-      <h4 class="titel"><%= @recipe.title %></h4>
+      <h4 class="titel"><%= recipe.title %></h4>
       <p>
-        <span class="label"><%= render(partial: 'recipes/rating', locals: { display_only: true }) %></span></span>
-        <span class="label"><%= @recipe.time %> min</span>
-        <span class="label"><%= Recipe.levels[@recipe.level] %></span>
+        <span class="label"><%= render(partial: 'recipes/rating', locals: { rating: recipe.rating || 0, display_only: true }) %></span></span>
+        <span class="label"><%= recipe.time %> min</span>
+        <span class="label"><%= Recipe.levels[recipe.level] %></span>
       </p>
-      <p style="height:80px"><%= @recipe.description %></p>
-      <%= link_to(t('views.landing_pages.more'), recipe_path(@recipe), class: 'btn btn-info') %>
+      <p style="height:80px"><%= recipe.description %></p>
+      <%= link_to(t('views.landing_pages.more'), recipe_path(recipe), class: 'btn btn-info') %>
       <% if signed_in? %>
-        <% if current_user.id == @recipe.user.id %>
-          <%= link_to(t('views.landing_pages.edit'), edit_recipe_path(@recipe), class: 'btn btn-success') %>
+        <% if current_user.id == recipe.user.id %>
+          <%= link_to(t('views.landing_pages.edit'), edit_recipe_path(recipe), class: 'btn btn-success') %>
         <% end %>
       <% end %>
     <% end %>
   </div>
 </li>
+<% end %>

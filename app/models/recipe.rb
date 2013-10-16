@@ -44,8 +44,8 @@ class Recipe < ActiveRecord::Base
       end
     end
     3.times.map do |i|
-      Recipe.find_by(id: matching_recipes[@position_in_resultset+i]) || Recipe.new
-    end
+      Recipe.find_by(id: matching_recipes[@position_in_resultset+i])
+    end.compact
   end
 
   # Average rating of given recipe, with two decimal places

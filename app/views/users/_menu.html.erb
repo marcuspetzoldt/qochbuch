@@ -11,7 +11,14 @@
           <i class="menu icon-plus"></i><%= t('views.landing_pages.new_recipe') %>
         <% end %>
       </li>
-      <li><a href="#"><i class="menu icon-search"></i><%= t('views.landing_pages.my_recipes') %></a></li>
+      <li>
+        <%= link_to(search_path('true'), method: 'post') do %>
+          <i class="menu icon-search"></i><%= t('views.landing_pages.my_recipes') %>
+          <% if session[:search_id] %>
+            <strong>&nbsp;&#10004;</strong>
+          <% end %>
+        <% end %>
+      </li>
       <li class="divider"></li>
       <li>
         <%= link_to(change_password_path, method: 'patch', remote: true, id: 'linkChangePassword') do %>

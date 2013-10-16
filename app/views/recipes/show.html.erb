@@ -8,8 +8,8 @@
     <p style="padding-left:8px"><%= @recipe.user.name %></p>
     <div class="well well-small" style="margin-bottom: 12px"><strong><%= t('views.recipes.rating') %></strong></div>
     <div style="padding-left: 8px">
-      <p class="big"><%= render(partial: 'rating', locals: { display_only: true }) %></p>
-      <p class="big" style="position: relative; left: 0; top: -30px; font-size: 200%; color: #bbb"><%= render(partial: 'rating', locals: { display_only: false }) %></p>
+      <p class="big"><%= render(partial: 'rating', locals: { rating: @recipe.rating || 0, display_only: true }) %></p>
+      <p class="big" style="position: relative; left: 0; top: -30px; font-size: 200%; color: #bbb"><%= render(partial: 'rating', locals: { rating: @recipe.rating || 0, display_only: false }) %></p>
     </div>
   </div>
   <div class="offset1 span6">

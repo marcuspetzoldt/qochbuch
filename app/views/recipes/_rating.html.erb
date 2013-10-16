@@ -1,4 +1,3 @@
-<% rating = @recipe.rating || 0.0 %>
 <% if display_only %>
 <% 5.times do |i| %><% if i < rating.to_i %><span class="starsyellow">&#x2605;</span><% else %><span class="starsgray">&#x2605;</span><% end %><% end %>
 <% else %>

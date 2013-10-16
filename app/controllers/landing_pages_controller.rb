@@ -20,18 +20,31 @@ class LandingPagesController < ApplicationController
 
   def search
 
-    session[:search_text] = params[:search_text].strip
-    unless session[:search_text].blank?
-      # mysql
-      # a = Recipe.where("MATCH(title, description, directions) AGAINST('#{session[:search_text]}' IN BOOLEAN MODE)").ids
-      # postgresql
-      a = Search.new(session[:search_text])
+    if params[:search_my]
+      # toggle only my recipes
+      if session[:search_id]
+        session[:search_id] = nil
+      else
+        session[:search_id] = current_user.id
+      end
     end
 
-    session[:search_tags] = params[:isearch_used].strip
-    tags = session[:search_tags].split(' ')
-    unless tags.empty?
-      b = Recipe.joins("JOIN taggings ON recipes.id = taggings.recipe_id JOIN tags ON taggings.tag_id = tags.id WHERE tags.id IN (#{tags.join(',')})").distinct.pluck(:id)
+    if params[:search_text]
+      session[:search_text] = params[:search_text].strip
+      unless session[:search_text].blank?
+        # mysql
+        # a = Recipe.where("MATCH(title, description, directions) AGAINST('#{session[:search_text]}' IN BOOLEAN MODE)").ids
+        # postgresql
+        a = Search.new(session[:search_text])
+      end
+    end
+
+    if params[:isearch_used]
+      session[:search_tags] = params[:isearch_used].strip
+      tags = session[:search_tags].split(' ')
+      unless tags.empty?
+        b = Recipe.joins("JOIN taggings ON recipes.id = taggings.recipe_id JOIN tags ON taggings.tag_id = tags.id WHERE tags.id IN (#{tags.join(',')})").distinct.pluck(:id)
+      end
     end
 
     if a.nil?
