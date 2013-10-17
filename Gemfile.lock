@@ -28,6 +28,7 @@ GEM
     arel (4.0.0)
     atomic (1.1.14)
     aws_cf_signer (0.1.2)
+    bcrypt-ruby (3.0.1)
     bcrypt-ruby (3.0.1-x86-mingw32)
     bootstrap-sass (2.3.2.2)
       sass (~> 3.2)
@@ -174,7 +175,7 @@ DEPENDENCIES
   ckeditor
   ckeditor_rails
   cloudinary
-  coffee-rails (~> 4.0.0)
+  coffee-rails (= 4.0.0)
   factory_girl_rails (= 4.2.1)
   i18n
   jbuilder (~> 1.2)
