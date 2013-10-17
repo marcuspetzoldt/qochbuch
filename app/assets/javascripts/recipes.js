@@ -5,13 +5,13 @@ $(document).on('click', 'img#preview_pic3', function() { $('input#upload_pic3').
 
 /* Upload Spinner */
 $(document).on('change', 'input#upload_pic1', function() {
-    $('img#preview_pic1').attr('src', '/assets/upload.gif').css('margin', '50px 100px 50px 100px')
+    $('img#preview_pic1').attr('src', $('#spinner').attr('src')).css('margin', '50px 100px 50px 100px')
 });
 $(document).on('change', 'input#upload_pic2', function() {
-    $('img#preview_pic2').attr('src', '/assets/upload.gif').css('margin', '50px 100px 50px 100px')
+    $('img#preview_pic2').attr('src', $('#spinner').attr('src')).css('margin', '50px 100px 50px 100px')
 });
 $(document).on('change', 'input#upload_pic3', function() {
-    $('img#preview_pic3').attr('src', '/assets/upload.gif').css('margin', '50px 100px 50px 100px')
+    $('img#preview_pic3').attr('src', $('#spinner').attr('src')).css('margin', '50px 100px 50px 100px')
 });
 
 /* Cloudinary Preview */
