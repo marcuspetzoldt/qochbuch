@@ -11,6 +11,9 @@ Qochbuch::Application.routes.draw do
   match '/change_password', to: 'users#change_password', via: 'patch'
   match '/recipes/:recipe_id/votes/:id/edit', to: 'votes#edit', via: 'get', as: 'recipes_votes_edit'
   match '/recipes/:id/calculate', to: 'recipes#calculate', via: 'patch', as: 'calculate'
+  match '/admin/users/(:order)', to: 'users#index', via: 'get', as: 'admin_users'
+  match '/admin/users/(:id)', to: 'users#destroy', via: 'delete', as: 'admin_users_delete'
+
 # resources :users do
 #   resources :recipes do
 #     resources :votes

@@ -3,6 +3,7 @@ class UsersController < ApplicationController
   include ApplicationHelper
 
   before_filter :require_login, except: [:new, :create]
+  before_filter :is_admin?, only: [:index, :destroy]
 
   def new
     @user = User.new
@@ -76,6 +77,45 @@ class UsersController < ApplicationController
 #   render js: 'location.reload(true)'
     render js: "window.location='#{root_path}'"
 
+  end
+
+  def index
+    @sort_by, @sort_direction = sort_by_column(name: params[:name],
+                                               email: params[:email],
+                                               created_at: params[:created_at],
+                                               recipes: params[:recipes])
+
+    if @sort_by == :recipes
+      if @sort_direction == :asc
+        @users =
+          User.all.sort do |a,b|
+            a.recipes.count <=> b.recipes.count
+          end
+      else
+        @users =
+          User.all.sort do |a,b|
+            b.recipes.count <=> a.recipes.count
+          end
+      end
+    else
+      @users = User.all.order(@sort_by => @sort_direction)
+    end
+  end
+
+  def destroy
+    if params[:id].present?
+      u = User.find(params[:id])
+      if u
+        if u.recipes.count == 0
+          u.destroy
+        else
+          flash[:error] = t('views.users.invalid_user_has_recipes')
+        end
+      else
+        flash[:error] = t('view.users.invalid_user_id')
+      end
+    end
+    redirect_to admin_users_path
   end
 
   private

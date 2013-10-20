@@ -1,12 +1,45 @@
 de:
+  datetime:
+    distance_in_words:
+      less_than_x_minutes:
+        one: 'weniger als einer Minute'
+        other: 'weniger als %{count} Minuten'
+      x_minutes:
+        one: 'einer Minute'
+        other: '%{count} Minuten'
+      about_x_hours:
+        one: 'ca. einer Stunde'
+        other: 'ca. %{count} Stunden'
+      x_days:
+       one: 'einem Tag'
+       other: '%{count} Tagen'
+      x_months:
+        one: 'einem Monat'
+        other: '%{count} Monaten'
+      about_x_months:
+        one: 'ca. einem Monat'
+        other: 'ca. %{count} Monaten'
+      about_x_years:
+        one: 'ca. einem Jahr'
+        other: 'ca. %{count} Jahren'
+      over_x_years:
+        one: 'über einem Jahr'
+        other: 'über %{count} Jahren'
+      almost_x_years:
+        one: 'fast einem Jahr'
+        other: 'fast %{count} Jahren'
   views:
     users:
       signin: 'Anmelden'
       cancel: 'Abbrechen'
       signup: 'Account anlegen'
       save: 'Speichern'
+      delete: 'Nutzer löschen'
       invalid_user_email_combination: 'E-Mail Adresse oder Kennwort ist falsch.'
+      invalid_user_id: 'Der Nutzer konnte nicht gefunden werden'
+      invalid_user_has_recipes: 'Der Nutzer kann nicht gelöscht werden, weil er bereits Rezepte erfasst hat.'
       wrong_password: 'Das alte Kennwort stimmt nicht.'
+      distance_of_time: 'Erstellt vor'
     landing_pages:
       placeholder: 'Platzhalter'
       image: 'Bild'
@@ -17,6 +50,7 @@ de:
       edit: 'Bearbeiten'
       new_recipe: 'Neues Rezept'
       my_recipes: 'Meine Rezepte'
+      configuration: 'Konfiguration'
       change_password: 'Kennwort ändern'
       signout: 'Abmelden'
     recipes:
@@ -40,6 +74,12 @@ de:
       recipe:
         one: 'Rezept'
         other: 'Rezepte'
+      tag:
+        one: 'Schlagwort'
+        other: 'Schlagwörter'
+      unit:
+        one: 'Maß'
+        other: 'Maße'
     attributes:
       user:
         email:
@@ -56,6 +96,7 @@ de:
           other: 'Namen'
         old_password: 'Altes Kennwort'
         new_password: 'Neues Kennwort'
+        created_at: 'Erstellt am'
       recipe:
         time: 'Zubereitungsdauer'
         level: 'Schwierigkeit'

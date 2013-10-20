@@ -1,0 +1,40 @@
+<div class="container">
+  <%= render partial: 'admins/header' %>
+  <div class="row">
+    <div class="span2">
+      <%= render partial: 'admins/menu', locals: { active: 'Users' } %>
+    </div>
+    <div class="span10">
+      <% flash.each do |key, value| %>
+        <div class="alert alert-<%= key %>" style="margin: 8px"><%= value %></div>
+      <% end %>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>
+              <%= link_to(admin_users_path(name: sort_direction(:name, @sort_by, @sort_direction))) do %>
+                <%= t('activerecord.attributes.user.name.one') %>
+              <% end %> / <%= link_to(admin_users_path(recipes: sort_direction(:recipes, @sort_by, @sort_direction))) do %>
+                <%= t('activerecord.models.recipe.other') %>
+              <% end %>
+            </th>
+            <th>
+              <%= link_to(admin_users_path(email: sort_direction(:email, @sort_by, @sort_direction))) do %>
+                <%= t('activerecord.attributes.user.email.one') %>
+              <% end %>
+            </th>
+            <th>
+              <%= link_to(admin_users_path(created_at: sort_direction(:created_at, @sort_by, @sort_direction))) do %>
+                <%= t('views.users.distance_of_time') %>
+              <% end %>
+            </th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= render partial: 'admins/users', collection: @users %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

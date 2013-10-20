@@ -12,7 +12,7 @@
         <% end %>
       </li>
       <li>
-        <%= link_to(search_path('true'), method: 'post') do %>
+        <%= link_to(search_path('my_recipes'), method: 'post') do %>
           <i class="menu icon-search"></i><%= t('views.landing_pages.my_recipes') %>
           <% if session[:search_id] %>
             <strong>&nbsp;&#10004;</strong>
@@ -25,6 +25,13 @@
           <i class="menu icon-wrench"></i><%= t('views.landing_pages.change_password') %>
         <% end %>
       </li>
+      <% if is_admin? %>
+        <li>
+          <%= link_to(admin_users_path) do %>
+            <i class="menu icon-wrench"></i><%= t('views.landing_pages.configuration') %>
+          <% end %>
+        </li>
+      <% end %>
       <li class="divider"></li>
       <li>
         <%= link_to(signout_path, method: 'delete', id: 'linkSignout') do %>

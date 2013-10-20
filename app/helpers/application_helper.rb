@@ -1,9 +1,29 @@
 module ApplicationHelper
 
   def require_login
-    unless signed_in?
-      redirect_to(root_path)
+    redirect_to(root_path) unless signed_in?
+  end
+
+  def require_admin
+    redirect_to(root_path) unless is_admin?
+  end
+
+  def sort_direction(column, sort_by, sort_direction)
+    return 1 unless column.to_s == sort_by.to_s
+    sort_direction == :asc ? -1 : 1
+  end
+
+  def sort_by_column(columns)
+    columns.each do |name, order|
+      unless order.nil?
+        if order.to_i > 0
+          return [name, :asc]
+        else
+          return [name, :desc]
+        end
+      end
     end
+    return [columns.keys[0], :asc]
   end
 
   def cloud(category, used_tags, outer)
