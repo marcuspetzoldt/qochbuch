@@ -5,6 +5,8 @@ class RecipesController < ApplicationController
   before_filter :require_login, except: [:show, :calculate]
   before_filter :require_admin, only: [:index, :destroy]
 
+  PAGINATION = 25
+
   def new
     @recipe = Recipe.new
     @recipe.user_id = current_user.id
@@ -74,19 +76,22 @@ class RecipesController < ApplicationController
                                                rating: params[:rating])
     if @sort_by == :rating
       if @sort_direction == :asc
-        @recipes =
+        r =
           Recipe.all.sort do |a,b|
             a.rating <=> b.rating
           end
       else
-        @recipes =
+        r =
           Recipe.all.sort do |a,b|
             b.rating <=> a.rating
         end
       end
     else
-      @recipes = Recipe.all.order(@sort_by => @sort_direction)
+      r = Recipe.all.order(@sort_by => @sort_direction)
     end
+    @page = params[:page] ? params[:page].to_i : 0
+    @max_page = r.count / PAGINATION - 1
+    @recipes = r[@page*PAGINATION..@page+PAGINATION-1]
   end
 
   def destroy

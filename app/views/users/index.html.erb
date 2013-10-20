@@ -35,6 +35,7 @@
           <%= render partial: 'admins/users', collection: @users %>
         </tbody>
       </table>
+      <%= render partial: 'admins/pagination', locals: { page: @page, max_page: @max_page, path: admin_users_path } %>
     </div>
   </div>
 </div>

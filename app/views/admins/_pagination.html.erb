@@ -1,0 +1,9 @@
+<div class="pagination pagination-centered">
+  <ul>
+    <li<%= raw(' class="disabled"') if page == 0 %>><%= link_to path+"?page=#{page-1}" do %>&laquo;<% end %></li>
+    <% 0.upto(max_page) do |n| %>
+      <li<%= raw(' class="active"') if page == n %>><%= link_to (n+1).to_s, path+"?page=#{n}" %></li>
+    <% end %>
+    <li<%= raw(' class="disabled"') if page >= max_page %>><%= link_to path+"?page=#{page+1}" do %>&raquo;<% end %></li>
+  </ul>
+</div>

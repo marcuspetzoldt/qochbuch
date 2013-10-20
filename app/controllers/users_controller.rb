@@ -5,6 +5,8 @@ class UsersController < ApplicationController
   before_filter :require_login, except: [:new, :create]
   before_filter :is_admin?, only: [:index, :destroy]
 
+  PAGINATION = 25
+
   def new
     @user = User.new
     respond_to do |format|
@@ -87,19 +89,22 @@ class UsersController < ApplicationController
 
     if @sort_by == :recipes
       if @sort_direction == :asc
-        @users =
+        u =
           User.all.sort do |a,b|
             a.recipes.count <=> b.recipes.count
           end
       else
-        @users =
+        u =
           User.all.sort do |a,b|
             b.recipes.count <=> a.recipes.count
           end
       end
     else
-      @users = User.all.order(@sort_by => @sort_direction)
+      u = User.all.order(@sort_by => @sort_direction)
     end
+    @page = params[:page] ? params[:page].to_i : 0
+    @max_page = u.count / PAGINATION - 1
+    @users = u[@page*PAGINATION..@page+PAGINATION-1]
   end
 
   def destroy
