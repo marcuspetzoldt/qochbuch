@@ -3,6 +3,7 @@ class RecipesController < ApplicationController
   include ApplicationHelper
 
   before_filter :require_login, except: [:show, :calculate]
+  before_filter :require_admin, only: [:index, :destroy]
 
   def new
     @recipe = Recipe.new
@@ -68,6 +69,37 @@ class RecipesController < ApplicationController
     render 'calculate'
   end
 
+  def index
+    @sort_by, @sort_direction = sort_by_column(title: params[:title],
+                                               rating: params[:rating])
+    if @sort_by == :rating
+      if @sort_direction == :asc
+        @recipes =
+          Recipe.all.sort do |a,b|
+            a.rating <=> b.rating
+          end
+      else
+        @recipes =
+          Recipe.all.sort do |a,b|
+            b.rating <=> a.rating
+        end
+      end
+    else
+      @recipes = Recipe.all.order(@sort_by => @sort_direction)
+    end
+  end
+
+  def destroy
+    if params[:id].present?
+      r = Recipe.find(params[:id])
+      if r
+        r.destroy
+      else
+        flash[:error] = t('view.users.invalid_user_id')
+      end
+    end
+    redirect_to admin_recipes_path
+  end
   private
 
     def recipe_params

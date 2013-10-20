@@ -1,0 +1,14 @@
+<tr>
+  <td><%= link_to recipes.title, edit_recipe_path(recipes.id) %></td>
+  <td><%= recipes.rating %></td>
+  <td>
+    <%= link_to admin_recipes_delete_path(recipes.id), method: 'delete', title: t('views.recipes.delete') do %>
+      <i class="icon-remove"></i>
+    <% end %>
+  </td>
+</tr>
+<tr>
+  <td colspan="4" class="muted" style="border: 0">
+    <%= t(Image.model_name.human(count: 2)) %>: <%= recipes.images.count %>, <%= t('views.recipes.regions') %>: <%= recipes.tags.where('tags.category = 0').count %>, <%= t('views.recipes.tags') %>: <%= recipes.tags.where('tags.category = 1').count %>
+  </td>
+</tr>

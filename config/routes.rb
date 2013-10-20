@@ -13,6 +13,8 @@ Qochbuch::Application.routes.draw do
   match '/recipes/:id/calculate', to: 'recipes#calculate', via: 'patch', as: 'calculate'
   match '/admin/users/(:order)', to: 'users#index', via: 'get', as: 'admin_users'
   match '/admin/users/(:id)', to: 'users#destroy', via: 'delete', as: 'admin_users_delete'
+  match '/admin/recipes/(:order)', to: 'recipes#index', via: 'get', as: 'admin_recipes'
+  match '/admin/recipes/(:id)', to: 'recipes#destroy', via: 'delete', as: 'admin_recipes_delete'
 
 # resources :users do
 #   resources :recipes do

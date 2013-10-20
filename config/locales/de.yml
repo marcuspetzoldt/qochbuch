@@ -55,6 +55,7 @@ de:
       signout: 'Abmelden'
     recipes:
       edit: 'Bearbeiten'
+      delete: 'Rezept löschen'
       author: 'Autor'
       rating: 'Bewertung'
       ingredients: 'Zutaten für'
@@ -80,6 +81,9 @@ de:
       unit:
         one: 'Maß'
         other: 'Maße'
+      image:
+        one: 'Bild'
+        other: 'Bilder'
     attributes:
       user:
         email:

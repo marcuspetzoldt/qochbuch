@@ -1,6 +1,7 @@
 class Image < ActiveRecord::Base
   before_save :pretty_name
   after_save :remove_obsolete_image
+  before_destroy :destroy_image
 
   belongs_to :recipe
 
@@ -40,6 +41,10 @@ class Image < ActiveRecord::Base
       if @obsolete_image.present?
         Cloudinary::Uploader.destroy(@obsolete_image)
       end
+    end
+
+    def destroy_image
+      Cloudinary::Uploader.destroy(public_id)
     end
 
 end

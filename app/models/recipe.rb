@@ -4,7 +4,7 @@ class Recipe < ActiveRecord::Base
   has_one :vote
   has_many :taggings
   has_many :tags, through: :taggings
-  has_many :images
+  has_many :images, dependent: :destroy
   accepts_nested_attributes_for :images, limit: 3
 
   attr_accessor :tagslist

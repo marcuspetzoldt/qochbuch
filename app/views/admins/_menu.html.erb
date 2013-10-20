@@ -1,6 +1,6 @@
 <ul class="nav nav-tabs nav-stacked">
-  <li <%= raw('class="active"') if active == 'Users' %>><a href="#"><%= User.model_name.human(count: 2) %></a></li>
-  <li <%= raw('class="active"') if active == 'Recipes' %>><a href="#"><%= Recipe.model_name.human(count: 2) %></a></li>
+  <li <%= raw('class="active"') if active == 'Users' %>><%= link_to User.model_name.human(count: 2), admin_users_path %></a></li>
+  <li <%= raw('class="active"') if active == 'Recipes' %>><%= link_to Recipe.model_name.human(count: 2), admin_recipes_path %></a></li>
   <li <%= raw('class="active"') if active == 'Tags' %>><a href="#"><%= Tag.model_name.human(count: 2) %></a></li>
   <li <%= raw('class="active"') if active == 'Units' %>><a href="#"><%= Unit.model_name.human(count: 2) %></a></li>
 </ul>

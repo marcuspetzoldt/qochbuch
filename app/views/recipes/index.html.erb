@@ -1,0 +1,33 @@
+<div class="container">
+  <%= render partial: 'admins/header' %>
+  <div class="row">
+    <div class="span2">
+      <%= render partial: 'admins/menu', locals: { active: 'Recipes' } %>
+    </div>
+    <div class="span10">
+      <% flash.each do |key, value| %>
+        <div class="alert alert-<%= key %>" style="margin: 8px"><%= value %></div>
+      <% end %>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>
+              <%= link_to(admin_recipes_path(title: sort_direction(:title, @sort_by, @sort_direction))) do %>
+                <%= t('activerecord.attributes.recipe.title') %>
+              <% end %>
+            </th>
+            <th>
+              <%= link_to(admin_recipes_path(rating: sort_direction(:rating, @sort_by, @sort_direction))) do %>
+                <%= t('views.recipes.rating') %>
+              <% end %>
+            </th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= render partial: 'admins/recipes', collection: @recipes %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
