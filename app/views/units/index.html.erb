@@ -8,12 +8,18 @@
       <% flash.each do |key, value| %>
         <div class="alert alert-<%= key %>" style="margin: 8px"><%= value %></div>
       <% end %>
+      <%= link_to t('views.units.new'), new_unit_path, class: 'btn' %>
       <table class="table">
         <thead>
         <tr>
           <th>
             <%= link_to(units_path(tag: sort_direction(:name, @sort_by, @sort_direction))) do %>
-              <%= t('activerecord.attributes.tag.tag') %>
+              <%= t('activerecord.attributes.unit.name') %>
+            <% end %>
+          </th>
+          <th>
+            <%= link_to(units_path(other: sort_direction(:other, @sort_by, @sort_direction))) do %>
+              <%= t('activerecord.attributes.unit.other') %>
             <% end %>
           </th>
           <th>

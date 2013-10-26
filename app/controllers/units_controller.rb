@@ -2,12 +2,44 @@ class UnitsController < ApplicationController
 
   include ApplicationHelper
 
+  before_action :signed_in?, except: [:index, :destroy]
   before_action :is_admin?, only: [:index, :destroy]
 
   PAGINATION = 25
 
+  def new
+    @unit = Unit.new
+  end
+
+  def create
+    if params[:commit]
+      @unit = Unit.new(unit_params)
+      unless @unit.save
+        render :new
+        return
+      end
+    end
+    redirect_to units_path
+  end
+
+  def edit
+    @unit = Unit.find(params[:id])
+    render :new
+  end
+
+  def update
+    if params[:commit]
+      @unit = Unit.find(params[:id])
+      unless @unit.update(unit_params)
+        render :new
+        return
+      end
+    end
+    redirect_to units_path
+  end
+
   def index
-    @sort_by, @sort_direction = sort_by_column(name: params[:tag], used: params[:used])
+    @sort_by, @sort_direction = sort_by_column(name: params[:tag], other: params[:other], used: params[:used])
     if @sort_by == :used
       if @sort_direction == 1
         r =
@@ -28,7 +60,7 @@ class UnitsController < ApplicationController
     @units = r[@page*PAGINATION..@page*PAGINATION+PAGINATION-1]
   end
 
-  def delete
+  def destroy
     if params[:id].present?
       r = Unit.find(params[:id])
       if r
@@ -38,6 +70,11 @@ class UnitsController < ApplicationController
       end
     end
     redirect_to units_path
+  end
 
+  private
+
+  def unit_params
+    params.require(:unit).permit(:name, :other)
   end
 end

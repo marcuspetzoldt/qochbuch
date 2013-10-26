@@ -74,6 +74,9 @@ de:
     units:
       used: 'Nutzung'
       delete: 'Maßeinheit löschen.'
+      save: 'Speichern'
+      cancel: 'Abbrechen'
+      new: 'Neue Maßeinheit'
       invalid_unit_id: 'Die Maßeinheit konnte nicht gefunden werden.'
 
   activerecord:
@@ -129,6 +132,7 @@ de:
         amount: 'Menge'
       unit:
         name: 'Maßeinheit'
+        other: 'Maßeinheit (pl.)'
       tag:
         tag: 'Schlagwort'
 
@@ -169,3 +173,9 @@ de:
             time:
               blank: "Bitte geben Sie eine Zubereitungsdauer in Minuten an."
               invalid: "Die Zubereitungsdauer muss eine Ganzzahl sein."
+        unit:
+          attributes:
+            name:
+              too_long: "Die Maßeinheit darf nicht länger als %{count} Zeichen sein."
+            other:
+              too_long: "Das Plural der Maßeinheit darf nicht länger als %{count} Zeichen sein."

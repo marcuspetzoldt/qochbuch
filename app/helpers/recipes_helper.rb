@@ -8,12 +8,13 @@ module RecipesHelper
     end
   end
 
-  def format_amount(amount, factor)
+  def format_amount(ingredient, factor)
 
     result = ''
 
-    a = amount.to_i * factor.to_i
+    a = ingredient[:amount].to_i * factor.to_i
     b = @recipe.portion.to_i
+    plural = ((a.to_f/b) > 1)
     while (t = ggt(a, b)) > 1
       a = a / t
       b = b / t
@@ -23,7 +24,11 @@ module RecipesHelper
 
     (result = q.to_s) if q > 0
     (result = result + " <sup>#{n}</sup>/<sub>#{b}</sub>") if n > 0
-
+    if plural
+      result = result + ' ' + ingredient[:punit]
+    else
+      result = result + ' ' + ingredient[:unit]
+    end
     return result
   end
 

@@ -120,16 +120,14 @@ class RecipesController < ApplicationController
 
     def get_ingredients
       if params[:recipe]
-        Rails.logger.info('get_ingredients')
-        Rails.logger.info(params)
         ing = params[:recipe][:ingredients]
         1.upto(ing[:amount].count-1).map do |i|
-          {amount: ing[:amount][i], unit_id: ing[:unit][i], unit: nil, tag: ing[:tag][i] }
+          {amount: ing[:amount][i], unit_id: ing[:unit][i], unit: nil, punit: nil, tag: ing[:tag][i] }
         end
       else
         @recipe.taggings.map do |t|
           if t.tag.category == 2
-            {amount: t.amount, unit_id: t.unit_id, unit: t.unit.name, tag: t.tag.tag }
+            {amount: t.amount, unit_id: t.unit_id, unit: t.unit.name, punit: t.unit.other, tag: t.tag.tag }
           end
         end.compact
       end
