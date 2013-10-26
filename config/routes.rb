@@ -2,6 +2,8 @@ Qochbuch::Application.routes.draw do
   root 'landing_pages#home'
   resources :users
   resources :recipes
+  resources :tags
+  resources :units
   match '/(:search_my)', to: 'landing_pages#search', via: 'post', as: 'search'
   match '/next', to: 'landing_pages#next', via: 'get'
   match '/previous', to: 'landing_pages#previous', via: 'get'
@@ -11,10 +13,6 @@ Qochbuch::Application.routes.draw do
   match '/change_password', to: 'users#change_password', via: 'patch'
   match '/recipes/:recipe_id/votes/:id/edit', to: 'votes#edit', via: 'get', as: 'recipes_votes_edit'
   match '/recipes/:id/calculate', to: 'recipes#calculate', via: 'patch', as: 'calculate'
-  match '/admin/users/(:order)', to: 'users#index', via: 'get', as: 'admin_users'
-  match '/admin/users/(:id)', to: 'users#destroy', via: 'delete', as: 'admin_users_delete'
-  match '/admin/recipes/(:order)', to: 'recipes#index', via: 'get', as: 'admin_recipes'
-  match '/admin/recipes/(:id)', to: 'recipes#destroy', via: 'delete', as: 'admin_recipes_delete'
 
 # resources :users do
 #   resources :recipes do

@@ -1,0 +1,34 @@
+<div class="container">
+  <%= render partial: 'admins/header' %>
+  <div class="row">
+    <div class="span2">
+      <%= render partial: 'admins/menu', locals: { active: 'Tags' } %>
+    </div>
+    <div class="span10">
+      <% flash.each do |key, value| %>
+        <div class="alert alert-<%= key %>" style="margin: 8px"><%= value %></div>
+      <% end %>
+      <table class="table">
+        <thead>
+        <tr>
+          <th>
+            <%= link_to(tags_path(tag: sort_direction(:tag, @sort_by, @sort_direction))) do %>
+              <%= t('activerecord.attributes.tag.tag') %>
+            <% end %>
+          </th>
+          <th>
+            <%= link_to(tags_path(used: sort_direction(:used, @sort_by, @sort_direction))) do %>
+              <%= t('views.tags.used') %>
+            <% end %>
+          </th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <%= render partial: 'admins/tags', collection: @tags %>
+        </tbody>
+      </table>
+      <%= render partial: 'shared/pagination', locals: { path: tags_path } %>
+    </div>
+  </div>
+</div>

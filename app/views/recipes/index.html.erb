@@ -12,12 +12,12 @@
         <thead>
           <tr>
             <th>
-              <%= link_to(admin_recipes_path(title: sort_direction(:title, @sort_by, @sort_direction))) do %>
+              <%= link_to(recipes_path(title: sort_direction(:title, @sort_by, @sort_direction))) do %>
                 <%= t('activerecord.attributes.recipe.title') %>
               <% end %>
             </th>
             <th>
-              <%= link_to(admin_recipes_path(rating: sort_direction(:rating, @sort_by, @sort_direction))) do %>
+              <%= link_to(recipes_path(rating: sort_direction(:rating, @sort_by, @sort_direction))) do %>
                 <%= t('views.recipes.rating') %>
               <% end %>
             </th>
@@ -28,7 +28,7 @@
           <%= render partial: 'admins/recipes', collection: @recipes %>
         </tbody>
       </table>
-      <%= render partial: 'admins/pagination', locals: { page: @page, max_page: @max_page, path: admin_recipes_path } %>
+      <%= render partial: 'shared/pagination', locals: { path: recipes_path } %>
     </div>
   </div>
 </div>

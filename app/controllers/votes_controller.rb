@@ -2,7 +2,7 @@ class VotesController < ApplicationController
 
   include ApplicationHelper
 
-  before_filter :require_login
+  before_action :require_login
 
   def edit
     # Voting user does not vote for own recipe

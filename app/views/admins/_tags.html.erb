@@ -1,0 +1,9 @@
+<tr>
+  <td><%= link_to tags.tag, edit_tag_path(tags.id) %></td>
+  <td><%= tags.taggings.count %></td>
+  <td>
+    <%= link_to tag_path(tags.id), method: 'delete', title: t('views.tags.delete') do %>
+      <i class="icon-remove"></i>
+    <% end %>
+  </td>
+</tr>

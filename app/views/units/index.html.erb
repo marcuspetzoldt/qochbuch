@@ -1,0 +1,34 @@
+<div class="container">
+  <%= render partial: 'admins/header' %>
+  <div class="row">
+    <div class="span2">
+      <%= render partial: 'admins/menu', locals: { active: 'Units' } %>
+    </div>
+    <div class="span10">
+      <% flash.each do |key, value| %>
+        <div class="alert alert-<%= key %>" style="margin: 8px"><%= value %></div>
+      <% end %>
+      <table class="table">
+        <thead>
+        <tr>
+          <th>
+            <%= link_to(units_path(tag: sort_direction(:name, @sort_by, @sort_direction))) do %>
+              <%= t('activerecord.attributes.tag.tag') %>
+            <% end %>
+          </th>
+          <th>
+            <%= link_to(units_path(used: sort_direction(:used, @sort_by, @sort_direction))) do %>
+              <%= t('views.units.used') %>
+            <% end %>
+          </th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <%= render partial: 'admins/units', collection: @units %>
+        </tbody>
+      </table>
+      <%= render partial: 'shared/pagination', locals: { path: units_path } %>
+    </div>
+  </div>
+</div>

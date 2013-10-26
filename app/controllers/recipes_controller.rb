@@ -2,8 +2,8 @@ class RecipesController < ApplicationController
 
   include ApplicationHelper
 
-  before_filter :require_login, except: [:show, :calculate]
-  before_filter :require_admin, only: [:index, :destroy]
+  before_action :require_login, except: [:show, :calculate]
+  before_action :require_admin, only: [:index, :destroy]
 
   PAGINATION = 25
 
@@ -75,7 +75,7 @@ class RecipesController < ApplicationController
     @sort_by, @sort_direction = sort_by_column(title: params[:title],
                                                rating: params[:rating])
     if @sort_by == :rating
-      if @sort_direction == :asc
+      if @sort_direction == 1
         r =
           Recipe.all.sort do |a,b|
             a.rating <=> b.rating
@@ -87,11 +87,11 @@ class RecipesController < ApplicationController
         end
       end
     else
-      r = Recipe.all.order(@sort_by => @sort_direction)
+      r = Recipe.all.order(@sort_by => (@sort_direction == 1 ? :asc : :desc))
     end
     @page = params[:page] ? params[:page].to_i : 0
     @max_page = r.count / PAGINATION - 1
-    @recipes = r[@page*PAGINATION..@page+PAGINATION-1]
+    @recipes = r[@page*PAGINATION..@page*PAGINATION+PAGINATION-1]
   end
 
   def destroy
@@ -100,11 +100,12 @@ class RecipesController < ApplicationController
       if r
         r.destroy
       else
-        flash[:error] = t('view.users.invalid_user_id')
+        flash[:error] = t('view.recipes.invalid_recipe_id')
       end
     end
-    redirect_to admin_recipes_path
+    redirect_to recipes_path
   end
+
   private
 
     def recipe_params

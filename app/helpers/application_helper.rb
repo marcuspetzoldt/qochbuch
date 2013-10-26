@@ -10,20 +10,20 @@ module ApplicationHelper
 
   def sort_direction(column, sort_by, sort_direction)
     return 1 unless column.to_s == sort_by.to_s
-    sort_direction == :asc ? -1 : 1
+    sort_direction > 0 ? -1 : 1
   end
 
   def sort_by_column(columns)
     columns.each do |name, order|
       unless order.nil?
         if order.to_i > 0
-          return [name, :asc]
+          return [name, 1]
         else
-          return [name, :desc]
+          return [name, -1]
         end
       end
     end
-    return [columns.keys[0], :asc]
+    return [columns.keys[0], 1]
   end
 
   def cloud(category, used_tags, outer)

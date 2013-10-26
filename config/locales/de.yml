@@ -66,6 +66,15 @@ de:
       save_progress: 'Rezept wird gespeichert ...'
       save: 'Speichern'
       cancel: 'Abbrechen'
+      invalid_recipe_id: 'Das Rezept konnte nicht gefunden werden.'
+    tags:
+      used: 'Nutzung'
+      delete: 'Schlagwort löschen.'
+      invalid_tag_id: 'Das Schlagwort konnte nicht gefunden werden.'
+    units:
+      used: 'Nutzung'
+      delete: 'Maßeinheit löschen.'
+      invalid_unit_id: 'Die Maßeinheit konnte nicht gefunden werden.'
 
   activerecord:
     models:
@@ -119,7 +128,9 @@ de:
       tagging:
         amount: 'Menge'
       unit:
-        unit: 'Maß'
+        name: 'Maßeinheit'
+      tag:
+        tag: 'Schlagwort'
 
     errors:
       models:

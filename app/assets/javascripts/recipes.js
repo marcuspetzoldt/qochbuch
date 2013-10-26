@@ -81,7 +81,7 @@ $(document).on('submit', 'form', function() {
 });
 
 /* Disable submit on ENTER in Ingredientslist */
-$(document).on('keypress', 'input', function(event) {
+$(document).on('keypress', 'input.noenter', function(event) {
     if (event.which == 13) {
         event.preventDefault();
     }

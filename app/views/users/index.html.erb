@@ -12,19 +12,19 @@
         <thead>
           <tr>
             <th>
-              <%= link_to(admin_users_path(name: sort_direction(:name, @sort_by, @sort_direction))) do %>
+              <%= link_to(users_path(name: sort_direction(:name, @sort_by, @sort_direction))) do %>
                 <%= t('activerecord.attributes.user.name.one') %>
-              <% end %> / <%= link_to(admin_users_path(recipes: sort_direction(:recipes, @sort_by, @sort_direction))) do %>
+              <% end %> / <%= link_to(users_path(recipes: sort_direction(:recipes, @sort_by, @sort_direction))) do %>
                 <%= t('activerecord.models.recipe.other') %>
               <% end %>
             </th>
             <th>
-              <%= link_to(admin_users_path(email: sort_direction(:email, @sort_by, @sort_direction))) do %>
+              <%= link_to(users_path(email: sort_direction(:email, @sort_by, @sort_direction))) do %>
                 <%= t('activerecord.attributes.user.email.one') %>
               <% end %>
             </th>
             <th>
-              <%= link_to(admin_users_path(created_at: sort_direction(:created_at, @sort_by, @sort_direction))) do %>
+              <%= link_to(users_path(created_at: sort_direction(:created_at, @sort_by, @sort_direction))) do %>
                 <%= t('views.users.distance_of_time') %>
               <% end %>
             </th>
@@ -35,7 +35,7 @@
           <%= render partial: 'admins/users', collection: @users %>
         </tbody>
       </table>
-      <%= render partial: 'admins/pagination', locals: { page: @page, max_page: @max_page, path: admin_users_path } %>
+      <%= render partial: 'shared/pagination', locals: { path: users_path } %>
     </div>
   </div>
 </div>
