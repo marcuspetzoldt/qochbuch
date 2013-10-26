@@ -90,7 +90,7 @@ class RecipesController < ApplicationController
       r = Recipe.all.order(@sort_by => (@sort_direction == 1 ? :asc : :desc))
     end
     @page = params[:page] ? params[:page].to_i : 0
-    @max_page = r.count / PAGINATION - 1
+    @max_page = r.count / PAGINATION - ((r.count % PAGINATION > 0) ? 0 : 1)
     @recipes = r[@page*PAGINATION..@page*PAGINATION+PAGINATION-1]
   end
 

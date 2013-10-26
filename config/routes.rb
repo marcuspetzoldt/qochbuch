@@ -13,6 +13,9 @@ Qochbuch::Application.routes.draw do
   match '/change_password', to: 'users#change_password', via: 'patch'
   match '/recipes/:recipe_id/votes/:id/edit', to: 'votes#edit', via: 'get', as: 'recipes_votes_edit'
   match '/recipes/:id/calculate', to: 'recipes#calculate', via: 'patch', as: 'calculate'
+  get '/regions', to: 'tags#index', default: { category: 0 }, as: 'regions'
+  get '/categories', to: 'tags#index', default: { category: 1 }, as: 'categories'
+  get '/ingredients', to: 'tags#index', default: { category: 2 }, as: 'ingredients'
 
 # resources :users do
 #   resources :recipes do

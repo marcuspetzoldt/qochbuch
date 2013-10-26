@@ -68,6 +68,9 @@ de:
       cancel: 'Abbrechen'
       invalid_recipe_id: 'Das Rezept konnte nicht gefunden werden.'
     tags:
+      tags: 'Schlagwörter'
+      regions: 'Regionen'
+      ingredients: 'Zutaten'
       used: 'Nutzung'
       delete: 'Schlagwort löschen.'
       invalid_tag_id: 'Das Schlagwort konnte nicht gefunden werden.'

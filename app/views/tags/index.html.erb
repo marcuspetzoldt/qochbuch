@@ -2,7 +2,7 @@
   <%= render partial: 'admins/header' %>
   <div class="row">
     <div class="span2">
-      <%= render partial: 'admins/menu', locals: { active: 'Tags' } %>
+      <%= render partial: 'admins/menu', locals: { active: "Tags#{@category}" } %>
     </div>
     <div class="span10">
       <% flash.each do |key, value| %>
@@ -28,7 +28,14 @@
         <%= render partial: 'admins/tags', collection: @tags %>
         </tbody>
       </table>
-      <%= render partial: 'shared/pagination', locals: { path: tags_path } %>
+      <% case @category %>
+      <% when 0 %>
+        <%= render partial: 'shared/pagination', locals: { path: regions_path } %>
+      <% when 1 %>
+        <%= render partial: 'shared/pagination', locals: { path: categories_path } %>
+      <% when 2 %>
+        <%= render partial: 'shared/pagination', locals: { path: ingredients_path } %>
+      <% end %>
     </div>
   </div>
 </div>

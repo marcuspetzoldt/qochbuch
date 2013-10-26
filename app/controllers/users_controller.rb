@@ -103,7 +103,7 @@ class UsersController < ApplicationController
       u = User.all.order(@sort_by => (@sort_direction == 1 ? :asc : :desc))
     end
     @page = params[:page] ? params[:page].to_i : 0
-    @max_page = u.count / PAGINATION - 1
+    @max_page = u.count / PAGINATION - ((u.count % PAGINATION > 0) ? 0 : 1)
     @users = u[@page*PAGINATION..@page*PAGINATION+PAGINATION-1]
   end
 

@@ -42,22 +42,22 @@ class UnitsController < ApplicationController
     @sort_by, @sort_direction = sort_by_column(name: params[:tag], other: params[:other], used: params[:used])
     if @sort_by == :used
       if @sort_direction == 1
-        r =
+        u =
             Unit.all.sort do |a,b|
               a.taggings.count <=> b.taggings.count
             end
       else
-        r =
+        u =
             Unit.all.sort do |a,b|
               b.taggings.count <=> a.taggings.count
             end
       end
     else
-      r = Unit.all.order(@sort_by => (@sort_direction == 1 ? :asc : :desc))
+      u = Unit.all.order(@sort_by => (@sort_direction == 1 ? :asc : :desc))
     end
     @page = params[:page] ? params[:page].to_i : 0
-    @max_page = r.count / PAGINATION - 1
-    @units = r[@page*PAGINATION..@page*PAGINATION+PAGINATION-1]
+    @max_page = u.count / PAGINATION - ((u.count % PAGINATION > 0) ? 0 : 1)
+    @units = u[@page*PAGINATION..@page*PAGINATION+PAGINATION-1]
   end
 
   def destroy
