@@ -37,10 +37,10 @@ module RecipesHelper
       when 0
         return ingredient[:tag]
       when 1
-        return ingredient[:ptag]
+        return ingredient[:ptag].blank? ? ingredient[:tag] : ingredient[:ptag]
       else
         if (ingredient[:amount].to_i * factor.to_i).to_f / @recipe.portion.to_i > 1.0
-          return ingredient[:ptag]
+          return ingredient[:ptag].blank? ? ingredient[:tag] : ingredient[:ptag]
         else
           return ingredient[:tag]
         end
