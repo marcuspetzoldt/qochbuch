@@ -7,7 +7,7 @@ class LandingPagesController < ApplicationController
     session[:search_tags] = nil
     Recipe.matching_recipes = Recipe.all.ids
     @recipes = Recipe.suggestions
-    @tags = cloud([0,1], Tag.where(id: session[:search]), false)
+    @tags = cloud([0,1], nil, false)
   end
 
   def next

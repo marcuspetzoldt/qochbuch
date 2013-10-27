@@ -67,7 +67,6 @@ class RecipesController < ApplicationController
   def calculate
     @recipe = Recipe.find(params[:id])
     @ingredients = get_ingredients
-    Rails.logger.info("calculate: #{params}")
     render 'calculate'
   end
 
