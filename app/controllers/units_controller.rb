@@ -39,7 +39,7 @@ class UnitsController < ApplicationController
   end
 
   def index
-    @sort_by, @sort_direction = sort_by_column(name: params[:tag], other: params[:other], used: params[:used])
+    @sort_by, @sort_direction = sort_by_column(name: params[:tag], other: params[:other], rule: params[:rule], used: params[:used])
     if @sort_by == :used
       if @sort_direction == 1
         u =
@@ -75,6 +75,6 @@ class UnitsController < ApplicationController
   private
 
   def unit_params
-    params.require(:unit).permit(:name, :other)
+    params.require(:unit).permit(:name, :other, :rule)
   end
 end

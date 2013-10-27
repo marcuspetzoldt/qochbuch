@@ -29,6 +29,7 @@ de:
         one: 'fast einem Jahr'
         other: 'fast %{count} Jahren'
   views:
+    blank:  '<leer>'
     users:
       signin: 'Anmelden'
       cancel: 'Abbrechen'
@@ -72,14 +73,17 @@ de:
       regions: 'Regionen'
       ingredients: 'Zutaten'
       used: 'Nutzung'
+      new: '%{category} erfassen'
+      merge: 'Markierte Verschmelzen'
       delete: 'Schlagwort löschen.'
       invalid_tag_id: 'Das Schlagwort konnte nicht gefunden werden.'
+      invalid_tag_has_recipes: 'Das Schlagwort kann nicht gelöscht werden, da es bereits genutzt wird.'
     units:
       used: 'Nutzung'
       delete: 'Maßeinheit löschen.'
       save: 'Speichern'
       cancel: 'Abbrechen'
-      new: 'Neue Maßeinheit'
+      new: 'Maßeinheit erfassen'
       invalid_unit_id: 'Die Maßeinheit konnte nicht gefunden werden.'
 
   activerecord:
@@ -136,8 +140,10 @@ de:
       unit:
         name: 'Maßeinheit'
         other: 'Maßeinheit (pl.)'
+        rule: 'Flektionsregel für Zutat'
       tag:
         tag: 'Schlagwort'
+        other: 'Schlagwort (pl.)'
 
     errors:
       models:
@@ -182,3 +188,10 @@ de:
               too_long: "Die Maßeinheit darf nicht länger als %{count} Zeichen sein."
             other:
               too_long: "Das Plural der Maßeinheit darf nicht länger als %{count} Zeichen sein."
+        tags:
+          attribute:
+            tag:
+              blank: "Geben Sie bitte ein Schlagwort ein"
+              too_long: "Das Schlagwort darf nicht länger als %{count} Zeichen sein."
+            other:
+              too_long: "Das Plural des Schlagworts darf nicht länger als %{count} Zeichen sein."

@@ -2,7 +2,7 @@
   <td><%= users.name %></td>
   <td><%= users.email %></td>
   <td><%= distance_of_time_in_words_to_now(users.created_at) %></td>
-  <td>
+  <td style='text-align: right'>
     <%= link_to user_path(users.id), method: 'delete', title: t('views.users.delete') do %>
       <i class="icon-remove"></i>
     <% end %>

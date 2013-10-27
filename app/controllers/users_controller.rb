@@ -117,7 +117,7 @@ class UsersController < ApplicationController
           flash[:error] = t('views.users.invalid_user_has_recipes')
         end
       else
-        flash[:error] = t('view.users.invalid_user_id')
+        flash[:error] = t('views.users.invalid_user_id')
       end
     end
     redirect_to users_path

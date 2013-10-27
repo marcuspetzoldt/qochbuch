@@ -23,6 +23,11 @@
             <% end %>
           </th>
           <th>
+            <%= link_to(units_path(rule: sort_direction(:rule, @sort_by, @sort_direction))) do %>
+              <%= t('activerecord.attributes.unit.rule') %>
+            <% end %>
+          </th>
+          <th>
             <%= link_to(units_path(used: sort_direction(:used, @sort_by, @sort_direction))) do %>
               <%= t('views.units.used') %>
             <% end %>

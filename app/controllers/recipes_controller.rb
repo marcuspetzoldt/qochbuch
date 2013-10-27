@@ -122,12 +122,12 @@ class RecipesController < ApplicationController
       if params[:recipe]
         ing = params[:recipe][:ingredients]
         1.upto(ing[:amount].count-1).map do |i|
-          {amount: ing[:amount][i], unit_id: ing[:unit][i], unit: nil, punit: nil, tag: ing[:tag][i] }
+          { amount: ing[:amount][i], unit_id: ing[:unit][i], unit: nil, punit: nil, tag: ing[:tag][i], ptag: nil, rule: 0 }
         end
       else
         @recipe.taggings.map do |t|
           if t.tag.category == 2
-            {amount: t.amount, unit_id: t.unit_id, unit: t.unit.name, punit: t.unit.other, tag: t.tag.tag }
+            { amount: t.amount, unit_id: t.unit_id, unit: t.unit.name, punit: t.unit.other, tag: t.tag.tag, ptag: t.tag.other, rule: t.unit.rule }
           end
         end.compact
       end
@@ -138,7 +138,7 @@ class RecipesController < ApplicationController
       1.upto(ing[:amount].count-1) do |i|
         # Skip entries without an ingredient name
         unless ing[:tag][i].blank?
-          tag = Tag.find_by(tag: ing[:tag][i])
+          tag = Tag.find_by("tag = :value OR other = :value", value: ing[:tag][i])
           if tag.nil?
             tag = Tag.create(category: 2, father: nil, tag: ing[:tag][i])
           end

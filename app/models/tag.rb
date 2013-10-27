@@ -4,9 +4,10 @@ class Tag < ActiveRecord::Base
 
   validates(:category, presence: true, inclusion: { in: 0..2 })
   validates(:tag, presence: true, length: { maximum: 60 })
+  validates(:other, presence: false, length: { maximum: 60 })
 
   def self.categories
-    ['Region', 'Kategorie', 'Zutat']
+    [I18n.t('views.tags.regions'), I18n.t('views.tags.tags'), I18n.t('views.tags.ingredients')]
   end
 
   def taglet

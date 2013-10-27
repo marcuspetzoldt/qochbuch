@@ -1,7 +1,17 @@
-<tr>
+<% if tags.id == @merged %>
+  <tr style='background-color: yellow'>
+<% else %>
+  <tr>
+<% end %>
   <td><%= link_to tags.tag, edit_tag_path(tags.id) %></td>
+  <td><%= tags.other %></td>
   <td><%= tags.taggings.count %></td>
-  <td>
+  <% if @category == 2 %>
+    <td style='text-align: right'>
+      <%= check_box_tag "merge[#{tags.id}]" %>
+    </td>
+  <% end %>
+  <td style='text-align: right'>
     <%= link_to tag_path(tags.id), method: 'delete', title: t('views.tags.delete') do %>
       <i class="icon-remove"></i>
     <% end %>

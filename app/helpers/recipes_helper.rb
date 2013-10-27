@@ -32,4 +32,18 @@ module RecipesHelper
     return result
   end
 
+  def format_ingredient(ingredient, factor)
+    case ingredient[:rule]
+      when 0
+        return ingredient[:tag]
+      when 1
+        return ingredient[:ptag]
+      else
+        if (ingredient[:amount].to_i * factor.to_i).to_f / @recipe.portion.to_i > 1.0
+          return ingredient[:ptag]
+        else
+          return ingredient[:tag]
+        end
+    end
+  end
 end

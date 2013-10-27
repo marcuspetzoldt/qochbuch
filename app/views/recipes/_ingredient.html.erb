@@ -3,6 +3,6 @@
     <div><input type="text" value="<%= ingredient[:amount].to_f.round(0) unless ingredient[:amount] == 0 || ingredient[:amount].blank? %>" name="recipe[ingredients[amount]][]" pattern="[0-9]+.?[0-9]*" style="width:40px; padding-left: 0" /><select name="recipe[ingredients[unit]][]" style="width: 80px; padding-left: 0"><%= options_for_select((Unit.all.map.each_with_index do |msr, idx| [msr.name, msr.id] end), ingredient[:unit_id]) %> %></select><input type="text" value="<%= ingredient[:tag] %>" name="recipe[ingredients[tag]][]" style="width:214px; padding-left: 0" /><%= link_to('#', name: 'remove_ingredient', style: 'margin-left: 4px; padding-left: 4px; padding-right: 4px; vertical-align: top', class: 'btn') do %><i class="icon icon-remove"></i><% end %></div>
   <% else %>
     <dt><%= render(inline: format_amount(ingredient, factor)) %></dt>
-    <dd><%= ingredient[:tag] %></dd>
+    <dd><%= render(inline: format_ingredient(ingredient, factor)) %></dd>
   <% end %>
 <% end %>

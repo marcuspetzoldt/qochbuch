@@ -1,8 +1,9 @@
 <tr>
-  <td><%= link_to units.name, edit_unit_path(units.id) %></td>
-  <td><%= units.other %></td>
+  <td><%= link_to units.name.blank? ? t('views.blank') : units.name, edit_unit_path(units.id) %></td>
+  <td><%= units.other.blank? ? t('views.blank') : units.other %></td>
+  <td><%= Unit.rules[units.rule] %></td>
   <td><%= units.taggings.count %></td>
-  <td>
+  <td style='text-align: right'>
     <%= link_to unit_path(units.id), method: 'delete', title: t('views.units.delete') do %>
       <i class="icon-remove"></i>
     <% end %>

@@ -1,7 +1,7 @@
 <tr>
   <td><%= link_to recipes.title, edit_recipe_path(recipes.id) %></td>
   <td><%= recipes.rating %></td>
-  <td>
+  <td style='text-align: right'>
     <%= link_to recipe_path(recipes.id), method: 'delete', title: t('views.recipes.delete') do %>
       <i class="icon-remove"></i>
     <% end %>
