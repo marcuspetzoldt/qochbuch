@@ -53,8 +53,10 @@ $(document).on('click', 'a[name=add_ingredient]', function() {
     $(this).attr('name', 'remove_ingredient');
     $(this).html('<i class="icon icon-remove"></i>');
     $(this).parent().after($new_ingredient);
+    $(this).parent().parent().children().last().children().first().focus();
     return false;
 });
+
 $(document).on('click', 'a[name=remove_ingredient]', function() {
     $(this).parent().remove()
     return false;
