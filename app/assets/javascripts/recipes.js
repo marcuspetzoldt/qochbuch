@@ -53,7 +53,7 @@ $(document).on('click', 'a[name=add_ingredient]', function() {
     $(this).attr('name', 'remove_ingredient');
     $(this).html('<i class="icon icon-remove"></i>');
     $(this).parent().after($new_ingredient);
-    $(this).parent().parent().children().last().children().first().focus();
+    $(this).parent().next().children().first().focus();
     return false;
 });
 
@@ -76,8 +76,8 @@ $(document).on('change', 'select#recipe_portion', function() {
 });
 
 /* Busy spinner */
-$(document).on('submit', 'form', function() {
-    var $busy = $('div#busy')
+$(document).on('submit', 'form#recipe_form', function() {
+    var $busy = $('div#busy');
     $busy.prepend('<div style="position:absolute; top: 0; left:0; width:100%; height: '+$('html').height()+'px; background-color:gray; opacity: .8;"></div>')
     $busy.css('visibility', 'visible').fadeIn(850);
 });

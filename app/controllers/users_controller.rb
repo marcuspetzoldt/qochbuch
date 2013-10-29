@@ -42,8 +42,7 @@ class UsersController < ApplicationController
     end
     # Wait for the fade-out of the form to happen (850ms)
     sleep(1)
-#   render js: 'location.reload(true)'
-    render js: "window.location='#{root_path}'"
+    render js: 'location.reload(true)'
   end
 
   def signout
@@ -76,8 +75,7 @@ class UsersController < ApplicationController
     end
     # Wait for the fade-out of the form to happen (850ms)
     sleep(1)
-#   render js: 'location.reload(true)'
-    render js: "window.location='#{root_path}'"
+    render js: 'location.reload(true)'
 
   end
 

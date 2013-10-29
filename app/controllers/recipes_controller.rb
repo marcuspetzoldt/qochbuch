@@ -18,18 +18,14 @@ class RecipesController < ApplicationController
   end
 
   def create
-    if params[:commit]
-      @recipe = Recipe.new(recipe_params)
-      @recipe.user_id = current_user.id
-      if @recipe.save
-        @recipe.tags = get_tags
-        save_ingredients
-        redirect_to @recipe
-      else
-        redisplay_form
-      end
+    @recipe = Recipe.new(recipe_params)
+    @recipe.user_id = current_user.id
+    if @recipe.save
+      @recipe.tags = get_tags
+      save_ingredients
+      redirect_to @recipe
     else
-      redirect_to(root_path)
+      redisplay_form
     end
   end
 
@@ -42,17 +38,13 @@ class RecipesController < ApplicationController
   end
 
   def update
-    if params[:commit]
-      @recipe = Recipe.find(params[:id])
-      if @recipe.update(recipe_params)
-        @recipe.tags = get_tags
-        save_ingredients
-        redirect_to @recipe
-      else
-        redisplay_form
-      end
+    @recipe = Recipe.find(params[:id])
+    if @recipe.update(recipe_params)
+      @recipe.tags = get_tags
+      save_ingredients
+      redirect_to @recipe
     else
-      redirect_to(recipe_path(params[:id]))
+      redisplay_form
     end
   end
 

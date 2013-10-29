@@ -1,4 +1,4 @@
-  <%= form_for(@recipe, html: { style: 'margin-bottom: 80px' }) do |f| %>
+  <%= form_for(@recipe, id: 'recipe_form', html: { style: 'margin-bottom: 80px' }) do |f| %>
     <%= f.hidden_field(:regionslist, id: 'iregion_used', value: @recipe.tags.where(category: 0).map do |tag| tag.id end.join(' ') ) %>
     <%= f.hidden_field(:tagslist, id: 'itag_used', value: @recipe.tags.where(category: 1).map do |tag| tag.id end.join(' ') ) %>
     <%= cloudinary_js_config %>
@@ -120,7 +120,6 @@
       <div class="control-group">
         <div class="controls">
           <%= f.button(t('views.recipes.save'), class: 'btn btn-primary', name: 'commit', id: 'commit') %>&nbsp;
-          <%= f.button(t('views.recipes.cancel'), class: 'btn', name: 'cancel', id: 'cancel') %>
         </div>
       </div>
     </div>
