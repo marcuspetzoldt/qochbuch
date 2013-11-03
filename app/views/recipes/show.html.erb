@@ -19,6 +19,11 @@
       </div>
       <a class="carousel-ctrl left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
       <a class="carousel-ctrl right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+      <div style="text-align: center">
+        <div class="fb-like" data-href="<%= recipe_path @recipe, only_path: false %>" data-colorscheme="light" data-layout="button_count" data-action="like" data-show-faces="false" data-send="false"></div>
+        <div class="g-plus" data-action="share" data-annotation="bubble" href="<%= recipe_path @recipe, only_path: false %>"></div>
+        <a href="https://twitter.com/share" class="twitter-share-button" data-lang="de">Twittern</a>
+      </div>
     </div><!-- /.carousel -->
   </div>
 </div>
