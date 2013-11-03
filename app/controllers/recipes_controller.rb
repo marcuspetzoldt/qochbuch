@@ -129,7 +129,7 @@ class RecipesController < ApplicationController
       1.upto(ing[:amount].count-1) do |i|
         # Skip entries without an ingredient name
         unless ing[:tag][i].blank?
-          tag = Tag.find_by("tag = :value OR other = :value AND category = 2", value: ing[:tag][i])
+          tag = Tag.find_by("(tag = :value OR other = :value) AND category = 2", value: ing[:tag][i])
           if tag.nil?
             tag = Tag.create(category: 2, father: nil, tag: ing[:tag][i])
           end
