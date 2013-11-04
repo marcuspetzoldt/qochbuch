@@ -9,7 +9,7 @@ development:
   database: qochbuch_dev
   pool: 5
   username: postgres
-  password: pImzKaw.WfeS.56s
+  password: eIkdGsr.NdP.57s
   timeout: 5000
 
 # Warning: The database defined as "test" will be erased and
