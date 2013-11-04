@@ -15,7 +15,18 @@
   <div class="offset1 span6">
     <div id="myCarousel" class="carousel slide">
       <div class="carousel-inner">
-        <%= render(partial: 'carousel', collection: @recipe.images) %>
+        <% if @recipe.images.count > 0 %>
+          <%= render(partial: 'carousel', collection: @recipe.images) %>
+        <% else %>
+          <div class="item active">
+            <%= image_tag('placeholder.png', alt: "#{@recipe.title} #{t('views.landing_pages.image')}" ) %>
+            <div class="container">
+              <div class="carousel-caption">
+                0/0
+              </div>
+            </div>
+          </div>
+        <% end %>
       </div>
       <a class="carousel-ctrl left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
       <a class="carousel-ctrl right" href="#myCarousel" data-slide="next">&rsaquo;</a>
