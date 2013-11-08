@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   include ApplicationHelper
 
   before_action :require_login, except: [:new, :create]
-  before_action :is_admin?, only: [:index, :destroy]
+  before_action :require_admin, only: [:index, :destroy]
 
   PAGINATION = 25
 

@@ -2,8 +2,7 @@ class UnitsController < ApplicationController
 
   include ApplicationHelper
 
-  before_action :signed_in?, except: [:index, :destroy]
-  before_action :is_admin?, only: [:index, :destroy]
+  before_action :require_admin
 
   PAGINATION = 25
 
