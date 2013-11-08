@@ -1,6 +1,6 @@
   <%= form_for(@recipe, id: 'recipe_form', html: { style: 'margin-bottom: 80px' }) do |f| %>
-    <%= f.hidden_field(:regionslist, id: 'iregion_used', value: @recipe.tags.where(category: 0).map do |tag| tag.id end.join(' ') ) %>
-    <%= f.hidden_field(:tagslist, id: 'itag_used', value: @recipe.tags.where(category: 1).map do |tag| tag.id end.join(' ') ) %>
+    <%= f.hidden_field(:regionslist, id: 'iregion_used', value: @regions[:used].map do |tag| tag[:id] end.join(' ') ) %>
+    <%= f.hidden_field(:tagslist, id: 'itag_used', value: @tags[:used].map do |tag| tag[:id] end.join(' ') ) %>
     <%= cloudinary_js_config %>
     <%= image_tag('upload.gif', style: 'display: none; margin: 50px 100px 50px 100px', id: 'spinner') %>
   <div class="row">

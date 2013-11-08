@@ -20,11 +20,14 @@ class RecipesController < ApplicationController
   def create
     @recipe = Recipe.new(recipe_params)
     @recipe.user_id = current_user.id
+    selected_tags = get_tags
     if @recipe.save
-      @recipe.tags = get_tags
+      @recipe.tags = selected_tags
       save_ingredients
       redirect_to @recipe
     else
+      @regions = cloud(0, selected_tags.where(category:0).order(:tag), true)
+      @tags = cloud(1, selected_tags.where(category: 1).order(:tag), true)
       redisplay_form
     end
   end
@@ -39,11 +42,14 @@ class RecipesController < ApplicationController
 
   def update
     @recipe = Recipe.find(params[:id])
+    selected_tags = get_tags
     if @recipe.update(recipe_params)
-      @recipe.tags = get_tags
+      @recipe.tags = selected_tags
       save_ingredients
       redirect_to @recipe
     else
+      @regions = cloud(0, selected_tags.where(category:0).order(:tag), true)
+      @tags = cloud(1, selected_tags.where(category: 1).order(:tag), true)
       redisplay_form
     end
   end

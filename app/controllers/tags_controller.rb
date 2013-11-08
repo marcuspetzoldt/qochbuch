@@ -79,9 +79,11 @@ class TagsController < ApplicationController
   end
 
   def destroy
+    c = 0
     if params[:id].present?
       r = Tag.find(params[:id])
       if r
+        c = r.category
         if r.taggings.count == 0
           r.destroy
         else
@@ -90,17 +92,8 @@ class TagsController < ApplicationController
       else
         flash[:error] = t('view.tags.invalid_tag_id')
       end
-      case r.category
-      when 0
-        redirect_to regions_path
-      when 1
-        redirect_to categories_path
-      when 2
-        redirect_to ingredients_path
-      end
-    else
-      redirect_to tags_path
     end
+    redirect_to path_from_category(c)
   end
 
   private
