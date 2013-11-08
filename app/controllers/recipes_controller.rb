@@ -122,7 +122,7 @@ class RecipesController < ApplicationController
           { amount: ing[:amount][i], unit_id: ing[:unit][i], unit: nil, punit: nil, tag: ing[:tag][i], ptag: nil, rule: 0 }
         end
       else
-        @recipe.taggings.map do |t|
+        @recipe.taggings.order(:id).map do |t|
           if t.tag.category == 2
             { amount: t.amount, unit_id: t.unit_id, unit: t.unit.name, punit: t.unit.other, tag: t.tag.tag, ptag: t.tag.other, rule: t.unit.rule }
           end
