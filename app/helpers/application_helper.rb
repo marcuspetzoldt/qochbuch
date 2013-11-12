@@ -35,7 +35,11 @@ module ApplicationHelper
       usable_tags = Tag.where(category: category).order(:tag) - used_tags
     else
       # Show only tags which are used by recipes in the result set.
-      usable_tags = Tag.joins("JOIN taggings ON tags.id = taggings.tag_id JOIN recipes ON recipes.id = taggings.recipe_id AND recipes.id IN (#{Recipe.matching_recipes.join(',')})").where(category: category).distinct.order(:tag) - used_tags
+      if Recipe.matching_recipes.empty?
+        usable_tags = []
+      else
+        usable_tags = Tag.joins("JOIN taggings ON tags.id = taggings.tag_id JOIN recipes ON recipes.id = taggings.recipe_id AND recipes.id IN (#{Recipe.matching_recipes.join(',')})").where(category: category).distinct.order(:tag) - used_tags
+      end
     end
     used_tags.map! do |t| { id: t.id, tag: t.tag, font_size: t.recipes.count } end
     usable_tags.map! do |t| ({ id: t.id, tag: t.tag, font_size: t.recipes.count }) end
