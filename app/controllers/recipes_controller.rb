@@ -24,7 +24,7 @@ class RecipesController < ApplicationController
     if @recipe.save
       @recipe.tags = selected_tags
       save_ingredients
-      redirect_to @recipe
+      redirect_to show_path(URI::escape(@recipe.title.downcase), @recipe.id)
     else
       @regions = cloud(0, selected_tags.where(category:0).order(:tag), true)
       @tags = cloud(1, selected_tags.where(category: 1).order(:tag), true)
@@ -46,7 +46,7 @@ class RecipesController < ApplicationController
     if @recipe.update(recipe_params)
       @recipe.tags = selected_tags
       save_ingredients
-      redirect_to @recipe
+      redirect_to show_path(URI::escape(@recipe.title.downcase), @recipe.id)
     else
       @regions = cloud(0, selected_tags.where(category:0).order(:tag), true)
       @tags = cloud(1, selected_tags.where(category: 1).order(:tag), true)

@@ -4,6 +4,7 @@ Qochbuch::Application.routes.draw do
   resources :recipes
   resources :tags
   resources :units
+  get '/recipes/:title/:id', to: 'recipes#show', as: 'show'
   match '/(:search_my)', to: 'landing_pages#search', via: 'post', as: 'search'
   match '/next', to: 'landing_pages#next', via: 'get'
   match '/previous', to: 'landing_pages#previous', via: 'get'

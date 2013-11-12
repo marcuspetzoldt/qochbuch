@@ -2,7 +2,7 @@
 <li class="span4">
   <div class="thumbnail">
     <p class="thumbnail">
-      <%= link_to(recipe_path(recipe)) do %>
+      <%= link_to(show_path(URI::escape(recipe.title.downcase), recipe.id)) do %>
         <% if recipe.images[0] %>
           <%= cl_image_tag("#{recipe.images[0].name if recipe.images[0]}", transformation: :download, alt: "#{recipe.title} #{t('views.landing_pages.image')} 1") %>
         <% else %>
@@ -17,7 +17,7 @@
       <span class="label"><%= Recipe.levels[recipe.level] %></span>
     </p>
     <p style="height:80px"><%= recipe.description %></p>
-    <%= link_to(t('views.landing_pages.more'), recipe_path(recipe), class: 'btn btn-info') %>
+    <%= link_to(t('views.landing_pages.more'), show_path(URI::escape(recipe.title.downcase), recipe.id), class: 'btn btn-info') %>
     <% if signed_in? %>
       <% if current_user.id == recipe.user.id %>
         <%= link_to(t('views.landing_pages.edit'), edit_recipe_path(recipe), class: 'btn btn-success') %>
