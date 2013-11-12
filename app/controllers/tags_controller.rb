@@ -41,19 +41,29 @@ class TagsController < ApplicationController
   end
 
   def merge
-    m = params[:merge].map { |e| e[0] }
-    if m && m.count > 1
-      Tagging.where(tag_id: m[1..-1]).update_all(tag_id: m[0])
-      Tag.where(id: m[1..-1]).destroy_all
+    if session[:prepare_merge] && session[:prepare_merge].count > 1
+      Tagging.where(tag_id: session[:prepare_merge][1..-1]).update_all(tag_id: session[:prepare_merge][0])
+      Tag.where(id: session[:prepare_merge][1..-1]).destroy_all
+      session[:prepare_merge] = nil
     end
-    redirect_to ingredients_path(merged: m[0])
+    redirect_to ingredients_path
+  end
+
+  def prepare_merge
+    if params[:remove]
+      session[:prepare_merge].delete(params[:id])
+    else
+      session[:prepare_merge] = [] if session[:prepare_merge].nil?
+      session[:prepare_merge] << params[:id]
+    end
+    redirect_to ingredients_path
   end
 
   def index
-    if params[:merged]
-      @merged = params[:merged].to_i
-    end
     @category = 0
+    if session[:prepare_merge]
+      @tags_to_merge = Tag.find(session[:prepare_merge])
+    end
     if params[:default] && params[:default][:category]
       @category = params[:default][:category]
     end

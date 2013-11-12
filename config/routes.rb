@@ -17,6 +17,7 @@ Qochbuch::Application.routes.draw do
   match '/regions', to: 'tags#index', via: ['get', 'post'], default: { category: 0 }, as: 'regions'
   match '/categories', to: 'tags#index', via: ['get', 'post'], default: { category: 1 }, as: 'categories'
   match '/ingredients', to: 'tags#index', via: ['get', 'post'], default: { category: 2 }, as: 'ingredients'
+  match '/ingredients/:id', to: 'tags#prepare_merge', via: 'patch', as: 'prepare_merge_ingredients'
   match '/ingredients/merge', to: 'tags#merge', via: 'post', as: 'merge_ingredients'
 
 # resources :users do

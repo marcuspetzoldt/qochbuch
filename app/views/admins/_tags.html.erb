@@ -1,5 +1,5 @@
-<% if tags.id == @merged %>
-  <tr style='background-color: yellow'>
+<% if prepare_merge %>
+  <tr style='background-color: #d0d0d0'>
 <% else %>
   <tr>
 <% end %>
@@ -8,12 +8,20 @@
   <td><%= tags.taggings.count %></td>
   <% if @category == 2 %>
     <td style='text-align: right'>
-      <%= check_box_tag "merge[#{tags.id}]" %>
+      <% if prepare_merge %>
+        <%= link_to t('views.tags.remove'), prepare_merge_ingredients_path(tags.id, remove: true), method: 'patch' %>
+      <% else %>
+        <% unless session[:prepare_merge] && session[:prepare_merge].index(tags.id.to_s) %>
+          <%= link_to t('views.tags.merge'), prepare_merge_ingredients_path(tags.id), method: 'patch' %>
+        <% end %>
+      <% end %>
     </td>
   <% end %>
   <td style='text-align: right'>
-    <%= link_to tag_path(tags.id), method: 'delete', title: t('views.tags.delete') do %>
-      <i class="icon-remove"></i>
+    <% unless prepare_merge %>
+      <%= link_to tag_path(tags.id), method: 'delete', title: t('views.tags.delete') do %>
+        <i class="icon-remove"></i>
+      <% end %>
     <% end %>
   </td>
 </tr>

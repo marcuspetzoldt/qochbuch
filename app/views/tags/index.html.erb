@@ -10,38 +10,41 @@
       <% end %>
       <%= link_to t('views.tags.new', category: Tag.categories[@category]), new_tag_path(category: @category), class: 'btn' %>
       <%= form_tag merge_ingredients_path do %>
-      <table class="table">
-        <thead>
-        <tr>
-          <th>
-            <%= link_to(path_from_category(@category, tag: sort_direction(:tag, @sort_by, @sort_direction))) do %>
-              <%= t('activerecord.attributes.tag.tag') %>
-            <% end %>
-          </th>
-          <th>
-            <%= link_to(path_from_category(@category, other: sort_direction(:other, @sort_by, @sort_direction))) do %>
-              <%= t('activerecord.attributes.tag.other') %>
-            <% end %>
-          </th>
-          <th>
-            <%= link_to(path_from_category(@category, used: sort_direction(:used, @sort_by, @sort_direction))) do %>
-              <%= t('views.tags.used') %>
-            <% end %>
-          </th>
-          <% if @category == 2 %>
-            <th style='text-align: right'>
-              <%= button_tag title: t('views.tags.merge'), class: 'btn' do %><i class="icon icon-wrench"></i><% end %>
+        <table class="table">
+          <thead>
+          <tr>
+            <th>
+              <%= link_to(path_from_category(@category, tag: sort_direction(:tag, @sort_by, @sort_direction))) do %>
+                <%= t('activerecord.attributes.tag.tag') %>
+              <% end %>
             </th>
+            <th>
+              <%= link_to(path_from_category(@category, other: sort_direction(:other, @sort_by, @sort_direction))) do %>
+                <%= t('activerecord.attributes.tag.other') %>
+              <% end %>
+            </th>
+            <th>
+              <%= link_to(path_from_category(@category, used: sort_direction(:used, @sort_by, @sort_direction))) do %>
+                <%= t('views.tags.used') %>
+              <% end %>
+            </th>
+            <% if @category == 2 %>
+              <th style='text-align: right'>
+                <%= button_tag title: t('views.tags.merge'), class: 'btn' do %><i class="icon icon-wrench"></i><% end %>
+              </th>
+            <% end %>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+          <% if @category == 2 %>
+            <%= render partial: 'admins/tags', collection: @tags_to_merge, locals: { prepare_merge: true } %>
           <% end %>
-          <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        <%= render partial: 'admins/tags', collection: @tags %>
-        </tbody>
-      </table>
+          <%= render partial: 'admins/tags', collection: @tags, locals: { prepare_merge: false } %>
+          </tbody>
+        </table>
+        <%= render partial: 'shared/pagination', locals: { path: path_from_category(@category) } %>
       <% end %>
-      <%= render partial: 'shared/pagination', locals: { path: path_from_category(@category) } %>
     </div>
   </div>
 </div>
