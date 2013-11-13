@@ -143,8 +143,15 @@ de:
         other: 'Maßeinheit (pl.)'
         rule: 'Flektionsregel für Zutat'
       tag:
-        tag: 'Schlagwort'
-        other: 'Schlagwort (pl.)'
+        region:
+          one: 'Region'
+          other: 'Region (pl.)'
+        ingredient:
+          one: 'Zutat'
+          other: 'Zutat (pl.)'
+        tag:
+          one: 'Schlagwort'
+          other: 'Schlagwort (pl.)'
 
     errors:
       models:

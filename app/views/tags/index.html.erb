@@ -15,12 +15,12 @@
           <tr>
             <th>
               <%= link_to(path_from_category(@category, tag: sort_direction(:tag, @sort_by, @sort_direction))) do %>
-                <%= t('activerecord.attributes.tag.tag') %>
+                <%= moniker_from_category(@category, 1) %>
               <% end %>
             </th>
             <th>
               <%= link_to(path_from_category(@category, other: sort_direction(:other, @sort_by, @sort_direction))) do %>
-                <%= t('activerecord.attributes.tag.other') %>
+                <%= moniker_from_category(@category, 2) %>
               <% end %>
             </th>
             <th>

@@ -1,7 +1,11 @@
 <% if prepare_merge %>
   <tr style='background-color: #d0d0d0'>
 <% else %>
-  <tr>
+  <% if tags.id == @just_merged %>
+    <tr style="background-color: #dff0d8">
+  <% else %>
+    <tr>
+  <% end %>
 <% end %>
   <td><%= link_to tags.tag, edit_tag_path(tags.id) %></td>
   <td><%= tags.other %></td>

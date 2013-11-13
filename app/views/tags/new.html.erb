@@ -9,17 +9,17 @@
         <% end %>
       </div>
 
-      <%= f.hidden_field(:category, value: @tag.category) %><%= "Category: #{@tag.category}" %>
+      <%= f.hidden_field(:category, value: @tag.category) %>
       <div class="control-group">
-        <%= f.label(:tag, class: 'control-label') %>
+        <%= f.label(:tag, moniker_from_category(@tag.category, 1), class: 'control-label') %>
         <div class="controls">
-          <%= f.text_field(:tag, class: 'input-block-level', maxlength: '60', placeholder: t('activerecord.attributes.tag.tag')) %>
+          <%= f.text_field(:tag, class: 'input-block-level', maxlength: '60', placeholder: moniker_from_category(@tag.category, 1)) %>
         </div>
       </div>
       <div class="control-group">
-        <%= f.label(:other, class: 'control-label') %>
+        <%= f.label(:other, moniker_from_category(@tag.category, 2), class: 'control-label') %>
         <div class="controls">
-          <%= f.text_field(:other, class: 'input-block-level', maxlength: '20', placeholder: t('activerecord.attributes.tag.other')) %>
+          <%= f.text_field(:other, class: 'input-block-level', maxlength: '20', placeholder: moniker_from_category(@tag.category, 2)) %>
         </div>
       </div>
 

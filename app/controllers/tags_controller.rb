@@ -42,9 +42,12 @@ class TagsController < ApplicationController
 
   def merge
     if session[:prepare_merge] && session[:prepare_merge].count > 1
-      Tagging.where(tag_id: session[:prepare_merge][1..-1]).update_all(tag_id: session[:prepare_merge][0])
+      merge_to = session[:prepare_merge].first
+      Tagging.where(tag_id: session[:prepare_merge][1..-1]).update_all(tag_id: merge_to)
       Tag.where(id: session[:prepare_merge][1..-1]).destroy_all
       session[:prepare_merge] = nil
+      redirect_to ingredients_path(just_merged: merge_to)
+      return
     end
     redirect_to ingredients_path
   end
@@ -61,6 +64,7 @@ class TagsController < ApplicationController
 
   def index
     @category = 0
+    @just_merged = params[:just_merged].to_i if params[:just_merged]
     if session[:prepare_merge]
       @tags_to_merge = Tag.find(session[:prepare_merge])
     end
