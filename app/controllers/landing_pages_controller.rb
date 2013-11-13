@@ -5,7 +5,7 @@ class LandingPagesController < ApplicationController
   def home
     session[:search_text] = nil
     session[:search_tags] = nil
-    Recipe.matching_recipes = Recipe.all.ids
+    Recipe.matching_recipes = Recipe.all.ids.shuffle
     @recipes = Recipe.suggestions
     @tags = cloud([0,1], nil, false)
   end

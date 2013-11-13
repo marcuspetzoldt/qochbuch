@@ -60,7 +60,7 @@ class Recipe < ActiveRecord::Base
 
   # all ids matching the last search
   def self.matching_recipes
-    @matching_recipes ||= all.ids
+    @matching_recipes ||= all.ids.shuffle
   end
 
   private

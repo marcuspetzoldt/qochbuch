@@ -5,7 +5,7 @@ class TagsController < ApplicationController
 
   before_action :require_admin
 
-  PAGINATION = 3
+  PAGINATION = 25
 
   def new
     @tag = Tag.new(category: params[:category])
