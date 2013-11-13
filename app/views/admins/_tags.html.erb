@@ -1,7 +1,7 @@
 <% if prepare_merge %>
   <tr style='background-color: #d0d0d0'>
 <% else %>
-  <% if tags.id == @just_merged %>
+  <% if tags.id == @just_edited %>
     <tr style="background-color: #dff0d8">
   <% else %>
     <tr>
@@ -13,10 +13,10 @@
   <% if @category == 2 %>
     <td style='text-align: right'>
       <% if prepare_merge %>
-        <%= link_to t('views.tags.remove'), prepare_merge_ingredients_path(tags.id, remove: true), method: 'patch' %>
+        <%= link_to t('views.tags.remove'), prepare_merge_ingredients_path(tags.id, remove: true, page: @page), method: 'patch' %>
       <% else %>
         <% unless session[:prepare_merge] && session[:prepare_merge].index(tags.id.to_s) %>
-          <%= link_to t('views.tags.merge'), prepare_merge_ingredients_path(tags.id), method: 'patch' %>
+          <%= link_to t('views.tags.merge'), prepare_merge_ingredients_path(tags.id, page: @page), method: 'patch' %>
         <% end %>
       <% end %>
     </td>
