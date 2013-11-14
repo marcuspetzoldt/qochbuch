@@ -14,6 +14,17 @@ $(document).on('change', 'input#upload_pic3', function() {
     $('img#preview_pic3').attr('src', $('#spinner').attr('src')).css('margin', '50px 100px 50px 100px')
 });
 
+/* Delete picture spinner */
+$(document).on('click', 'button#delete_pic1', function() {
+    $('img#preview_pic1').attr('src', $('#spinner').attr('src')).css('margin', '50px 100px 50px 100px')
+});
+$(document).on('click', 'button#delete_pic2', function() {
+    $('img#preview_pic2').attr('src', $('#spinner').attr('src')).css('margin', '50px 100px 50px 100px')
+});
+$(document).on('click', 'button#delete_pic3', function() {
+    $('img#preview_pic3').attr('src', $('#spinner').attr('src')).css('margin', '50px 100px 50px 100px')
+});
+
 /* Cloudinary Preview */
 $(document).on('cloudinarydone', '.cloudinary-fileupload', function(e, data) {
     $(this).parent().children().first().html(

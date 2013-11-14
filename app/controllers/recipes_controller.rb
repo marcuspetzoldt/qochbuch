@@ -43,15 +43,22 @@ class RecipesController < ApplicationController
   def update
     @recipe = Recipe.find(params[:id])
     selected_tags = get_tags
-    if @recipe.update(recipe_params)
-      @recipe.tags = selected_tags
-      save_ingredients
-      redirect_to show_path(URI::escape(@recipe.title.downcase), @recipe.id)
+
+    if params[:delete_pic]
+      @recipe.images[params[:delete_pic].to_i].destroy
+      @recipe.reload
     else
-      @regions = cloud(0, selected_tags.where(category:0).order(:tag), true)
-      @tags = cloud(1, selected_tags.where(category: 1).order(:tag), true)
-      redisplay_form
+      if @recipe.update(recipe_params)
+        @recipe.tags = selected_tags
+        save_ingredients
+        redirect_to show_path(URI::escape(@recipe.title.downcase), @recipe.id)
+        return
+      end
     end
+
+    @regions = cloud(0, selected_tags.where(category:0).order(:tag), true)
+    @tags = cloud(1, selected_tags.where(category: 1).order(:tag), true)
+    redisplay_form
   end
 
   def show

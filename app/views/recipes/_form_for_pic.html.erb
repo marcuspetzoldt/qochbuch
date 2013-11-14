@@ -2,6 +2,9 @@
   <div id="cloudinary_preview<%= nr %>">
     <% if image %>
       <%= cl_image_tag(image.name, transformation: :download, style: 'cursor: pointer', id: "preview_pic#{nr}") %>
+      <%= button_tag(id: "delete_pic#{nr}", name: "delete_pic", value: "#{nr-1}", class: 'btn', style: 'position: relative; top: -200px; margin-left: 260px; z-order: 100') do %>
+        <i class="icon-remove-circle"></i>
+      <% end %>
     <% else %>
       <%= image_tag('placeholder.png', style: 'cursor: pointer', id: "preview_pic#{nr}") %>
     <% end %>
