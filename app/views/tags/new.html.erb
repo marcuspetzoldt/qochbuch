@@ -19,7 +19,7 @@
       <div class="control-group">
         <%= f.label(:other, moniker_from_category(@tag.category, 2), class: 'control-label') %>
         <div class="controls">
-          <%= f.text_field(:other, class: 'input-block-level', maxlength: '20', placeholder: moniker_from_category(@tag.category, 2)) %>
+          <%= f.text_field(:other, class: 'input-block-level', maxlength: '60', placeholder: moniker_from_category(@tag.category, 2)) %>
         </div>
       </div>
 
