@@ -25,6 +25,21 @@ $(document).on('click', 'button#delete_pic3', function() {
     $('img#preview_pic3').attr('src', $('#spinner').attr('src')).css('margin', '50px 100px 50px 100px')
 });
 
+/* Length hint */
+$(document).on('focus', 'input[maxlength]', function() {
+    $(this).after('<span class="length_hint">' + $(this).val().length + '/' + $(this).attr('maxLength') + '</span>');
+    $hint = $(this).next();
+    $hint.css('margin-left', '-' + ($hint.width() + 15) + 'px');
+});
+$(document).on('blur', 'input[maxlength]', function() {
+    $(this).next().remove();
+})
+$(document).on('keyup', 'input[maxlength]', function() {
+    $hint = $(this).next();
+    $hint.text($(this).val().length + '/' + $(this).attr('maxLength'));
+    $hint.css('margin-left', '-' + ($hint.width() + 15) + 'px');
+})
+
 /* Cloudinary Preview */
 $(document).on('cloudinarydone', '.cloudinary-fileupload', function(e, data) {
     $(this).parent().children().first().html(
