@@ -40,6 +40,24 @@ $(document).on('keyup', 'input[maxlength]', function() {
     $hint.css('margin-left', '-' + ($hint.width() + 15) + 'px');
 })
 
+/* Password match hint */
+$(document).on('keyup', 'input#user_password', function() {
+    match_passwords();
+});
+
+$(document).on('keyup', 'input#user_password_confirmation', function() {
+    match_passwords();
+});
+
+function match_passwords() {
+    var $confirmation = $('input#user_password_confirmation')
+    if ($('input#user_password').val() != $confirmation.val()) {
+        $confirmation.css('background-color', '#f2dede');
+    } else {
+        $confirmation.css('background-color', 'white');
+    }
+}
+
 /* Cloudinary Preview */
 $(document).on('cloudinarydone', '.cloudinary-fileupload', function(e, data) {
     $(this).parent().children().first().html(
