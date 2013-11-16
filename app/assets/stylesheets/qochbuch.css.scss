@@ -220,7 +220,6 @@ span > a:hover {
   display: inline-block;
   z-index: 3;
   margin-top: -40px;
-  margin-right: 7px;
   background-color: white;
   height: 10px;
   padding: 2px 3px;
@@ -235,5 +234,10 @@ span > a:hover {
 
   .input-prepend > & {
     margin-top: -30px;
+  }
+
+  & + a.btn {
+    position: relative;
+    left: 7px;
   }
 }
