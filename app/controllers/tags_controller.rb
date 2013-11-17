@@ -13,12 +13,10 @@ class TagsController < ApplicationController
 
   def create
     c = params[:tag][:category] || 0
-    if params[:commit]
-      @tag = Tag.new(tag_params)
-      unless @tag.save
-        render :new
-        return
-      end
+    @tag = Tag.new(tag_params)
+    unless @tag.save
+      render :new
+      return
     end
     redirect_to path_from_category(c, just_edited: @tag.id)
   end
@@ -30,12 +28,10 @@ class TagsController < ApplicationController
 
   def update
     c = params[:tag][:category] || 0
-    if params[:commit]
-      @tag = Tag.find(params[:id])
-      unless @tag.update(tag_params)
-        render :new
-        return
-      end
+    @tag = Tag.find(params[:id])
+    unless @tag.update(tag_params)
+      render :new
+      return
     end
     redirect_to path_from_category(c, just_edited: @tag.id)
   end

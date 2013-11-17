@@ -11,12 +11,10 @@ class UnitsController < ApplicationController
   end
 
   def create
-    if params[:commit]
-      @unit = Unit.new(unit_params)
-      unless @unit.save
-        render :new
-        return
-      end
+    @unit = Unit.new(unit_params)
+    unless @unit.save
+      render :new
+      return
     end
     redirect_to units_path
   end
@@ -27,12 +25,10 @@ class UnitsController < ApplicationController
   end
 
   def update
-    if params[:commit]
-      @unit = Unit.find(params[:id])
-      unless @unit.update(unit_params)
-        render :new
-        return
-      end
+    @unit = Unit.find(params[:id])
+    unless @unit.update(unit_params)
+      render :new
+      return
     end
     redirect_to units_path
   end
