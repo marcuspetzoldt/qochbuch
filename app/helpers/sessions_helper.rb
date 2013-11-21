@@ -7,7 +7,7 @@ module SessionsHelper
 
   def sign_out()
     self.current_user = nil
-    session[:remember_token] = nil
+    reset_session
   end
 
   def current_user=(user)

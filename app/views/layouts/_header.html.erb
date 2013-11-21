@@ -16,6 +16,7 @@
           <%= text_field_tag(:search_text, session[:search_text], class: 'span4', placeholder: t('views.landing_pages.search')) %>
           <%= hidden_field_tag(:search_tags, session[:search_tags], id: 'isearch_used', name: 'isearch_used') %>
           <%= button_tag(t('views.landing_pages.go'), class: 'btn', name: 'search') %>
+          <%= button_tag(t('views.landing_pages.all'), class: 'btn', name: 'search_all') %>
         </div>
       <% end %>
     </div>

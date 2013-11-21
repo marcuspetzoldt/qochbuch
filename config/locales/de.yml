@@ -46,6 +46,8 @@ de:
       image: 'Bild'
       search: 'Suche'
       go: 'Los!'
+      all: 'Alles'
+      no_results: 'Keine Treffer'
       homepage: 'Home'
       more: 'Mehr'
       edit: 'Bearbeiten'

@@ -29,21 +29,28 @@ class LandingPagesController < ApplicationController
       end
     end
 
-    if params[:search_text]
-      session[:search_text] = params[:search_text].strip
-      unless session[:search_text].blank?
-        # mysql
-        # a = Recipe.where("MATCH(title, description, directions) AGAINST('#{session[:search_text]}' IN BOOLEAN MODE)").ids
-        # postgresql
-        a = Search.new(session[:search_text])
+    if params[:search_all]
+      session[:search_tags] = nil
+      session[:search_text] = nil
+      a = nil
+      b = nil
+    else
+      if params[:search_text]
+        session[:search_text] = params[:search_text].strip
+        unless session[:search_text].blank?
+          # mysql
+          # a = Recipe.where("MATCH(title, description, directions) AGAINST('#{session[:search_text]}' IN BOOLEAN MODE)").ids
+          # postgresql
+          a = Search.new(session[:search_text])
+        end
       end
-    end
 
-    if params[:isearch_used]
-      session[:search_tags] = params[:isearch_used].strip
-      tags = session[:search_tags].split(' ')
-      unless tags.empty?
-        b = Recipe.find_by_sql("SELECT DISTINCT r.id FROM recipes r JOIN taggings j ON r.id = j.recipe_id JOIN tags t on t.id = j.tag_id WHERE t.id IN (#{tags.join(',')}) GROUP BY r.id HAVING count(*) = #{tags.count}").map do |e| e.id end
+      if params[:isearch_used]
+        session[:search_tags] = params[:isearch_used].strip
+        tags = session[:search_tags].split(' ')
+        unless tags.empty?
+          b = Recipe.find_by_sql("SELECT DISTINCT r.id FROM recipes r JOIN taggings j ON r.id = j.recipe_id JOIN tags t on t.id = j.tag_id WHERE t.id IN (#{tags.join(',')}) GROUP BY r.id HAVING count(*) = #{tags.count}").map do |e| e.id end
+        end
       end
     end
 

@@ -2,7 +2,11 @@
   <div style="margin-bottom: -60px"><span class="spin spin-left"><%= link_to(previous_path) do %>&lsaquo;<% end %></span><span class="spin spin-right"><%= link_to(next_path) do %>&rsaquo;<% end %></span></div>
   <div class="span12">
     <ul class="thumbnails" style="height: 450px">
-      <%= render(@recipes) %>
+      <% if @recipes.count > 0 %>
+        <%= render(@recipes) %>
+      <% else %>
+        <h1 class="muted" style="font-size: 400%; text-align: center; margin-top: 188px"><%= t('views.landing_pages.no_results') %></h1>
+      <% end %>
     </ul>
   </div>
 </div>
