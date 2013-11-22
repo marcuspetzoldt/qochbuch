@@ -66,7 +66,11 @@ class LandingPagesController < ApplicationController
       end
     end
 
-    Recipe.matching_recipes = a.shuffle
+    if session[:search_id]
+      Recipe.matching_recipes = Recipe.find(a).map { |r| r.user_id == session[:search_id]? r.id : nil }.compact.shuffle
+    else
+      Recipe.matching_recipes = a.shuffle
+    end
     go_home
   end
 
